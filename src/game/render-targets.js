@@ -51,18 +51,28 @@ export function drawEntity(g, e, view, t, opts = {}) {
   g.globalAlpha = Math.max(0, Math.min(1, e.alpha * (opts.fade ?? 1)));
   g.translate(p.sx, p.sy);
 
-  // death motion
+  // death motion: a photo of the animal down / the bird falling if one exists,
+  // otherwise the live pose is tilted and collapsed
+  let deathArt = null;
+  const flyer = e.sp.family === 'bird' && e.sp.anchor === 'center';
   if (e.state === 'dying') {
     const dt = e.deathT;
     const fam = e.sp.family;
-    if (fam === 'bird' && e.sp.anchor === 'center') g.rotate(dt * 7 * e.facing);
-    else if (fam === 'quad' || (fam === 'bird')) { const c = Math.min(1, dt * 2.2); g.rotate(-e.facing * c * 0.18); g.scale(1, 1 - c * 0.55); }
+    if (!opts.drawnOnly && (fam === 'quad' || fam === 'bird')) {
+      const f = getFrames(spritePaths(e.spId, fam, flyer ? 'fall' : 'down'));
+      if (f && (flyer || dt > 0.12)) deathArt = f[0];
+    }
+    if (flyer) g.rotate(dt * (deathArt ? 2.5 : 7) * e.facing);
+    else if ((fam === 'quad' || fam === 'bird') && !deathArt) { const c = Math.min(1, dt * 2.2); g.rotate(-e.facing * c * 0.18); g.scale(1, 1 - c * 0.55); }
     else if (fam === 'alien') { const c = Math.min(1, dt * 1.5); g.scale(1 + c * 0.3, 1 - c * 0.7); }
   }
   g.scale(e.facing * k, k);
 
-  const art = opts.drawnOnly ? null : spriteFrames(e);
-  if (art) drawSprite(g, e, art.frames);
+  const art = deathArt || opts.drawnOnly ? null : spriteFrames(e);
+  if (deathArt) {
+    const w = e.sp.len * (flyer ? 1 : 1.05), h = w * (deathArt.height / deathArt.width);
+    g.drawImage(deathArt, -w / 2, flyer ? -h / 2 : -h, w, h);
+  } else if (art) drawSprite(g, e, art.frames);
   else (DRAW[e.sp.draw] || DRAW.popup)(g, e, t);
 
   if (e.sp.weakpoints && e.state === 'alive') drawWeakpoints(g, e, t);

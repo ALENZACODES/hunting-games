@@ -16,6 +16,14 @@ export const POSES = {
   plate: { idle: 1 }, popup: { idle: 1 }, noshoot: { idle: 1 }, drone: { idle: 1 }, vehicle: { idle: 1 }, sniper: { idle: 1 },
 };
 
+// optional: a photo of the animal down (lying on its side) and of each bird
+// falling. Used when a target is hit, instead of tilting the live pose.
+export const EXTRA_POSES = {
+  mallard: { fall: 1 }, goose: { fall: 1 }, pheasant: { fall: 1 }, dove: { fall: 1 }, swan: { fall: 1 }, eagle: { fall: 1 },
+  turkey: { down: 1 }, rabbit: { down: 1 }, whitetail: { down: 1 }, doe: { down: 1 }, muledeer: { down: 1 }, pronghorn: { down: 1 },
+  elk: { down: 1 }, moose: { down: 1 }, boar: { down: 1 }, bear: { down: 1 },
+};
+
 // species that reuse another species' art
 const ALIAS = { mover: 'popup' };
 
@@ -24,7 +32,7 @@ export function spritePaths(speciesId, family, pose) {
   const poses = POSES[id];
   if (!poses) return [];
   const folder = FOLDER[family] || 'animals';
-  const n = poses[pose];
+  const n = poses[pose] || EXTRA_POSES[id]?.[pose];
   if (!n) return [];
   if (n === 1) return [`${folder}/${id}_${pose}.png`];
   return Array.from({ length: n }, (_, i) => `${folder}/${id}_${pose}_${i + 1}.png`);

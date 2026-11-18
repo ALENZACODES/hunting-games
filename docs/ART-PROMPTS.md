@@ -998,6 +998,206 @@ It must look like a real, unedited photograph: true-to-life textures and fine de
 
 ---
 
+## 10. Guns still missing — `assets/weapons/<id>_profile.png` · 1536×1024 · transparent `.png`
+
+These 8 were refused the first time. One profile photo fills both the Arsenal picture and the in-hand gun, so first-person images are not needed. These prompts describe a plain catalogue photo of the gun lying flat on a backdrop. If one is still refused, skip it: the game keeps its drawn stand-in for that gun.
+
+**cz457_profile.png**
+```
+Catalogue photograph of a CZ 457 American bolt-action .22 rimfire rifle: checkered walnut stock, blued barrel and receiver, short bolt handle, 4-12x scope in low rings, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**sako85_profile.png**
+```
+Catalogue photograph of a Sako 85 Hunter bolt-action hunting rifle: oiled walnut stock, blued barrel and action, detachable magazine, 4-16x hunting scope, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**win70_profile.png**
+```
+Catalogue photograph of a Winchester Model 70 Featherweight bolt-action hunting rifle: classic walnut stock with a schnabel fore-end tip, blued steel, 3-9x hunting scope, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**xbolt_profile.png**
+```
+Catalogue photograph of a Browning X-Bolt Hunter bolt-action hunting rifle: satin walnut stock, matte blued barrel, 4.5-14x hunting scope, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**m4_profile.png**
+```
+Catalogue photograph of a Colt M4A1 carbine: black anodised aluminium, collapsible stock, flat-top rail, rail handguard, magazine inserted, compact red-dot sight, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**scar_profile.png**
+```
+Catalogue photograph of an FN SCAR 17S rifle in flat dark earth: folding adjustable stock, full-length top rail, 1-6x variable scope, magazine inserted, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**axmc_profile.png**
+```
+Catalogue photograph of an Accuracy International AXMC bolt-action precision rifle: dark earth aluminium chassis, folding stock with adjustable cheek piece, long fluted barrel with a muzzle brake, folded bipod, 5-25x56 scope, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**m82_profile.png**
+```
+Catalogue photograph of a Barrett M82A1 .50 calibre semi-automatic rifle: black steel, rectangular upper receiver, large muzzle brake, folded bipod, carry handle, 4-16x scope, lying on its side on a plain light-grey seamless backdrop, photographed straight down from above with a 90 mm lens at f/11 under soft, even studio light, so it reads as a flat, pure side profile with the muzzle pointing right. The whole gun is in frame with space around it. Accurate proportions and true colours, crisp detail on screws, controls and scope turrets, real wood grain or metal finish as on the real gun. No hands, no people, no ammunition, no props.
+Transparent background (PNG); if not possible, keep the plain light-grey backdrop.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+
+---
+
+## 11. Down and falling poses (optional) — `assets/animals/` · transparent `.png`
+
+When a target is hit, the game shows these instead of tilting the live photo. Missing ones fall back to the tilt, so add them in any order.
+
+Upload the matching existing image from `assets/animals/` together with each pose prompt (for example `whitetail_walk.png` with `whitetail_down.png`) and add: `Same animal as the attached photo.` That keeps coat, antlers and size consistent.
+
+**turkey_down.png**
+```
+Cut-out, 1024x1024: an adult wild turkey gobbler (dark bronze iridescent body feathers, bare blue-white head with red wattles, black chest beard, wings folded) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**rabbit_down.png**
+```
+Cut-out, 1024x1024: an adult eastern cottontail rabbit (grey-brown fur, white cotton tail, ears laid back) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**whitetail_down.png**
+```
+Cut-out, 1024x1024: a mature white-tailed deer buck (grey-brown coat, white throat patch and belly, symmetrical 10-point antlers) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**doe_down.png**
+```
+Cut-out, 1024x1024: an adult white-tailed deer doe with no antlers (tan-grey coat, white throat patch and belly) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**muledeer_down.png**
+```
+Cut-out, 1024x1024: a mature mule deer buck (grey-brown coat, very large ears, white rump patch, black-tipped tail, forked antlers) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**pronghorn_down.png**
+```
+Cut-out, 1024x1024: an adult pronghorn buck (tan-orange upper body, white belly and rump, black cheek patch, short black pronged horns) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**elk_down.png**
+```
+Cut-out, 1536x1024: a mature bull Rocky Mountain elk (tan-gold body, dark brown neck mane, pale rump patch, large 6x6 antlers) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**moose_down.png**
+```
+Cut-out, 1536x1024: a mature bull moose (very dark brown coat, humped shoulders, long pale-grey legs, long muzzle, broad palmated antlers) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**boar_down.png**
+```
+Cut-out, 1024x1024: an adult Eurasian wild boar (coarse dark grey-brown bristly coat, bristle mane along the spine, small curved tusks) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**bear_down.png**
+```
+Cut-out, 1024x1024: an adult American black bear (glossy black coat, tan-brown muzzle, rounded ears) lying still on its side after a clean, ethical harvest: legs relaxed, head resting low, eyes closed. Side view with the back toward the top of the frame and the head to the right. No blood, no wounds.
+Shot like a real hunting photograph: long telephoto lens from a distance at ground level, so the body is flat and undistorted; soft overcast daylight from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**mallard_fall.png**
+```
+Cut-out, 1024x1024: a drake mallard (glossy green head, white neck ring, chestnut breast, grey flanks, blue speculum) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**goose_fall.png**
+```
+Cut-out, 1024x1024: a Canada goose (black head and neck, white cheek strap, grey-brown body) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**pheasant_fall.png**
+```
+Cut-out, 1024x1024: a rooster ring-necked pheasant (green head, red face wattle, white neck ring, copper body, long barred tail) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**dove_fall.png**
+```
+Cut-out, 1024x1024: a mourning dove (slim grey-buff body, black wing spots, long pointed tail) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**swan_fall.png**
+```
+Cut-out, 1024x1024: a trumpeter swan (all-white plumage, black bill, long neck) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat dark-green background (never white).
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+**eagle_fall.png**
+```
+Cut-out, 1024x1024: a bald eagle (white head and tail, dark brown body and wings, yellow bill) falling limp out of the sky: wings half-folded and loose, body tilted head-down and to the right, two or three loose feathers drifting beside it. No blood, no wounds.
+Shot like real bird photography: 600 mm lens, 1/4000 s, sharp feather detail, soft overcast sky light from the upper left.
+Isolate it on a transparent background (PNG): no ground, no shadow, no scenery. The whole subject is in frame with clear space on every side, nothing cropped. If transparency is not possible, use a plain flat light-grey background.
+It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
+```
+
+
+---
+
 ## 9. Title key art — `assets/ui/title.jpg` · 1536×1024
 
 Shown behind the main menu. Keep the centre calm, because the menu sits on top of it.
