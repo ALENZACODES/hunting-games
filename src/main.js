@@ -67,7 +67,10 @@ const app = {
   finish(r) {
     if (this.mode !== 'play' && this.mode !== 'paused') return;
     const { def, kind } = this.current;
-    store.recordResult(def.id, { passed: r.pass, stars: r.stars, score: r.score });
+    const before = store.recordResult(def.id, { passed: r.pass, stars: r.stars, score: r.score });
+    const careerBefore = { longest: store.stats().longest };
+    store.recordStats(r);
+    r.before = before; r.careerBefore = careerBefore;
     const unlocks = [];
     const after = store.campaignLevelReached();
     if (kind === 'hunt' && after > this.reachedBefore) {

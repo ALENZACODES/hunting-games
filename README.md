@@ -2,12 +2,12 @@
 
 A first-person hunting shooter for the browser. It keeps the classic light-gun loop (targets flush, you have a few shells, hit enough to clear the round) and adds real firearms, scopes, ballistics and an alien turn.
 
-- **12-level hunt campaign:** ducks, geese, pheasant, doves, turkey, rabbits, whitetail, mule deer, pronghorn, elk, moose, wild boar and black bear, then the aliens arrive.
+- **100-level hunt campaign in 10 chapters:** ducks, geese, pheasant, doves, turkey, rabbits, whitetail, mule deer, pronghorn, elk, moose, wild boar and black bear, with fog, wind, night vision, thermal, trophy animals and timed levels, then the aliens arrive and the last chapters end at the Colossus.
 - **25 real firearms:** shotguns, rimfires, a magnum revolver, lever guns, hunting rifles and military rifles, each with its own caliber, action, magazine, recoil, sway and optic.
 - **Scopes that behave like scopes:** duplex, BDC, mil-dot and LPVO reticles at true mil spacing, variable zoom, breath hold, rangefinder, elevation and windage turrets.
 - **Ballistics:** time of flight, drag, gravity drop, wind drift, shotgun patterns with a real range limit. An Arcade setting switches it all off.
 - **25 Military Ops:** ranges, long-range steel, shoot houses, counter-sniper, night vision, thermal, drone swarms, convoy overwatch, helicopter door gunner, extreme long range, alien defense, a boss walker and an endless last stand.
-- **Hall of Fame** high scores, star ratings per level and op, and a full options menu.
+- **Career and menus:** a main-menu dashboard with rank and progress, a Continue button, chapter tabs with conditions on every level, detailed briefings, results with a bag tally and records, a detailed pause screen, a Career & Stats screen, Hall of Fame and a full options menu.
 
 The full design is in [`docs/CONCEPT.md`](docs/CONCEPT.md).
 
@@ -60,14 +60,14 @@ hunting-games/
 │   ├── data/                   all content is data
 │   │   ├── weapons.js          25 firearms and their ballistic figures
 │   │   ├── species.js          animals, aliens, targets: size, hitboxes, behaviour, points
-│   │   ├── levels.js           biomes and the 12-level campaign
+│   │   ├── levels.js           biomes and the 100-level campaign (10 chapters)
 │   │   ├── ops.js              25 Military Ops
 │   │   └── art.js              art file names the game looks for
 │   ├── engine/
 │   │   ├── assets.js           image loading, background removal, trimming
 │   │   ├── audio.js            synthesized gunshots, actions, impacts, ambience
 │   │   ├── input.js            mouse/keyboard, pointer lock
-│   │   └── storage.js          progress, high scores, options
+│   │   └── storage.js          progress, career stats, high scores, options
 │   ├── game/
 │   │   ├── view.js             camera geometry (45° FOV, 1.6 m eye height, mils)
 │   │   ├── session.js          a round: spawning, ballistics, scoring, goals, HUD
@@ -76,7 +76,7 @@ hunting-games/
 │   │   ├── render-scene.js     landscapes and foregrounds
 │   │   ├── render-targets.js   target drawing (photo sprites or stand-ins)
 │   │   └── fx.js               particles
-│   └── ui/menus.js             title, campaign, ops, briefing, arsenal, options, results
+│   └── ui/menus.js             title dashboard, campaign, ops, briefing, career, arsenal, options, pause, results
 ├── assets/                     drop-in art (see assets/README.md)
 ├── docs/
 │   ├── CONCEPT.md              game design

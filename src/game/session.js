@@ -46,6 +46,8 @@ export class Session {
     this.state = demo ? 'play' : 'intro'; this.introT = 2.4;
     this.rangeInfo = null;
     this.difficulty = 1;
+    this.diff = def.diff || 1;
+    this.tally = { species: {}, weapons: {}, penalties: {} };
     this.finaleSpawned = false; this.bossDown = false;
     this.goal = def.goal || 'quota';
     this.total = def.total || 0;
@@ -218,6 +220,8 @@ export class Session {
     if (gun.ammo <= 0) { if (!auto) audio.sfx('dry'); gun.startReload(); return; }
     gun.fire();
     this.shots++;
+    const wt = this.tally.weapons[gun.def.id] || (this.tally.weapons[gun.def.id] = { shots: 0, kills: 0 });
+    wt.shots++;
     if (this.shotsLeft != null) this.shotsLeft--;
     const def = gun.def;
     const gp = this.gunPoint();
@@ -374,6 +378,7 @@ export class Session {
 
     if (!e.counts && sp.penalty) {
       e.result = 'illegal';
+      this.tally.penalties[sp.name] = (this.tally.penalties[sp.name] || 0) + 1;
       this.score -= sp.penalty;
       this.combo = 0;
       const label = sp.noShoot ? 'NO-SHOOT' : sp.protected ? 'PROTECTED SPECIES' : 'NOT LEGAL';
@@ -388,8 +393,11 @@ export class Session {
     e.result = 'hit';
     if (e.slot != null) this.slots[e.slot] = 'hit';
     this.kills++;
+    this.tally.species[sp.name] = (this.tally.species[sp.name] || 0) + 1;
+    const wk = this.tally.weapons[def.id] || (this.tally.weapons[def.id] = { shots: 0, kills: 0 });
+    wk.kills++;
     if (hit.vital) this.vitals++;
-    this.longest = Math.max(this.longest, d);
+    if (d > this.longest) { this.longest = d; this.longestWith = def.id; }
     let label = hit.vital ? (sp.family === 'alien' ? 'WEAK POINT' : 'VITAL') : (sp.family === 'mil' ? 'HIT' : 'CLEAN');
     let mul = (1 + d / 100) * (hit.vital ? 1.5 : 1);
     if ((sp.family === 'bird' || sp.draw === 'rabbit') && def.power >= 7) { mul *= 0.5; label = 'OVERKILL'; }
@@ -424,6 +432,7 @@ export class Session {
     let sum = pool.reduce((a, s) => a + s.w, 0), r = Math.random() * sum, choice = pool[0];
     for (const s of pool) { r -= s.w; if (r <= 0) { choice = s; break; } }
     const e = createEntity(this, choice.sp, choice);
+    if (e.sp.trophy) { this.text(W / 2, H * 0.22, `${e.sp.name.toUpperCase()} SPOTTED`, '#ffd36e', 34, 2.2, true); audio.sfx('good'); }
     if (e.counts) {
       if (quota) { e.slot = this.countedSpawned; this.slots.push('pending'); }
       this.countedSpawned++;
@@ -495,7 +504,8 @@ export class Session {
     audio.sfx(pass ? 'good' : 'bad');
     const result = {
       pass, stars, reason, score: this.score, shots: this.shots, hits: this.shotHits, kills: this.kills, vitals: this.vitals,
-      accuracy: acc, longest: Math.round(this.longest), time: this.time, quota: this.goal === 'quota' || this.def.goal === 'quota' ? `${hits} / ${this.total}` : null, lines, maxCombo: this.maxCombo,
+      accuracy: acc, longest: Math.round(this.longest), longestWith: this.longestWith || '', time: this.time, tally: this.tally,
+      quotaHits: hits, total: this.total, need: this.need, hp: this.hp, maxHp: this.maxHp, quota: (this.def.goal || 'quota') === 'quota' && this.total ? `${hits} / ${this.total}` : null, lines, maxCombo: this.maxCombo,
     };
     setTimeout(() => this.onEnd(result), 900);
   }
@@ -686,7 +696,7 @@ export class Session {
     shadowText(this.score.toLocaleString(), 40, 70, 54);
     if (this.combo > 1) shadowText(`COMBO ×${comboMul(this.combo).toFixed(1)}`, 40, 108, 24, '#ffd36e');
     // title + quota / clock
-    shadowText(this.def.name.toUpperCase(), W / 2, 44, 26, '#e9e4d6', 'center', 600);
+    shadowText((this.kind === 'hunt' && this.def.n ? `${this.def.n}. ` : '') + this.def.name.toUpperCase(), W / 2, 44, 26, '#e9e4d6', 'center', 600);
     if (this.goal === 'quota' && this.total) this.drawQuota(g);
     else if (this.goal === 'clear') shadowText(`PLATES  ${this.statics.filter((e) => e.state !== 'alive').length} / ${this.statics.length}   (need ${this.need})`, W / 2, 84, 24, '#ffffff', 'center');
     else if (this.goal === 'score') shadowText(`TARGET  ${this.need.toLocaleString()}`, W / 2, 84, 24, this.score >= this.need ? '#7dffb0' : '#ffffff', 'center');
@@ -752,6 +762,7 @@ export class Session {
       const a = Math.min(1, this.introT);
       g.globalAlpha = a;
       g.fillStyle = 'rgba(0,0,0,0.55)'; g.fillRect(0, H * 0.36, W, 190);
+      if (this.kind === 'hunt' && this.def.n) shadowText(`LEVEL ${this.def.n} · CHAPTER ${this.def.chapter}`, W / 2, H * 0.36 + 26, 22, '#ffb07a', 'center', 600);
       shadowText(this.def.name.toUpperCase(), W / 2, H * 0.36 + 80, 64, '#fff', 'center');
       shadowText(this.objectiveText(), W / 2, H * 0.36 + 140, 26, '#ffd36e', 'center', 500);
       g.globalAlpha = 1;

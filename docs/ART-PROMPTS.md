@@ -56,91 +56,91 @@ Reply with the image only. One image per message.
 
 All daylight on purpose: the game tints the same background for dawn, dusk and night. Do not add a visible sun unless the prompt says so.
 
-**marsh.jpg** · horizon 44 % · Level 1
+**marsh.jpg** · horizon 44 % · Wetlands chapter
 ```
 Landscape photograph of a wide cattail marsh in Ontario just after sunrise. Calm open water across the middle distance reflecting a soft peach and pale-blue sky with thin cloud, a band of brown cattails and reeds along the far shore, low rolling mixed-forest hills on the horizon softened by morning mist. Wet marsh grass and shallow water with floating duckweed across the lower half. Low golden side light, dew on the grass.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 44% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**lake.jpg** · horizon 46 % · Level 2
+**lake.jpg** · horizon 46 % · Wetlands chapter
 ```
 Landscape photograph of a prairie pothole lake in Saskatchewan on a clear morning. Open blue-grey water with light ripples in the middle distance, bulrushes along the far shore, flat golden grassland beyond, a huge sky with scattered cumulus clouds. Short trampled shoreline grass and mud across the lower half.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 46% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**farm.jpg** · horizon 45 % · Level 3
+**farm.jpg** · horizon 45 % · Uplands chapter
 ```
 Landscape photograph of the edge of a harvested cornfield in Iowa at midday in autumn. Rows of cut golden corn stubble and scattered husks across the lower half, a dense hedgerow of shrubs and a few bare oak trees in the distance, gently rolling farmland, clear pale-blue sky. Plain natural farmland, no buildings, no machinery.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 45% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**hardwood.jpg** · horizon 43 % · Level 4, Thermal Sweep, Stalker Hunt
+**hardwood.jpg** · horizon 43 % · Whitetail Woods chapter, Dangerous Game chapter, Grand Slam chapter, Strange Lights chapter, Thermal Sweep, Stalker Hunt
 ```
 Landscape photograph across an open clearing in an oak and sugar-maple hardwood forest in late October. Orange, red and yellow leaves on the trees along the far edge, grey trunks, a wooded ridge rising behind, brown leaf litter and short grass across the lower half. Bright overcast sky, sun not visible.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 43% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**forestedge.jpg** · horizon 44 % · Level 5
+**forestedge.jpg** · horizon 44 % · Uplands chapter, Whitetail Woods chapter, Grand Slam chapter
 ```
 Landscape photograph of a green spring hayfield at the edge of a deciduous forest in Pennsylvania. Fresh green grass and clover across the lower half, a line of newly leafed trees across the middle distance, soft clear morning light, sun not visible.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 44% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**mountain.jpg** · horizon 50 % · Level 6
+**mountain.jpg** · horizon 50 % · High Country chapter, Grand Slam chapter, Strange Lights chapter
 ```
 Landscape photograph of a wide alpine meadow in the Montana Rockies in late summer. Green and gold meadow grass with scattered rocks across the lower half, a few dark spruce and fir trees, grassy slopes rising in the middle distance, rugged grey peaks with snow patches on the horizon, deep-blue sky with light cloud.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 50% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**scrub.jpg** · horizon 46 % · Level 7
+**scrub.jpg** · horizon 46 % · Dangerous Game chapter
 ```
 Landscape photograph of dry south Texas brush country in late afternoon. Sandy pale soil with sparse dry grass and prickly pear across the lower half, low grey-green mesquite and thorny scrub in the middle distance, flat-topped mesas on the horizon, warm hazy sky, sun not visible.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 46% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**valley.jpg** · horizon 50 % · Level 8
+**valley.jpg** · horizon 50 % · High Country chapter, Grand Slam chapter, Strange Lights chapter
 ```
 Landscape photograph of a broad mountain basin in Colorado elk country at dawn. An open grassy valley floor across the lower half, dark conifer timber on the far slopes, aspen patches turning yellow, jagged peaks behind, soft cool early light with a little mist in the valley, sun not visible.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 50% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**boreal.jpg** · horizon 45 % · Level 9, Fog of War
+**boreal.jpg** · horizon 45 % · Wetlands chapter, Whitetail Woods chapter, Dangerous Game chapter, Grand Slam chapter, Fog of War
 ```
 Landscape photograph of a northern Ontario boreal bog. Sedge grass, sphagnum moss and a calm open pond across the lower half, a dense line of narrow black spruce and tamarack across the middle distance, low hills behind, cool grey overcast sky.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 45% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**prairie.jpg** · horizon 47 % · Level 10, Convoy Overwatch, Orbital Drop
+**prairie.jpg** · horizon 47 % · Uplands chapter, Whitetail Woods chapter, Grand Slam chapter, Strange Lights chapter, Invasion chapter, Convoy Overwatch, Orbital Drop
 ```
 Landscape photograph of open mixed-grass prairie in Alberta. Tall golden grass moving slightly in the wind across the lower half, a few isolated cottonwood trees on the horizon, a huge sky with high thin cloud, sun not visible. No roads, no fences.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 47% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**canyon.jpg** · horizon 47 % · Level 11 (the game makes it night)
+**canyon.jpg** · horizon 47 % · Crash Site chapter, Invasion chapter (the game makes it night)
 ```
 Landscape photograph of a wide desert canyon floor in Utah in late-afternoon light. A flat sandy wash with scattered rocks and dry brush across the lower half, red sandstone mesas and canyon walls on the horizon. In the middle distance, slightly right of centre, a large dark disc-shaped craft about 30 metres across lies crashed and half-buried in the sand, its hull scorched and dented, a thin trail of grey smoke rising. Sun not visible. No people, no creatures.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 47% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**hive.jpg** · horizon 47 % · Level 12, Hive Purge, Colossus (alien light — keep it)
+**hive.jpg** · horizon 47 % · The Hive chapter, Hive Purge, Colossus (alien light — keep it)
 ```
 Landscape photograph of a valley that has been transformed by an alien organism, at dusk. Dark violet soil covered in glowing pink and teal bioluminescent growths and fleshy pods across the lower half, tall curved black chitin spires rising in the distance, a magenta and purple sky with two moons and faint aurora. Photographed like a real location with a real camera: believable scale, real dust and moisture in the air, long-exposure noise in the shadows. No creatures, no people.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 47% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**range.jpg** · horizon 47 % · Military ranges, Night Watch, Iron Sights Only
+**range.jpg** · horizon 47 % · Invasion chapter, Qualification Range, Steel Ladder, Moving Target Range, Night Watch, Wind Masters, Speed Steel, Mile High (ELR), Iron Sights Only
 ```
 Landscape photograph of a military desert firing range seen from the firing line. Flat packed sand and gravel across the lower half, low earth berms at several distances, small steel target stands far away, reddish mesas on the horizon, dusty pale-blue sky, sun not visible. No people, no vehicles, no signs.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 47% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
@@ -154,14 +154,14 @@ Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**ridge.jpg** · horizon 50 % · Counter-Sniper, Cold Bore, Marksman Gauntlet
+**ridge.jpg** · horizon 50 % · Crash Site chapter, Invasion chapter, Cold Bore, Counter-Sniper, Marksman Gauntlet
 ```
 Landscape photograph from a dry valley floor looking up at a long arid hillside ridge. The ridge fills the upper middle of the frame (its crest about 20 to 30 percent from the top), covered in scattered boulders, rock outcrops and dark green juniper and scrub bushes. Open dry ground across the lower half; the base of the ridge meets the valley floor about halfway down. Bright overcast sky.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 50% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.
 It must look like a real, unedited photograph: true-to-life textures and fine detail, natural slightly muted colours, subtle film grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy look, no airbrushed smoothness, no HDR glow, no oversaturation. No text, no logos, no watermarks.
 ```
 
-**base.jpg** · horizon 48 % · Drone Swarm, Perimeter Breach, Last Stand
+**base.jpg** · horizon 48 % · Crash Site chapter, Invasion chapter, Drone Swarm, Perimeter Breach, Last Stand
 ```
 Landscape photograph looking outward from a remote desert outpost. Flat open desert of sand and small stones across the lower half, a faint dirt track leading away, distant mesas, clear dusty sky, sun not visible. Nothing close to the lens. No people, no vehicles.
 Frame: 1536x1024 landscape. Camera perfectly level at standing eye height (1.6 m), 35 mm lens at f/11, everything sharp from 15 m to the horizon. The horizon sits about 48% from the top. The lower half is open ground with nothing close to the lens. Natural atmospheric haze makes distant hills paler and bluer. Empty scene: no animals, no birds, no people, no vehicles, no tracks, no fences, no signs.

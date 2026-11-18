@@ -11,7 +11,12 @@ let nextId = 1;
 
 export function createEntity(S, spId, def = {}) {
   const base = SPECIES[spId];
-  const sp = def.as ? { ...base, ...def.as, colors: base.colors } : base;
+  let sp = def.as ? { ...base, ...def.as, colors: base.colors } : base;
+  // later levels: targets move faster and leave sooner
+  const dm = S.diff || 1;
+  if (dm !== 1 && !sp.boss && sp.behavior !== 'static') {
+    sp = { ...sp, speed: sp.speed ? sp.speed * (1 + (dm - 1) * 0.6) : sp.speed, walk: sp.walk ? sp.walk * (1 + (dm - 1) * 0.4) : sp.walk, escape: sp.escape < 900 ? sp.escape / dm : sp.escape };
+  }
   const lane = def.lane || sp.lane;
   const e = {
     id: nextId++, spId, sp, lane,
