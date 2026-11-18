@@ -371,7 +371,7 @@ export function drawCoverView(g, biomeId, coverT, t) {
   const k = Math.min(1, coverT);
   g.save();
   g.fillStyle = `rgba(0,0,0,${0.25 * k})`; g.fillRect(0, 0, W, H);
-  const img = getImage(foregroundPath(biomeId), 'overlay');
+  const img = BIOMES[biomeId].noCoverArt ? null : getImage(foregroundPath(biomeId), 'overlay');
   const lift = k * H * 0.3;
   if (img) {
     // grow the overlay from the bottom centre until its cover object rises to just below eye level
@@ -452,12 +452,16 @@ function coverOverlay(img) {
   let solid = 0.74;
   try {
     const d = g.getImageData(0, 0, w, h);
-    for (let y = 0; y < h; y++) {
+    // climb from the bottom edge while at least half of each row is covered;
+    // a tree canopy or sign above a thin trunk or post does not count
+    let top = h;
+    for (let y = h - 1; y >= 0; y--) {
       let n = 0;
       for (let x = 0; x < w; x += 2) if (d.data[(y * w + x) * 4 + 3] > 40) n++;
-      if (n >= w * 0.25) { solid = y / h; break; } // half of the sampled columns
+      if (n >= w * 0.25) top = y; else if (top < h) break;
     }
-    const fadeTo = solid * h + h * 0.004, fadeFrom = solid * h - h * 0.018;
+    if (top < h) solid = top / h;
+    const fadeTo = solid * h + h * 0.002, fadeFrom = solid * h - h * 0.006;
     for (let y = 0; y < fadeTo; y++) {
       const k = y < fadeFrom ? 0 : (y - fadeFrom) / (fadeTo - fadeFrom);
       for (let x = 0; x < w; x++) { const i = (y * w + x) * 4 + 3; d.data[i] *= k; }
@@ -471,8 +475,8 @@ function coverOverlay(img) {
 
 export function drawForeground(g, biomeId, t, windStrength = 2, wide = false) {
   if (wide) { for (const k of [-1, 0, 1]) { g.save(); g.translate(k * W, 0); drawForeground(g, biomeId, t, windStrength, false); g.restore(); } return; }
-  const img = getImage(foregroundPath(biomeId), 'overlay');
   const b = BIOMES[biomeId];
+  const img = b.noCoverArt ? null : getImage(foregroundPath(biomeId), 'overlay');
   if (img && b.fg === 'cover') { const c = coverOverlay(img); g.drawImage(c.img, 0, c.shift * H, W, H); return; }
   if (img) { g.drawImage(img, 0, 0, W, H); return; }
   if (!b.fg || b.fg === 'none') return;

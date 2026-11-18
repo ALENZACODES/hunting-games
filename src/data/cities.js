@@ -22,14 +22,21 @@ export const CITY_ARMORY = ['m4', 'scar', 'akm', 'sbe3', 'axmc', 'm82'];
 const ALT = { street: 16, square: 12, strip: 14, park: 5, interior: 5, rooftop: 3, bridge: 9, waterfront: 6 };
 // horizon (fraction of screen height) the scene photos are prompted with
 const HORIZON = { street: 0.5, square: 0.5, strip: 0.5, park: 0.5, interior: 0.5, rooftop: 0.46, bridge: 0.5, waterfront: 0.48 };
-// eye level measured on each scene photo that exists (vanishing point of the
+// cover photos that show scenery behind the object instead of being cut out;
+// the game uses its drawn cover for these until the file is replaced
+const SKIP_COVER = new Set(['singapore-11']);
+
+// eye level measured on each of the 60 scene photos (vanishing point of the
 // ground, or the far horizon on rooftops and waterfronts)
 const MEASURED = {
   'nyc-01': 0.60, 'nyc-02': 0.48, 'nyc-03': 0.52, 'nyc-04': 0.60, 'nyc-05': 0.48, 'nyc-06': 0.60,
   'nyc-07': 0.47, 'nyc-08': 0.56, 'nyc-09': 0.47, 'nyc-10': 0.46, 'nyc-11': 0.55, 'nyc-12': 0.42,
   'hongkong-01': 0.59, 'hongkong-02': 0.46, 'hongkong-03': 0.57, 'hongkong-04': 0.45, 'hongkong-05': 0.52, 'hongkong-06': 0.51,
   'hongkong-07': 0.49, 'hongkong-08': 0.47, 'hongkong-09': 0.49, 'hongkong-10': 0.52, 'hongkong-11': 0.55, 'hongkong-12': 0.46,
-  'singapore-03': 0.61, 'singapore-04': 0.55, 'singapore-05': 0.50, 'singapore-06': 0.57,
+  'singapore-01': 0.53, 'singapore-02': 0.56, 'singapore-03': 0.61, 'singapore-04': 0.55, 'singapore-05': 0.50, 'singapore-06': 0.57,
+  'singapore-07': 0.58, 'singapore-08': 0.55, 'singapore-09': 0.58, 'singapore-10': 0.56, 'singapore-11': 0.51, 'singapore-12': 0.50,
+  'toronto-01': 0.53, 'toronto-02': 0.55, 'toronto-03': 0.55, 'toronto-04': 0.56, 'toronto-05': 0.60, 'toronto-06': 0.56,
+  'toronto-07': 0.47, 'toronto-08': 0.58, 'toronto-09': 0.52, 'toronto-10': 0.54, 'toronto-11': 0.55, 'toronto-12': 0.49,
   'vegas-01': 0.53, 'vegas-02': 0.51, 'vegas-03': 0.53, 'vegas-04': 0.58, 'vegas-05': 0.47, 'vegas-06': 0.44,
   'vegas-07': 0.54, 'vegas-08': 0.55, 'vegas-09': 0.55, 'vegas-10': 0.51, 'vegas-11': 0.51, 'vegas-12': 0.44,
 };
@@ -209,7 +216,7 @@ function buildScene(city, i, row) {
   // register the scene as a biome so the renderer can use it like any other
   BIOMES[biomeId] = {
     name: `${name}, ${city.name}`, horizon: MEASURED[biomeId] ?? HORIZON[type], city: city.id, sceneType: type, neon: city.neon,
-    water: type === 'waterfront' || (type === 'bridge' && city.water), fg: 'cover', fgTop: 0.74,
+    water: type === 'waterfront' || (type === 'bridge' && city.water), fg: 'cover', fgTop: 0.74, noCoverArt: SKIP_COVER.has(biomeId),
     art: `city/${city.id}/scene_${sid}`,
   };
   const altMax = ALT[type];
