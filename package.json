@@ -1,0 +1,11 @@
+{
+  "name": "hunting-games",
+  "version": "0.1.0",
+  "private": true,
+  "description": "First-person hunting shooter: 12 hunts, 25 real firearms with scopes and ballistics, aliens and 25 military ops. Runs in the browser with no build step.",
+  "type": "module",
+  "scripts": {
+    "start": "npx --yes http-server . -p 8080 -c-1",
+    "art": "node tools/art-status.mjs"
+  }
+}

@@ -1,0 +1,28 @@
+# assets/
+
+Art for the game. Everything here is optional: any file that is missing is replaced by a drawn stand-in, so the game always runs. Prompts for every file are in [`docs/ART-PROMPTS.md`](../docs/ART-PROMPTS.md).
+
+```
+assets/
+├── backgrounds/   <biome>.jpg (1536×1024) and optional <biome>_fg.png overlays
+├── animals/       birds, small game and big game cut-outs (.png)
+├── aliens/        alien cut-outs (.png)
+├── military/      plates, pop-up targets, drone, vehicle, marksman (.png)
+├── weapons/       <id>.png first-person view, <id>_profile.png side view
+└── ui/            title.jpg key art behind the main menu
+```
+
+## How images are used
+
+- **Cut-outs** (animals, aliens, targets, guns): a transparent background is best. A plain single-colour background also works, because the loader removes it by flood-filling from the edges. Empty margins are trimmed automatically.
+- **Facing:** side-view cut-outs must face **right**. The game mirrors them when they move left.
+- **Scale:** the trimmed width of a sprite is set to the animal's real body length (`len` in `src/data/species.js`), so a deer is the right size at every distance. Image resolution only affects sharpness.
+- **Frames:** wing-flap birds use two files, `<id>_fly_1.png` and `<id>_fly_2.png`. Everything else is one image per pose; the engine adds bob, gallop and fall motion.
+- **Backgrounds** are drawn full-screen. If the horizon in an image does not line up with where animals stand, change that biome's `horizon` in `src/data/levels.js`.
+- **Local testing:** open the game through a local web server (`npm start`), not by double-clicking `index.html`. Browsers block the image clean-up step on `file://` pages.
+
+Check what is present and what is missing:
+
+```
+npm run art
+```
