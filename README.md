@@ -43,7 +43,7 @@ It also runs as-is on GitHub Pages (Settings → Pages → deploy from the `main
 
 The game ships with drawn stand-ins for every animal, alien, target, gun and landscape, so it is fully playable without any image files. Photoreal art drops in by file name:
 
-1. Generate images with the prompts in [`docs/ART-PROMPTS.md`](docs/ART-PROMPTS.md) (132 files, each with its exact name).
+1. Generate images with the prompts in [`docs/ART-PROMPTS.md`](docs/ART-PROMPTS.md): 132 complete photo-realistic prompts, each with its exact file name, plus fix-up commands for results that look fake.
 2. Save them under `assets/` in the folder the prompt names.
 3. Run `npm run art` to see what is in place and what is missing.
 
