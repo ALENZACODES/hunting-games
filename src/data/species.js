@@ -24,7 +24,7 @@ export const SPECIES = {
   eagle: { name: 'Bald eagle (protected)', family: 'bird', draw: 'eagle', len: 0.95, anchor: 'center', body: { x: 0, y: 0, rx: 0.9, ry: 0.18 }, vital: { x: 0.2, y: 0.04, r: 0.12 }, minPower: 1, hp: 1, behavior: 'cross', high: true, speed: 6, lane: { d: [40, 70] }, escape: 14, points: 0, counts: false, penalty: 1000, protected: true, colors: ['#3b2a1c', '#f5f3ee', '#e2b33a'] },
 
   // ── Small game ────────────────────────────────────────
-  rabbit: { name: 'Eastern cottontail', family: 'quad', draw: 'rabbit', len: 0.42, anchor: 'bottom', body: { x: 0, y: 0.15, rx: 0.2, ry: 0.12 }, vital: { x: 0.08, y: 0.17, r: 0.06 }, minPower: 1, hp: 1, behavior: 'hop', speed: 5, lane: { d: [12, 24] }, escape: 6, points: 120, colors: ['#8a7560', '#efe8dc'] },
+  rabbit: { name: 'Eastern cottontail', family: 'quad', draw: 'rabbit', len: 0.42, anchor: 'bottom', body: { x: 0, y: 0.15, rx: 0.2, ry: 0.12 }, vital: { x: 0.08, y: 0.17, r: 0.06 }, minPower: 1, hp: 1, behavior: 'hop', speed: 5, lane: { d: [15, 30] }, escape: 6, points: 120, colors: ['#8a7560', '#efe8dc'] },
 
   // ── Big game ──────────────────────────────────────────
   whitetail: { name: 'Whitetail buck', family: 'quad', draw: 'deer', antlers: 'whitetail', len: 2.0, anchor: 'bottom', body: { x: 0, y: 0.95, rx: 0.72, ry: 0.32 }, vital: { x: 0.35, y: 0.88, r: 0.13 }, minPower: 4, hp: 1, behavior: 'graze', walk: 1.2, speed: 11, lane: { d: [60, 140] }, escape: 30, points: 400, colors: ['#8b6a48', '#f2ede4', '#3a2b1d'] },

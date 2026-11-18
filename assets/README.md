@@ -18,6 +18,7 @@ assets/
 - **Facing:** side-view cut-outs must face **right**. The game mirrors them when they move left.
 - **Scale:** the trimmed width of a sprite is set to the animal's real body length (`len` in `src/data/species.js`), so a deer is the right size at every distance. Image resolution only affects sharpness.
 - **Frames:** wing-flap birds use two files, `<id>_fly_1.png` and `<id>_fly_2.png`. Everything else is one image per pose; the engine adds bob, gallop and fall motion.
+- **Guns:** the in-hand view uses `<id>.png` (first-person) when present; otherwise it uses the side-profile photo `<id>_profile.png`, mirrored and angled into the scene; with neither, a drawn stand-in.
 - **Backgrounds** are drawn full-screen. If the horizon in an image does not line up with where animals stand, change that biome's `horizon` in `src/data/levels.js`.
 - **Local testing:** open the game through a local web server (`npm start`), not by double-clicking `index.html`. Browsers block the image clean-up step on `file://` pages.
 

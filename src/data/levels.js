@@ -1,27 +1,28 @@
 // Biomes (backgrounds) and the 100-level hunt campaign (10 chapters of 10).
 //
 // Biome fields drive the drawn stand-in landscape and tell the engine where the
-// horizon is. When assets/backgrounds/<biome>.jpg exists it replaces the drawing;
+// horizon is. Horizons and foreground tops are calibrated to the delivered
+// background photos (where open ground meets the far tree line or horizon). When assets/backgrounds/<biome>.jpg exists it replaces the drawing;
 // if its horizon sits higher or lower, adjust `horizon` (0 = top, 1 = bottom).
 
 export const BIOMES = {
-  marsh:    { name: 'Cattail marsh', horizon: 0.44, hills: 'low', trees: 'mixed', ground: ['#56603a', '#2f3a22'], water: true, fg: 'reeds', fgTop: 0.66 },
-  lake:     { name: 'Prairie lake', horizon: 0.46, hills: 'none', trees: 'sparse', ground: ['#7a7a48', '#4a4f2c'], water: true, fg: 'reeds', fgTop: 0.7 },
-  farm:     { name: 'Cornfield edge', horizon: 0.45, hills: 'low', trees: 'hedgerow', ground: ['#a08a52', '#6b5a32'], fg: 'corn', fgTop: 0.72 },
-  hardwood: { name: 'Hardwood ridge', horizon: 0.43, hills: 'mid', trees: 'autumn', ground: ['#6d5536', '#3e3020'], fg: 'brush', fgTop: 0.8 },
-  forestedge: { name: 'Spring forest edge', horizon: 0.44, hills: 'low', trees: 'deciduous', ground: ['#5f7a3a', '#3a4d22'], fg: 'grass', fgTop: 0.8 },
-  mountain: { name: 'Alpine meadow', horizon: 0.5, hills: 'alps', trees: 'conifer', ground: ['#7c8a4a', '#4c5a2c'], fg: 'grass', fgTop: 0.84 },
-  scrub:    { name: 'Dry scrub', horizon: 0.46, hills: 'mesa', trees: 'scrub', ground: ['#9a7f55', '#5e4a2e'], fg: 'brush', fgTop: 0.8 },
-  valley:   { name: 'Mountain valley', horizon: 0.5, hills: 'alps', trees: 'conifer', ground: ['#6f7a46', '#46512a'], fg: 'grass', fgTop: 0.85 },
-  boreal:   { name: 'Boreal bog', horizon: 0.45, hills: 'low', trees: 'spruce', ground: ['#5c5a38', '#353420'], water: true, fg: 'grass', fgTop: 0.8 },
-  prairie:  { name: 'Open prairie', horizon: 0.47, hills: 'none', trees: 'sparse', ground: ['#8a8150', '#55502e'], fg: 'grass', fgTop: 0.82 },
-  canyon:   { name: 'Desert canyon', horizon: 0.47, hills: 'mesa', trees: 'none', ground: ['#9c6b45', '#5a3a24'], fg: 'rocks', fgTop: 0.84, crash: true },
-  hive:     { name: 'Alien valley', horizon: 0.47, hills: 'spires', trees: 'alien', ground: ['#3b3348', '#1d1826'], fg: 'alien', fgTop: 0.82, alien: true },
-  range:    { name: 'Desert firing range', horizon: 0.47, hills: 'mesa', trees: 'none', ground: ['#b39466', '#7a6141'], fg: 'none', berms: true },
-  urban:    { name: 'Training village', horizon: 0.5, hills: 'none', trees: 'none', ground: ['#77736a', '#4a4741'], fg: 'none', buildings: true },
-  ridge:    { name: 'Arid ridge', horizon: 0.5, hills: 'ridge', trees: 'scrub', ground: ['#9d8a62', '#5e5038'], fg: 'brush', fgTop: 0.86 },
-  base:     { name: 'Forward outpost', horizon: 0.48, hills: 'mesa', trees: 'none', ground: ['#8c7b5a', '#5a4d36'], fg: 'wire', fgTop: 0.82 },
-  bridge:   { name: 'River crossing', horizon: 0.46, hills: 'mid', trees: 'conifer', ground: ['#6a6a48', '#3d3d2a'], water: true, bridge: true, fg: 'none' },
+  marsh:    { name: 'Cattail marsh', horizon: 0.44, hills: 'low', trees: 'mixed', ground: ['#56603a', '#2f3a22'], water: true, fg: 'reeds', fgTop: 0.73 },
+  lake:     { name: 'Prairie lake', horizon: 0.445, hills: 'none', trees: 'sparse', ground: ['#7a7a48', '#4a4f2c'], water: true, fg: 'reeds', fgTop: 0.79 },
+  farm:     { name: 'Cornfield edge', horizon: 0.52, hills: 'low', trees: 'hedgerow', ground: ['#a08a52', '#6b5a32'], fg: 'corn', fgTop: 0.73 },
+  hardwood: { name: 'Hardwood ridge', horizon: 0.575, hills: 'mid', trees: 'autumn', ground: ['#6d5536', '#3e3020'], fg: 'brush', fgTop: 0.74 },
+  forestedge: { name: 'Spring forest edge', horizon: 0.49, hills: 'low', trees: 'deciduous', ground: ['#5f7a3a', '#3a4d22'], fg: 'grass', fgTop: 0.72 },
+  mountain: { name: 'Alpine meadow', horizon: 0.5, hills: 'alps', trees: 'conifer', ground: ['#7c8a4a', '#4c5a2c'], fg: 'grass', fgTop: 0.75 },
+  scrub:    { name: 'Dry scrub', horizon: 0.52, hills: 'mesa', trees: 'scrub', ground: ['#9a7f55', '#5e4a2e'], fg: 'brush', fgTop: 0.74 },
+  valley:   { name: 'Mountain valley', horizon: 0.505, hills: 'alps', trees: 'conifer', ground: ['#6f7a46', '#46512a'], fg: 'grass', fgTop: 0.81 },
+  boreal:   { name: 'Boreal bog', horizon: 0.515, hills: 'low', trees: 'spruce', ground: ['#5c5a38', '#353420'], water: true, fg: 'grass', fgTop: 0.76 },
+  prairie:  { name: 'Open prairie', horizon: 0.485, hills: 'none', trees: 'sparse', ground: ['#8a8150', '#55502e'], fg: 'grass', fgTop: 0.77 },
+  canyon:   { name: 'Desert canyon', horizon: 0.48, hills: 'mesa', trees: 'none', ground: ['#9c6b45', '#5a3a24'], fg: 'rocks', fgTop: 0.69, crash: true },
+  hive:     { name: 'Alien valley', horizon: 0.48, hills: 'spires', trees: 'alien', ground: ['#3b3348', '#1d1826'], fg: 'alien', fgTop: 0.77, alien: true },
+  range:    { name: 'Desert firing range', horizon: 0.505, hills: 'mesa', trees: 'none', ground: ['#b39466', '#7a6141'], fg: 'none', berms: true },
+  urban:    { name: 'Training village', horizon: 0.515, hills: 'none', trees: 'none', ground: ['#77736a', '#4a4741'], fg: 'none', buildings: true },
+  ridge:    { name: 'Arid ridge', horizon: 0.58, hills: 'ridge', trees: 'scrub', ground: ['#9d8a62', '#5e5038'], fg: 'brush', fgTop: 0.66 },
+  base:     { name: 'Forward outpost', horizon: 0.505, hills: 'mesa', trees: 'none', ground: ['#8c7b5a', '#5a4d36'], fg: 'wire', fgTop: 0.72 },
+  bridge:   { name: 'River crossing', horizon: 0.466, hills: 'mid', trees: 'conifer', ground: ['#6a6a48', '#3d3d2a'], water: true, bridge: true, fg: 'none' },
   heli:     { name: 'From the helicopter', horizon: 0.36, hills: 'mesa', trees: 'scrub', ground: ['#a08158', '#6a5234'], fg: 'none', scroll: true },
 };
 

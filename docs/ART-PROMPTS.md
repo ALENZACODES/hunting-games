@@ -818,7 +818,7 @@ It must look like a real, unedited photograph: true-to-life textures and fine de
 
 ## 8. Guns, side profile (Arsenal screen) — `assets/weapons/<id>_profile.png` · 1536×1024 · transparent `.png`
 
-Shown on the Arsenal screen. Use the same gun descriptions as section 7.
+Shown on the Arsenal screen, and used as the in-hand gun when a first-person image is missing. Use the same gun descriptions as section 7.
 
 **rem870_profile.png**
 ```

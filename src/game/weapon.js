@@ -4,7 +4,7 @@
 
 import { W, H, MIL } from './view.js';
 import { getImage } from '../engine/assets.js';
-import { weaponPath } from '../data/art.js';
+import { weaponPath, weaponProfilePath } from '../data/art.js';
 import * as audio from '../engine/audio.js';
 
 export class Gun {
@@ -121,16 +121,21 @@ export function drawViewmodel(g, gun, aimX, aimY, t, moving) {
   const kickBack = a.kick * a.kick * 60 * (0.4 + gun.def.recoil);
   const sway = Math.sin(t * 1.6) * 4;
   if (img) {
-    const h = H * 0.62;
+    // first-person photo: hands and gun, anchored in the bottom-right corner
+    const h = H * 0.47;
     const w = h * (img.width / img.height);
+    const x0 = W - w * 0.86 + (aimX - W / 2) * 0.05 + kickBack * 0.4;
+    const y0 = H - h * 0.93 + lower + kickBack * 0.5 + sway + (aimY - H / 2) * 0.04;
     g.save();
-    g.translate(W - w * 0.92 + (aimX - W / 2) * 0.05 + kickBack * 0.4, H - h + 30 + lower + kickBack * 0.5 + sway + (aimY - H / 2) * 0.04);
+    g.translate(x0, y0);
     g.rotate(-a.kick * 0.04 * (1 + gun.def.recoil) + a.reload * 0.25);
     g.drawImage(img, 0, 0, w, h);
     g.restore();
-    if (a.flash > 0.3) muzzleFlash(g, W - w * 0.55 + (aimX - W / 2) * 0.05, H - h * 0.85, 60 * a.flash * (gun.def.power / 5 + 0.5));
+    if (a.flash > 0.3) muzzleFlash(g, x0 + w * 0.05, y0 + h * 0.06, 60 * a.flash * (gun.def.power / 5 + 0.5));
     return;
   }
+  const profile = getImage(weaponProfilePath(gun.def.id));
+  if (profile) { drawProfileViewmodel(g, gun, profile, aimX, aimY, kickBack, lower, sway); return; }
   const m = MODELS[gun.def.model] || MODELS.bolt;
   const ox = W * 0.76 + (aimX - W / 2) * 0.08 + kickBack * 0.6;
   const oy = H + 60 + lower + kickBack * 0.4 + sway + (aimY - H / 2) * 0.05;
@@ -183,6 +188,33 @@ export function drawViewmodel(g, gun, aimX, aimY, t, moving) {
   g.restore();
   if (a.flash > 0.3) {
     const mx = ox + Math.cos(ang) * L * 1.02, my = oy + Math.sin(ang) * L * 1.02;
+    muzzleFlash(g, mx, my, 50 * a.flash * (gun.def.power / 5 + 0.5));
+  }
+}
+
+// Side-profile photo used as the in-hand gun when no first-person photo exists:
+// mirrored so the muzzle points into the scene, stock running off the
+// bottom-right corner, angled toward the aim point.
+function drawProfileViewmodel(g, gun, img, aimX, aimY, kickBack, lower, sway) {
+  const a = gun.anim;
+  const pistol = gun.def.model === 'revolver';
+  const len = W * (pistol ? 0.34 : 0.6) * (pistol ? 1 : Math.min(1.15, (MODELS[gun.def.model] || MODELS.bolt).len));
+  const s = len / img.width;
+  const w = img.width * s, h = img.height * s;
+  const ox = W * (pistol ? 0.86 : 1.03) + kickBack * 0.8;
+  const oy = H * (pistol ? 0.9 : 0.95) + lower + kickBack * 0.3 + sway;
+  const tx = W * 0.5 + (aimX - W / 2) * 0.35, ty = H * 0.58 + (aimY - H / 2) * 0.3;
+  const ang = Math.atan2(ty - oy, tx - ox) - Math.PI - a.kick * 0.05 * (1 + gun.def.recoil) - a.reload * 0.3;
+  g.save();
+  g.translate(ox, oy);
+  g.rotate(ang);
+  g.scale(-1, 1);
+  g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 18; g.shadowOffsetY = 8;
+  g.drawImage(img, 0, -h * 0.55, w, h);
+  g.restore();
+  if (a.flash > 0.3) {
+    const mx = ox + Math.cos(ang + Math.PI) * w * 0.99 + Math.sin(ang) * h * 0.25;
+    const my = oy + Math.sin(ang + Math.PI) * w * 0.99 - Math.cos(ang) * h * 0.25;
     muzzleFlash(g, mx, my, 50 * a.flash * (gun.def.power / 5 + 0.5));
   }
 }
