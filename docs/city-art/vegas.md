@@ -18,7 +18,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_01_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The Strip, Las Vegas, matching the scene's light (night): a concrete median planter with a palm trunk, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The Strip, Las Vegas, matching the scene's light (night): a low concrete median planter with desert shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -36,7 +36,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_02_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Fountain Lake, Las Vegas, matching the scene's light (night): the lake's stone balustrade, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Fountain Lake, Las Vegas, matching the scene's light (night): the lake's stone balustrade, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -54,7 +54,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_03_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Casino Floor, Las Vegas, matching the scene's light (night): the backs of a row of slot machines with stools, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Casino Floor, Las Vegas, matching the scene's light (night): the backs of a row of slot machines with stools, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -72,7 +72,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_04_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Fremont Street Canopy, Las Vegas, matching the scene's light (night): a stone planter with a palm and a lamp-post base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Fremont Street Canopy, Las Vegas, matching the scene's light (night): a low stone planter with clipped shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -90,7 +90,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_05_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Resort Pool Deck, Las Vegas, matching the scene's light (day): the edge of a white cabana and stacked sun loungers, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Resort Pool Deck, Las Vegas, matching the scene's light (day): the edge of a white cabana and stacked sun loungers, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -108,7 +108,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_06_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Rooftop Helipad, Las Vegas, matching the scene's light (dusk): a rooftop steel cabinet and a helipad edge light, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Rooftop Helipad, Las Vegas, matching the scene's light (dusk): a rooftop steel cabinet and a helipad edge light, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -126,7 +126,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_07_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for South Strip Median, Las Vegas, matching the scene's light (dusk): a landscaped kerb with desert shrubs and a palm base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for South Strip Median, Las Vegas, matching the scene's light (dusk): a landscaped kerb with desert shrubs and a palm base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -144,7 +144,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_08_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Monorail Station, Las Vegas, matching the scene's light (night): a steel platform bench and the base of the glass barrier, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Monorail Station, Las Vegas, matching the scene's light (night): a steel platform bench and the base of the glass barrier, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -162,7 +162,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_09_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Neon Sign Graveyard, Las Vegas, matching the scene's light (night): a toppled giant vintage sign arrow lying in the gravel, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Neon Sign Graveyard, Las Vegas, matching the scene's light (night): a toppled giant vintage sign arrow lying in the gravel, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -180,7 +180,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_10_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Red Rock Overlook, Las Vegas, matching the scene's light (day): a red sandstone boulder and dry scrub, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Red Rock Overlook, Las Vegas, matching the scene's light (day): a red sandstone boulder and dry scrub, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -198,7 +198,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_11_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Wedding Chapel Row, Las Vegas, matching the scene's light (night): a low white picket fence and a planter, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Wedding Chapel Row, Las Vegas, matching the scene's light (night): a low white picket fence and a planter, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -216,7 +216,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/vegas/scene_12_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The Tower Top, Las Vegas, matching the scene's light (night): the base of the tower deck's steel railing, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The Tower Top, Las Vegas, matching the scene's light (night): the base of the tower deck's steel railing, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.

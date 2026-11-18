@@ -18,7 +18,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_01_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Marina Bay Promenade, Singapore, matching the scene's light (night): the promenade's stone railing and a lamp-post base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Marina Bay Promenade, Singapore, matching the scene's light (night): the promenade's low stone railing, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -36,7 +36,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_02_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Orchard Road, Singapore, matching the scene's light (night): a large round concrete planter with tropical shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Orchard Road, Singapore, matching the scene's light (night): a large round concrete planter with tropical shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -54,7 +54,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_03_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Supertree Grove, Singapore, matching the scene's light (night): a curved stone garden bench edged with ferns, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Supertree Grove, Singapore, matching the scene's light (night): a curved stone garden bench edged with ferns, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -72,7 +72,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_04_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The SkyPark Deck, Singapore, matching the scene's light (dusk): a teak sun lounger and a white umbrella base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The SkyPark Deck, Singapore, matching the scene's light (dusk): a teak sun lounger and a white umbrella base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -90,7 +90,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_05_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Helix Bridge, Singapore, matching the scene's light (night): the bridge's steel handrail and a stone bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Helix Bridge, Singapore, matching the scene's light (night): the bridge's steel handrail and a stone bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -108,7 +108,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_06_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Raffles Place, Singapore, matching the scene's light (day): a low granite wall with a brass rail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Raffles Place, Singapore, matching the scene's light (day): a low granite wall with a brass rail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -126,7 +126,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_07_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Luxury Mall Atrium, Singapore, matching the scene's light (day): a white marble planter with an indoor palm, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Luxury Mall Atrium, Singapore, matching the scene's light (day): a white marble planter with low ferns, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -144,7 +144,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_08_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Esplanade Waterfront, Singapore, matching the scene's light (dusk): the edge of wide stone steps with a low railing, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Esplanade Waterfront, Singapore, matching the scene's light (dusk): the edge of wide stone steps with a low railing, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -162,7 +162,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_09_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Cloud Forest Dome, Singapore, matching the scene's light (day): a steel walkway railing beside a moss-covered rock, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Cloud Forest Dome, Singapore, matching the scene's light (day): a steel walkway railing beside a moss-covered rock, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -180,7 +180,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_10_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Merlion Park, Singapore, matching the scene's light (dawn): a stone balustrade by the water, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Merlion Park, Singapore, matching the scene's light (dawn): a stone balustrade by the water, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -198,7 +198,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_11_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Clarke Quay, Singapore, matching the scene's light (night): an overturned riverside café table and chairs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Clarke Quay, Singapore, matching the scene's light (night): an overturned riverside café table and chairs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -216,7 +216,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/singapore/scene_12_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for SkyPark at Midnight, Singapore, matching the scene's light (night): a teak planter box with clipped plants beside the pool, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for SkyPark at Midnight, Singapore, matching the scene's light (night): a teak planter box with clipped plants beside the pool, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.

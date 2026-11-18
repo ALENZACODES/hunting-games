@@ -209,7 +209,7 @@ function drawProfileViewmodel(g, gun, img, aimX, aimY, kickBack, lower, sway) {
   g.translate(ox, oy);
   g.rotate(ang);
   g.scale(-1, 1);
-  g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 18; g.shadowOffsetY = 8;
+  g.shadowColor = 'rgba(0,0,0,0.3)'; g.shadowBlur = 6; g.shadowOffsetY = 3;
   g.drawImage(img, 0, -h * 0.55, w, h);
   g.restore();
   if (a.flash > 0.3) {

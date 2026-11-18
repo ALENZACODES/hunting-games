@@ -18,7 +18,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_01_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Yorkville Avenue, Toronto, matching the scene's light (dusk): an empty patio planter box with evergreen shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Yorkville Avenue, Toronto, matching the scene's light (dusk): an empty patio planter box with evergreen shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -36,7 +36,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_02_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Bloor Street, Toronto, matching the scene's light (night): a granite planter with a young tree, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Bloor Street, Toronto, matching the scene's light (night): a granite planter with low evergreen shrubs, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -54,7 +54,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_03_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Village of Yorkville Park, Toronto, matching the scene's light (day): a section of the big granite rock, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Village of Yorkville Park, Toronto, matching the scene's light (day): a section of the big granite rock, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -72,7 +72,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_04_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The Museum Crystal, Toronto, matching the scene's light (night): a long concrete bench block, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The Museum Crystal, Toronto, matching the scene's light (night): a long concrete bench block, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -90,7 +90,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_05_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Hazelton Courtyard, Toronto, matching the scene's light (dusk): a pile of stacked wrought-iron café chairs and a stone planter, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Hazelton Courtyard, Toronto, matching the scene's light (dusk): a pile of stacked wrought-iron café chairs and a stone planter, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -108,7 +108,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_06_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Cumberland Terrace, Toronto, matching the scene's light (night): a snow-crusted concrete planter with frozen shrubs and slush, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Cumberland Terrace, Toronto, matching the scene's light (night): a snow-crusted concrete planter with frozen shrubs and slush, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -126,7 +126,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_07_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Hotel Rooftop Bar, Toronto, matching the scene's light (night): the back of a teak outdoor sofa and a patio heater base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Hotel Rooftop Bar, Toronto, matching the scene's light (night): the back of a low teak outdoor sofa, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -144,7 +144,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_08_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Philosopher’s Walk, Toronto, matching the scene's light (dawn): a low dry-stone retaining wall with fallen leaves, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Philosopher’s Walk, Toronto, matching the scene's light (dawn): a low dry-stone retaining wall with fallen leaves, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -162,7 +162,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_09_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Bay Station Platform, Toronto, matching the scene's light (night): a steel platform bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Bay Station Platform, Toronto, matching the scene's light (night): a steel platform bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -180,7 +180,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_10_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Queen’s Park Circle, Toronto, matching the scene's light (day): a fallen tree trunk lying on the grass, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Queen’s Park Circle, Toronto, matching the scene's light (day): a fallen tree trunk lying on the grass, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -198,7 +198,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_11_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Yorkville Village Mall, Toronto, matching the scene's light (day): a glass and steel balustrade with a chrome handrail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Yorkville Village Mall, Toronto, matching the scene's light (day): a glass and steel balustrade with a chrome handrail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -216,7 +216,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/toronto/scene_12_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Tower Crown, Bloor-Yorkville, Toronto, matching the scene's light (night): a snow-covered rooftop ventilation unit, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Tower Crown, Bloor-Yorkville, Toronto, matching the scene's light (night): a snow-covered rooftop ventilation unit, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.

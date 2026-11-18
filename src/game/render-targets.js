@@ -91,9 +91,9 @@ export function drawEntity(g, e, view, t, opts = {}) {
 
   const art = deathArt || opts.drawnOnly ? null : spriteFrames(e);
   if (deathArt) {
-    const w = e.sp.len * (flyer ? 1 : e.sp.family === 'alien' ? 1.6 : 1.05), h = w * (deathArt.height / deathArt.width);
+    const w = e.sp.height ? e.sp.height * 0.95 : e.sp.len * (flyer ? 1 : e.sp.family === 'alien' ? 1.6 : 1.05), h = w * (deathArt.height / deathArt.width);
     g.drawImage(deathArt, -w / 2, flyer ? -h / 2 : -h, w, h);
-  } else if (art) drawSprite(g, e, art.frames);
+  } else if (art) drawSprite(g, e, art.frames, art.pose);
   else (DRAW[e.sp.draw] || DRAW.popup)(g, e, t);
 
   if (e.sp.weakpoints && e.state === 'alive') drawWeakpoints(g, e, t);
@@ -116,11 +116,19 @@ export function drawEntity(g, e, view, t, opts = {}) {
   g.restore();
 }
 
-function drawSprite(g, e, frames) {
+// Upright figures (Vyrr, people) are scaled by standing height so every pose
+// keeps the same size; lying and leaping poses span about their height.
+const POSE_HEIGHT = { crouch: 0.62, roar: 1.02, run: 0.97 };
+const POSE_SPAN = { leap: 0.95, down: 0.95, pounce: null };
+
+function drawSprite(g, e, frames, pose) {
   const fi = frames.length > 1 ? Math.floor((e.phase / Math.PI) % frames.length + frames.length) % frames.length : 0;
   const img = frames[fi];
-  const w = e.sp.len;
-  const h = w * (img.height / img.width);
+  let w = e.sp.len, h = w * (img.height / img.width);
+  if (e.sp.height) {
+    if (POSE_SPAN[pose]) { w = e.sp.height * POSE_SPAN[pose]; h = w * (img.height / img.width); }
+    else { h = e.sp.height * (POSE_HEIGHT[pose] || 1); w = h * (img.width / img.height); }
+  }
   let bob = 0;
   if (frames.length === 1) {
     if (e.sp.anchor === 'center' && e.sp.family !== 'mil') bob = Math.sin(e.phase) * 0.04 * w;
@@ -435,7 +443,7 @@ const DRAW = {
 
   // ── City Hunt ──
   vyrr(g, e) {
-    const s = e.sp.len / 1.1;
+    const s = (e.sp.height || 2.6) / 2.65;
     const [c, glow] = e.sp.colors;
     const walk = e.mode === 'move' ? 0.45 : e.mode === 'leap' ? 0 : 0.08;
     g.lineCap = 'round';

@@ -131,8 +131,8 @@ const INIT = {
     e.mode = 'drive';
   },
   hunter(e, S) {
-    e.x = sxToX(S, e, rand(220, W - 220));
     e.alt = perchAlt(e);
+    e.x = sxToX(S, e, perchScreenX(e.alt));
     e.alpha = 0; e.mode = 'perch'; e.timer = rand(2.2, 3.8);
     if (e.sp.isAlpha) { e.d = e.lane.d[1] - 15; e.x = sxToX(S, e, W / 2); e.alt = 0; e.nextRoar = 0.75; }
   },
@@ -152,6 +152,13 @@ const INIT = {
     e.fireT = rand(8, 12); e.glintT = rand(0.8, 2);
   },
 };
+
+// High perches sit toward the sides of the view, where the scene has walls,
+// facades, trees or cables to cling to; ground positions can be anywhere.
+function perchScreenX(alt) {
+  if (alt <= 1.5) return rand(220, W - 220);
+  return Math.random() < 0.5 ? rand(90, W * 0.22) : rand(W * 0.78, W - 90);
+}
 
 function perchAlt(e) {
   const a = e.lane.alt;
@@ -436,13 +443,17 @@ function startMove(e, S) {
   e.x0 = e.x; e.d0 = e.d; e.a0 = e.alt; e.t0 = e.age;
   e.d1 = rand(e.lane.d[0], e.lane.d[1]);
   if (sp.isAlpha) { e.lane = { ...e.lane, d: [Math.max(12, e.lane.d[0] - 6), Math.max(18, e.lane.d[1] - 6)] }; e.d1 = rand(e.lane.d[0], e.lane.d[1]); }
-  e.x1 = xForScreen(S.view, rand(220, W - 220), e.d1);
   e.a1 = perchAlt(e);
+  e.x1 = xForScreen(S.view, perchScreenX(e.a1), e.d1);
   const dist = Math.hypot(e.x1 - e.x0, e.d1 - e.d0);
   if (sp.leaps && (Math.abs(e.a1 - e.a0) > 1.5 || Math.random() < 0.35)) {
     e.mode = 'leap'; e.T = rand(0.8, 1.2); e.arc = rand(2, 4) + Math.abs(e.a1 - e.a0) * 0.3;
   } else {
     e.a1 = e.a0 < 1.5 ? 0 : e.a0; // walking stays on the same surface
+    if (e.a1 > 1.5) { // along the same wall: stay on this side of the view
+      const left = project(S.view, e.x0, e.a0, e.d0).sx < W / 2;
+      e.x1 = xForScreen(S.view, left ? rand(90, W * 0.22) : rand(W * 0.78, W - 90), e.d1);
+    }
     e.mode = 'move'; e.T = Math.max(0.8, dist / (sp.speed * 0.7));
   }
 }

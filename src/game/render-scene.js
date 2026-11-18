@@ -374,14 +374,12 @@ export function drawCoverView(g, biomeId, coverT, t) {
   const img = getImage(foregroundPath(biomeId), 'overlay');
   const lift = k * H * 0.3;
   if (img) {
-    // zoom into the overlay so its cover object rises to just below eye level
-    const iw = img.width, ih = img.height;
-    const fgTop = BIOMES[biomeId].fgTop || 0.74;
-    const top = (fgTop - 0.26 * k) * H;
-    const vs = (H - top) / ((1 - fgTop) * ih);
-    const sy = ih * Math.max(0, fgTop - 0.2);
-    const dy = top - (fgTop * ih - sy) * vs;
-    g.drawImage(img, 0, sy, iw, ih - sy, (W - iw * vs) / 2, dy, iw * vs, (ih - sy) * vs);
+    // grow the overlay from the bottom centre until its cover object rises to just below eye level
+    const c = coverOverlay(img);
+    const top0 = c.solid + c.shift; // where the object's top sits in the normal view
+    const target = top0 + (0.48 - top0) * k;
+    const sc = (1 - target) / (1 - top0);
+    g.drawImage(c.img, W / 2 - (W / 2) * sc, H - (H - c.shift * H) * sc, W * sc, H * sc);
   } else {
     const top = H - lift - 120 * k;
     const gr = g.createLinearGradient(0, top, 0, H);
@@ -439,11 +437,44 @@ function fgStalks(biomeId) {
   return list;
 }
 
+// City cover overlays come in many shapes. Find where the solid part of the
+// object starts, push it down so it never covers more than the bottom quarter,
+// and fade out anything that sticks up above it (a palm trunk, a lamp post).
+const COVER_TOP = 0.85; // only a lip of the cover object shows until you duck
+const coverCache = new WeakMap();
+function coverOverlay(img) {
+  let c = coverCache.get(img);
+  if (c) return c;
+  const w = img.width, h = img.height;
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d', { willReadFrequently: true });
+  g.drawImage(img, 0, 0);
+  let solid = 0.74;
+  try {
+    const d = g.getImageData(0, 0, w, h);
+    for (let y = 0; y < h; y++) {
+      let n = 0;
+      for (let x = 0; x < w; x += 2) if (d.data[(y * w + x) * 4 + 3] > 40) n++;
+      if (n >= w * 0.25) { solid = y / h; break; } // half of the sampled columns
+    }
+    const fadeTo = solid * h + h * 0.004, fadeFrom = solid * h - h * 0.018;
+    for (let y = 0; y < fadeTo; y++) {
+      const k = y < fadeFrom ? 0 : (y - fadeFrom) / (fadeTo - fadeFrom);
+      for (let x = 0; x < w; x++) { const i = (y * w + x) * 4 + 3; d.data[i] *= k; }
+    }
+    g.putImageData(d, 0, 0);
+  } catch (e) { /* tainted (file://): draw as is */ }
+  c = { img: cv, solid, shift: Math.max(0, COVER_TOP - solid) };
+  coverCache.set(img, c);
+  return c;
+}
+
 export function drawForeground(g, biomeId, t, windStrength = 2, wide = false) {
   if (wide) { for (const k of [-1, 0, 1]) { g.save(); g.translate(k * W, 0); drawForeground(g, biomeId, t, windStrength, false); g.restore(); } return; }
   const img = getImage(foregroundPath(biomeId), 'overlay');
-  if (img) { g.drawImage(img, 0, 0, W, H); return; }
   const b = BIOMES[biomeId];
+  if (img && b.fg === 'cover') { const c = coverOverlay(img); g.drawImage(c.img, 0, c.shift * H, W, H); return; }
+  if (img) { g.drawImage(img, 0, 0, W, H); return; }
   if (!b.fg || b.fg === 'none') return;
   if (b.fg === 'cover') return; // city scenes: the cover object only fills the view when ducking (drawCoverView)
   const stalks = fgStalks(biomeId);

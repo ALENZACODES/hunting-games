@@ -18,7 +18,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_01_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Times Square, New York, matching the scene's light (night): a row of three concrete Jersey barriers with scuffed yellow paint along the top, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Times Square, New York, matching the scene's light (night): a row of three concrete Jersey barriers with scuffed yellow paint along the top, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -36,7 +36,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_02_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Fifth Avenue, New York, matching the scene's light (dusk): a low granite planter box with clipped boxwood shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Fifth Avenue, New York, matching the scene's light (dusk): a low granite planter box with clipped boxwood shrubs, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -54,7 +54,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_03_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The Mall, Central Park, New York, matching the scene's light (dawn): an old green-painted wooden park bench with cast-iron legs, seen from behind, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The Mall, Central Park, New York, matching the scene's light (dawn): an old green-painted wooden park bench with cast-iron legs, seen from behind, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -72,7 +72,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_04_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Grand Central Concourse, New York, matching the scene's light (day): a polished brass and marble ticket-counter ledge, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Grand Central Concourse, New York, matching the scene's light (day): a polished brass and marble ticket-counter ledge, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -90,7 +90,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_05_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Subway Platform, New York, matching the scene's light (night): a stone platform bench and a steel trash can, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Subway Platform, New York, matching the scene's light (night): a stone platform bench and a steel trash can, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -108,7 +108,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_06_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Wall Street, New York, matching the scene's light (night): a wet concrete Jersey barrier with a strip of police tape tied to it, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Wall Street, New York, matching the scene's light (night): a wet concrete Jersey barrier with a strip of police tape tied to it, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -126,7 +126,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_07_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Water Tower Rooftops, New York, matching the scene's light (dusk): a low brick parapet with a rusted vent pipe, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Water Tower Rooftops, New York, matching the scene's light (dusk): a low brick parapet with a rusted vent pipe, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -144,7 +144,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_08_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Brooklyn Bridge, New York, matching the scene's light (night): the walkway's wooden railing and a steel cable anchor block, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Brooklyn Bridge, New York, matching the scene's light (night): the walkway's wooden railing and a steel cable anchor block, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -162,7 +162,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_09_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for The High Line, New York, matching the scene's light (dusk): a long wooden lounger bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for The High Line, New York, matching the scene's light (dusk): a long wooden lounger bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -180,7 +180,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_10_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Midtown Helipad, New York, matching the scene's light (night): a steel rooftop equipment cabinet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Midtown Helipad, New York, matching the scene's light (night): a steel rooftop equipment cabinet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -198,7 +198,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_11_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for SoHo Cast-Iron Row, New York, matching the scene's light (day): a cast-iron loading-dock edge with a stack of wooden pallets, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for SoHo Cast-Iron Row, New York, matching the scene's light (day): a cast-iron loading-dock edge with a stack of wooden pallets, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -216,7 +216,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/nyc/scene_12_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Top of the Rock, New York, matching the scene's light (night): the observation deck's low stone wall with a wet steel cap, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Top of the Rock, New York, matching the scene's light (night): the observation deck's low stone wall with a wet steel cap, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.

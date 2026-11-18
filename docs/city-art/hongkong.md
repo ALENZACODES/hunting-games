@@ -18,7 +18,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_01_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Queen’s Road Central, Hong Kong, matching the scene's light (night): a steel pedestrian guard-rail along the kerb, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Queen’s Road Central, Hong Kong, matching the scene's light (night): a steel pedestrian guard-rail along the kerb, wet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -36,7 +36,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_02_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Victoria Harbour Promenade, Hong Kong, matching the scene's light (night): the promenade's metal railing and a wooden bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Victoria Harbour Promenade, Hong Kong, matching the scene's light (night): the promenade's metal railing and a wooden bench, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -54,7 +54,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_03_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Mong Kok Neon Street, Hong Kong, matching the scene's light (night): a stack of plastic produce crates and a folded market trolley, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Mong Kok Neon Street, Hong Kong, matching the scene's light (night): a stack of plastic produce crates and a folded market trolley, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -72,7 +72,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_04_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Victoria Peak Lookout, Hong Kong, matching the scene's light (dusk): a low stone wall with a coin-operated telescope stand, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Victoria Peak Lookout, Hong Kong, matching the scene's light (dusk): a low stone wall with a coin-operated telescope stand, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -90,7 +90,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_05_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Mid-Levels Escalator, Hong Kong, matching the scene's light (day): a concrete stair landing with a steel handrail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Mid-Levels Escalator, Hong Kong, matching the scene's light (day): a concrete stair landing with a steel handrail, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -108,7 +108,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_06_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Star Ferry Pier, Hong Kong, matching the scene's light (dusk): a coil of thick mooring rope on a steel bollard, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Star Ferry Pier, Hong Kong, matching the scene's light (dusk): a coil of thick mooring rope on a steel bollard, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -126,7 +126,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_07_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Temple Street Night Market, Hong Kong, matching the scene's light (night): an abandoned market-stall counter with a tarpaulin, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Temple Street Night Market, Hong Kong, matching the scene's light (night): an abandoned market-stall counter with a tarpaulin, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -144,7 +144,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_08_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Skyscraper Helipad, Hong Kong, matching the scene's light (night): a rooftop steel equipment cabinet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Skyscraper Helipad, Hong Kong, matching the scene's light (night): a rooftop steel equipment cabinet, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -162,7 +162,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_09_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Lan Kwai Fong, Hong Kong, matching the scene's light (night): a row of beer kegs and plastic stools against a wall, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Lan Kwai Fong, Hong Kong, matching the scene's light (night): a row of beer kegs and plastic stools against a wall, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -180,7 +180,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_10_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Causeway Bay Crossing, Hong Kong, matching the scene's light (day): a steel pedestrian barrier and a traffic-light pole base, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Causeway Bay Crossing, Hong Kong, matching the scene's light (day): a steel pedestrian barrier, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -198,7 +198,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_11_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Hong Kong Park, Hong Kong, matching the scene's light (day): a stone pond edge with tropical plants, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Hong Kong Park, Hong Kong, matching the scene's light (day): a stone pond edge with tropical plants, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
@@ -216,7 +216,7 @@ It must look like a real, unedited photograph from a professional full-frame cam
 
 **`assets/city/hongkong/scene_12_cover.png`** · 1536x1024 · the player ducks behind this (Space)
 ```
-Foreground cover overlay for Above the Harbour, Hong Kong, matching the scene's light (night): a steel parapet with a beacon light, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Everything above it is empty.
+Foreground cover overlay for Above the Harbour, Hong Kong, matching the scene's light (night): a steel parapet with a beacon light, photographed from about 1.2 metres away at the same eye height, running across the whole bottom of the frame so its top edge sits about 74% of the way down. Nothing rises above it: no trees, palms, poles, posts or lamps. Everything above it is empty.
 Frame: 1536x1024. Transparent background (PNG). If transparency is not possible, make everything above the object a plain flat chroma-green (#00B140), with nothing else in it.
 No readable text anywhere: every sign, screen, billboard, storefront and vehicle shows only abstract colour, light and shapes, with no letters, numbers, logos, brand names or flags.
 It must look like a real, unedited photograph from a professional full-frame camera: true-to-life texture and fine detail, natural colour, physically correct light, subtle sensor grain. Not a 3D render, not CGI, not game art, not an illustration or painting; no plastic or waxy surfaces, no airbrushing, no HDR glow, no oversaturation. No watermarks.
