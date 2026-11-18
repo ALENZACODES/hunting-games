@@ -7,7 +7,7 @@ import { BIOMES } from '../data/levels.js';
 import { WEAPON_BY_ID, weaponName } from '../data/weapons.js';
 import { createEntity, updateEntity, hitTest, canBeHit, spook, makeCharge } from './entities.js';
 import { drawEntity } from './render-targets.js';
-import { drawBackdrop, drawForeground, horizonFor, worldTint } from './render-scene.js';
+import { drawBackdrop, drawForeground, horizonFor, worldTint, drawCoverView } from './render-scene.js';
 import { Gun, drawViewmodel, drawCrosshair, drawSightPicture, drawScopeOverlay, scopeRadius } from './weapon.js';
 import { FX } from './fx.js';
 import * as audio from '../engine/audio.js';
@@ -77,12 +77,33 @@ export class Session {
     if (this.goal === 'clear') { this.total = this.statics.length; this.need = this.def.need || this.total; }
   }
 
-  spawnBoss(id) {
-    const e = createEntity(this, id, {});
+  spawnBoss(id, def = {}) {
+    const e = createEntity(this, id, def);
     e.counts = false; e.isBoss = true;
     this.entities.push(e); this.boss = e;
-    this.text(W / 2, this.view.horizonY - 160, 'COLOSSUS INBOUND', '#ff3d6e', 40, 2.5, true);
+    this.text(W / 2, this.view.horizonY - 160, `${e.sp.name.toUpperCase()} INBOUND`, '#ff3d6e', 40, 2.5, true);
     audio.sfx('boom');
+  }
+
+  bossName() { const n = this.boss ? this.boss.sp.name : 'boss'; return /^the /i.test(n) ? n : `The ${n}`; }
+
+  // Vyrr fire back
+  spawnProjectile(from, opts) {
+    if (this.demo || this.state !== 'play') return;
+    const e = createEntity(this, 'spine', { from, ...opts });
+    e.counts = false;
+    this.entities.push(e);
+  }
+  impact(e) {
+    if (this.coverT > 0.6) {
+      this.text(W / 2 + (Math.random() - 0.5) * 300, H * 0.62, 'BLOCKED', '#9fd3ff', 26, 0.8, true);
+      audio.sfx('clang');
+      this.hitDir = 0;
+      return;
+    }
+    const p = project(this.view, e.x, e.alt, Math.max(2, e.d));
+    this.hitDir = p.sx < W * 0.4 ? -1 : p.sx > W * 0.6 ? 1 : 0;
+    this.damage(e.dmg || 10, e);
   }
 
   spawn(spId, def = {}) {
@@ -97,7 +118,7 @@ export class Session {
   damage(n, e) {
     if (this.demo || this.hp == null || this.state !== 'play') return;
     this.hp = Math.max(0, this.hp - n);
-    this.hurtT = 0.6;
+    this.hurtT = 0.6; this.hitDirT = 0.8;
     audio.sfx('hurt');
     this.text(W / 2, H * 0.62, `${this.def.hpLabel || 'HEALTH'} −${n}`, '#ff5a4a', 30, 1.2, true);
     if (this.hp <= 0) this.end(this.goal === 'endless', this.goal === 'endless' ? 'You went down.' : (this.def.hpLabel === 'CONVOY' ? 'The convoy was destroyed.' : 'You were taken down.'));
@@ -178,6 +199,8 @@ export class Session {
     }
     const shift = input.down.has('ShiftLeft') || input.down.has('ShiftRight');
     this.holding = shift && this.breath > 0.02 && this.exhausted <= 0;
+    this.cover = !!this.def.cover && input.down.has('Space');
+    if (this.cover) this.ads = false;
   }
 
   switchGun(i) {
@@ -212,6 +235,7 @@ export class Session {
   // ── shooting ──
   tryFire(auto = false) {
     if (this.state !== 'play' || this.demo) return;
+    if (this.coverT > 0.5) return; // ducked behind cover
     const gun = this.gun;
     if (!gun) return;
     if (gun.reloading && !gun.interruptReload()) return;
@@ -349,6 +373,12 @@ export class Session {
       return;
     }
 
+    if (sp.intercept) { // a spine shot out of the air
+      e.state = 'dying'; e.deathT = 0; e.vx = e.vd = e.valt = 0;
+      this.score += sp.points; this.text(ix, iy - 20, `INTERCEPTED  +${sp.points}`, '#9fe0ff', 22);
+      this.fx.sparks(ix, iy, '#ffd27a', Math.max(0.35, k / 30)); audio.sfx('clang', delay);
+      return;
+    }
     let dmg;
     if (sp.weakpoints) {
       if (hit.weak == null) { this.text(ix, iy - 20, 'ARMOR', '#9fb3c8', 22); this.fx.sparks(ix, iy, '#ffe2a0', k / 10); audio.sfx('clang', delay); return; }
@@ -374,14 +404,14 @@ export class Session {
     if (sp.behavior === 'static') { e.hitX = clamp((ix - project(this.view, e.x, e.alt, e.d).sx) / (sp.body.rx * k), -0.7, 0.7); e.hitY = rand(-0.5, 0.5); }
     audio.sfx(sp.family === 'mil' ? (sp.behavior === 'static' ? 'ding' : 'clang') : sp.family === 'alien' ? 'alienDie' : 'thwack', delay);
     if (sp.draw === 'vehicle' || sp.boss) { audio.sfx('boom', delay); for (let i = 0; i < 6; i++) this.fx.smoke(e); }
-    if (e.isBoss) { this.bossDown = true; this.addPoints(sp.points, ix, iy, 'COLOSSUS DOWN', '#ff3d6e', true); return; }
+    if (e.isBoss) { this.bossDown = true; this.addPoints(sp.points, ix, iy, `${sp.name.toUpperCase()} DOWN`, '#ff3d6e', true); return; }
 
     if (!e.counts && sp.penalty) {
       e.result = 'illegal';
       this.tally.penalties[sp.name] = (this.tally.penalties[sp.name] || 0) + 1;
       this.score -= sp.penalty;
       this.combo = 0;
-      const label = sp.noShoot ? 'NO-SHOOT' : sp.protected ? 'PROTECTED SPECIES' : 'NOT LEGAL';
+      const label = sp.penaltyLabel || (sp.noShoot ? 'NO-SHOOT' : sp.protected ? 'PROTECTED SPECIES' : 'NOT LEGAL');
       this.text(ix, iy - 26, `${label}  −${sp.penalty}`, '#ff5a4a', 26, 1.8);
       audio.sfx('bad');
       if (sp.noShoot) {
@@ -459,7 +489,7 @@ export class Session {
     if (g === 'quota') {
       if (this.total && misses > this.total - this.need) return this.end(false, 'The quota can no longer be met.');
       if (this.countedSpawned >= this.total && pending === 0) {
-        if (hits >= this.need && this.def.finale && !this.finaleSpawned) { this.finaleSpawned = true; this.goal = 'boss'; this.spawnBoss(this.def.finale); return; }
+        if (hits >= this.need && this.def.finale && !this.finaleSpawned) { this.finaleSpawned = true; this.goal = 'boss'; this.spawnBoss(this.def.finale, this.def.finaleDef || {}); return; }
         return this.end(hits >= this.need, hits >= this.need ? '' : 'Not enough hits.');
       }
       if (outOfShots) return this.end(hits >= this.need, 'Out of ammunition.');
@@ -467,8 +497,8 @@ export class Session {
       const down = this.statics.filter((e) => e.state !== 'alive').length;
       if (down === this.statics.length || outOfShots) return this.endClear();
     } else if (g === 'boss') {
-      if (this.bossDown) return this.end(true, 'The Colossus is down.');
-      if (this.boss && this.boss.state === 'gone' && !this.bossDown) return this.end(false, 'The Colossus broke through.');
+      if (this.bossDown) return this.end(true, `${this.bossName()} is down.`);
+      if (this.boss && this.boss.state === 'gone' && !this.bossDown) return this.end(false, `${this.bossName()} broke through.`);
     } else if (g === 'score' && outOfShots) return this.end(this.score >= this.need, 'Out of ammunition.');
   }
 
@@ -518,6 +548,10 @@ export class Session {
     if (!this.demo && this.state !== 'done') this.handleInput(input, dt);
     const gun = this.gun;
     if (gun) gun.update(dt);
+    // cover: duck behind the scene's cover object; reloads twice as fast there
+    this.coverT = clamp((this.coverT || 0) + (this.cover ? dt : -dt) / 0.18, 0, 1);
+    if (gun && this.coverT > 0.5 && gun.reloading) gun.reloadT -= dt;
+    if (this.hitDirT > 0) this.hitDirT -= dt;
     // ADS
     const canAds = gun && this.state !== 'done';
     this.adsT = clamp(this.adsT + (this.ads && canAds ? dt : -dt) / 0.16, 0, 1);
@@ -617,12 +651,50 @@ export class Session {
       drawScopeOverlay(g, gun, clamp(vx, -40, 40), clamp(vy, -40, 40), filter ? '#ff3b30' : this.opt.reticleColor);
       if (gun.anim.flash > 0.5 && !this.opt.reduceFlashes) { g.fillStyle = `rgba(255,230,200,${0.25 * gun.anim.flash})`; g.fillRect(0, 0, W, H); }
     } else if (ads) drawSightPicture(g, gun, this.time, this.opt.reticleColor);
-    else if (gun && this.state !== 'done') {
+    else if (gun && this.state !== 'done' && (this.coverT || 0) < 0.5) {
       drawViewmodel(g, gun, gp.x, gp.y, this.time);
       drawCrosshair(g, gp.x, gp.y, gun, filter ? '#7dff9a' : '#ffffff');
     }
+    if (this.def.cover && this.coverT > 0) drawCoverView(g, this.def.biome, this.coverT, this.time);
     this.drawTexts(g, ads, gp, z);
+    this.drawWarnings(g, ads, gp, z);
     this.drawHud(g, ads);
+  }
+
+  // red brackets on any Vyrr charging a shot, incoming spines and hit direction
+  drawWarnings(g, ads, gp, z) {
+    if (this.demo) return;
+    g.save();
+    const pulse = 0.55 + 0.45 * Math.sin(this.time * 18);
+    let incoming = 0;
+    for (const e of this.entities) {
+      if (e.state !== 'alive') continue;
+      if (e.aiming) {
+        const p = project(this.view, e.x, e.alt, e.d);
+        const c = this.toScreen(p.sx, p.sy - e.sp.body.y * p.ppm, ads, gp, z);
+        const r = Math.max(26, e.sp.body.ry * p.ppm * (ads ? z : 1) * 1.2);
+        g.strokeStyle = `rgba(255,60,40,${pulse})`; g.lineWidth = 3;
+        for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+          g.beginPath(); g.moveTo(c.x + sx * r, c.y + sy * r * 0.6); g.lineTo(c.x + sx * r, c.y + sy * r); g.lineTo(c.x + sx * r * 0.6, c.y + sy * r); g.stroke();
+        }
+        incoming++;
+      }
+      if (e.sp.intercept && e.d < 25) incoming++;
+    }
+    if (incoming && this.def.cover) {
+      g.font = '700 30px "Bahnschrift", "Arial Narrow", system-ui, sans-serif'; g.textAlign = 'center';
+      g.lineWidth = 5; g.strokeStyle = 'rgba(0,0,0,0.7)'; g.fillStyle = `rgba(255,80,60,${pulse})`;
+      const msg = this.coverT > 0.5 ? 'INCOMING · STAY DOWN' : 'INCOMING · SPACE FOR COVER';
+      g.strokeText(msg, W / 2, H * 0.2); g.fillText(msg, W / 2, H * 0.2);
+    }
+    if (this.hitDirT > 0 && this.hitDir) {
+      const a = Math.min(1, this.hitDirT);
+      const x = this.hitDir < 0 ? 0 : W - 140;
+      const gr = g.createLinearGradient(x, 0, x + 140, 0);
+      gr.addColorStop(this.hitDir < 0 ? 0 : 1, `rgba(220,20,10,${0.7 * a})`); gr.addColorStop(this.hitDir < 0 ? 1 : 0, 'rgba(220,20,10,0)');
+      g.fillStyle = gr; g.fillRect(x, 0, 140, H);
+    }
+    g.restore();
   }
 
   renderEntities(g) {
@@ -641,7 +713,7 @@ export class Session {
     drawForeground(g, this.def.biome, this.time, Math.abs(this.wind), wide);
     this.fx.draw(g);
     const fog = this.def.fog || 0;
-    const tint = thermal ? null : worldTint(this.tod);
+    const tint = thermal || this.biome.city ? null : worldTint(this.tod);
     if (tint) { g.fillStyle = tint; g.fillRect(-W, -H, W * 3, H * 3); }
     if (fog) {
       const fg = g.createLinearGradient(0, this.view.horizonY - 300, 0, H);
@@ -704,7 +776,7 @@ export class Session {
       const f = Math.max(0, this.boss.hp / this.boss.sp.hp);
       g.fillStyle = 'rgba(0,0,0,0.5)'; g.fillRect(W / 2 - 300, 66, 600, 18);
       g.fillStyle = '#ff3d6e'; g.fillRect(W / 2 - 300, 66, 600 * f, 18);
-      shadowText(`COLOSSUS  ${Math.round(this.boss.d)} m`, W / 2, 116, 22, '#ffb3c6', 'center');
+      shadowText(`${this.boss.sp.name.toUpperCase()}  ${Math.round(this.boss.d)} m`, W / 2, 116, 22, '#ffb3c6', 'center');
     } else if (this.goal === 'endless') shadowText(`SURVIVED  ${this.time.toFixed(0)} s`, W / 2, 84, 24, '#ffffff', 'center');
     // right column
     let ry = 60;
@@ -721,6 +793,7 @@ export class Session {
     shadowText(`WIND ${Math.abs(wv).toFixed(1)} m/s ${wv >= 0 ? '→' : '←'}`, W - 40, ry + 12, 20, '#cfe7ff', 'right', 600);
     ry += 30;
     if (this.shotsLeft != null) shadowText(`ROUNDS LEFT ${this.shotsLeft}`, W - 40, ry + 12, 20, '#ffd36e', 'right', 600);
+    if (this.def.cover) { ry += 30; shadowText(this.coverT > 0.5 ? 'IN COVER · RELOADING FASTER' : 'HOLD SPACE · TAKE COVER', W - 40, ry + 12, 18, this.coverT > 0.5 ? '#9fe0ff' : '#cfcfcf', 'right', 600); }
 
     // weapon block
     if (gun) {
@@ -763,6 +836,7 @@ export class Session {
       g.globalAlpha = a;
       g.fillStyle = 'rgba(0,0,0,0.55)'; g.fillRect(0, H * 0.36, W, 190);
       if (this.kind === 'hunt' && this.def.n) shadowText(`LEVEL ${this.def.n} · CHAPTER ${this.def.chapter}`, W / 2, H * 0.36 + 26, 22, '#ffb07a', 'center', 600);
+      if (this.kind === 'city') shadowText(`${this.def.cityName.toUpperCase()} · SCENE ${this.def.n} OF 12`, W / 2, H * 0.36 + 26, 22, '#ffb07a', 'center', 600);
       shadowText(this.def.name.toUpperCase(), W / 2, H * 0.36 + 80, 64, '#fff', 'center');
       shadowText(this.objectiveText(), W / 2, H * 0.36 + 140, 26, '#ffd36e', 'center', 500);
       g.globalAlpha = 1;
@@ -778,7 +852,7 @@ export class Session {
       case 'score': return `Score ${this.need.toLocaleString()} in ${d.timeLimit} s`;
       case 'survive': return `Survive ${d.timeLimit} s`;
       case 'clear': return `Knock down ${this.need} of ${this.total} plates${d.shots ? ` with ${d.shots} rounds` : ''}`;
-      case 'boss': return 'Destroy the Colossus';
+      case 'boss': return this.boss?.sp.isAlpha ? `Bring down ${this.boss.sp.name}` : `Destroy ${this.bossName().replace(/^The /, 'the ')}`;
       case 'endless': return 'Survive as long as you can';
       default: return '';
     }

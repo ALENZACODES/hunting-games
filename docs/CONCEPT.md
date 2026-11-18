@@ -182,6 +182,24 @@ Room for five more (to reach 30): Vehicle Ambush, Rooftop Overwatch, Sniper Duel
 
 ---
 
+## 9b. City Hunt — special series
+
+**Premise.** The Vyrr, an original alien species that hunts for sport, have come to five of the world's richest districts. Major Cole Navarro of Joint Task Force Nightfall leads the response: a veteran in his early fifties with a heavyweight bodybuilder's build and light-brown, sun-tanned skin. He is an original character, not a likeness of any real person.
+
+**Cities (pick any).** New York (Manhattan), Toronto (Yorkville), Singapore (Marina Bay), Hong Kong (Central and Victoria Harbour), Las Vegas (the Strip). Each has 12 scenes that unlock in order; scene 12 is the city's alpha: The Spire Warden, The Frostcrest, The Tidecaller, The Neon Matriarch, The High Roller.
+
+**Scenes.** Eight scene types (street, plaza, the Strip, park, interior, rooftop, bridge, waterfront) at dawn, day, dusk or night. Vyrr perch on ledges up to 16 m above the street, leap between positions, and hunters cloak while they move.
+
+**They fire back.** A Vyrr about to fire glows at the chest and gets red brackets on screen, with an INCOMING warning. Its bone spine flies at the player in real time: shoot it out of the air (+50) or hold Space to duck behind the scene's cover object (the view drops behind it, the gun lowers, firing stops and reloads run twice as fast). Hounds charge and are not stopped by cover. The alpha closes in, fires three-spine volleys and calls in hounds at each quarter of its health.
+
+**No-shoots.** Civilians (−1000) and police (−1500) run through the scenes.
+
+**Armory.** M4A1, SCAR 17S, AKM, SBE3, AXMC and M82A1 are issued; pick three. Alphas need gun power 5 or more.
+
+**Story.** Twelve story cards per city: three before scene 1, two after scene 3, two after scene 6, two before the alpha and three after it. Each plays once and can be replayed from the city page.
+
+**Art.** 301 images, prompts in `docs/CITY-ART-PROMPTS.md` and `docs/city-art/`. Everything has a drawn stand-in until its photo exists.
+
 ## 10. Scoring
 
 - **Base points** per species/target, multiplied by **distance** (1 + metres ÷ 100) and **vital zone** (×1.5).
@@ -236,7 +254,7 @@ Synthesized in the browser (no files needed for v0): caliber-scaled gunshots wit
 ## 15. Roadmap
 
 1. **v0 — playable prototype:** full loop, 100 levels in 10 chapters, 25 guns, 25 ops, career stats and ranks, high scores, options, drawn stand-ins.
-2. **v1 — photoreal art pass:** generate and drop in the images from `docs/ART-PROMPTS.md`; tune horizons per background.
+2. **v1 — photoreal art pass:** generate and drop in the images from `docs/ART-PROMPTS.md` and `docs/CITY-ART-PROMPTS.md`; tune horizons per background.
 3. **v1.1 — sound pass:** recorded gunshots per caliber, animal calls, ambience.
 4. **v1.2 — mobile:** touch aiming, on-screen scope/reload buttons.
 5. **v2 — 3D:** Three.js/Babylon renderer with rigged glTF animals, aliens and soldiers.

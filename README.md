@@ -7,6 +7,7 @@ A first-person hunting shooter for the browser. It keeps the classic light-gun l
 - **Scopes that behave like scopes:** duplex, BDC, mil-dot and LPVO reticles at true mil spacing, variable zoom, breath hold, rangefinder, elevation and windage turrets.
 - **Ballistics:** time of flight, drag, gravity drop, wind drift, shotgun patterns with a real range limit. An Arcade setting switches it all off.
 - **25 Military Ops:** ranges, long-range steel, shoot houses, counter-sniper, night vision, thermal, drone swarms, convoy overwatch, helicopter door gunner, extreme long range, alien defense, a boss walker and an endless last stand.
+- **City Hunt (special series):** Major Cole Navarro against the Vyrr, an alien species that hunts for sport, in New York, Toronto, Singapore, Hong Kong and Las Vegas. 60 scenes (12 per city) on streets, rooftops, bridges, waterfronts and interiors, each city ending with its alpha. The Vyrr fire back: shoot their spines out of the air or hold Space to take cover. Civilians and police are no-shoot. Story cards play between scenes.
 - **Career and menus:** a main-menu dashboard with rank and progress, a Continue button, chapter tabs with conditions on every level, detailed briefings, results with a bag tally and records, a detailed pause screen, a Career & Stats screen, Hall of Fame and a full options menu.
 
 The full design is in [`docs/CONCEPT.md`](docs/CONCEPT.md).
@@ -37,13 +38,14 @@ It also runs as-is on GitHub Pages (Settings → Pages → deploy from the `main
 | F | Rangefinder and holdover |
 | Arrow keys | Dial elevation / windage (0.1 mil) |
 | Backspace | Turrets back to zero |
+| Space (City Hunt) | Take cover; you reload twice as fast there |
 | Esc · P | Pause |
 
 ## Art
 
 The game ships with drawn stand-ins for every animal, alien, target, gun and landscape, so it is fully playable without any image files. Photoreal art drops in by file name:
 
-1. Generate images with the prompts in [`docs/ART-PROMPTS.md`](docs/ART-PROMPTS.md): 132 complete photo-realistic prompts, each with its exact file name, plus fix-up commands for results that look fake.
+1. Generate images with the prompts in [`docs/ART-PROMPTS.md`](docs/ART-PROMPTS.md) (132 prompts for the campaign and ops) and [`docs/CITY-ART-PROMPTS.md`](docs/CITY-ART-PROMPTS.md) (301 prompts for City Hunt, split by city in `docs/city-art/`). Each prompt names its exact file, and both files include fix-up commands for results that look fake.
 2. Save them under `assets/` in the folder the prompt names.
 3. Run `npm run art` to see what is in place and what is missing.
 
@@ -62,6 +64,7 @@ hunting-games/
 │   │   ├── species.js          animals, aliens, targets: size, hitboxes, behaviour, points
 │   │   ├── levels.js           biomes and the 100-level campaign (10 chapters)
 │   │   ├── ops.js              25 Military Ops
+│   │   ├── cities.js           City Hunt: 5 cities, 60 scenes, story beats, Major Navarro
 │   │   └── art.js              art file names the game looks for
 │   ├── engine/
 │   │   ├── assets.js           image loading, background removal, trimming
@@ -76,11 +79,13 @@ hunting-games/
 │   │   ├── render-scene.js     landscapes and foregrounds
 │   │   ├── render-targets.js   target drawing (photo sprites or stand-ins)
 │   │   └── fx.js               particles
-│   └── ui/menus.js             title dashboard, campaign, ops, briefing, career, arsenal, options, pause, results
+│   └── ui/menus.js             title dashboard, campaign, ops, City Hunt, story cards, briefing, career, arsenal, options, pause, results
 ├── assets/                     drop-in art (see assets/README.md)
 ├── docs/
 │   ├── CONCEPT.md              game design
-│   └── ART-PROMPTS.md          image prompts with exact file names
+│   ├── ART-PROMPTS.md          campaign and ops image prompts with exact file names
+│   ├── CITY-ART-PROMPTS.md     City Hunt prompts: index, style locks, Vyrr, police, Major
+│   └── city-art/               City Hunt prompts per city (nyc, toronto, singapore, hongkong, vegas)
 └── tools/art-status.mjs        art checklist (npm run art)
 ```
 

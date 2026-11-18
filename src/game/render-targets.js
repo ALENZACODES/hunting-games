@@ -5,7 +5,7 @@
 
 import { project } from './view.js';
 import { getFrames } from '../engine/assets.js';
-import { spritePaths } from '../data/art.js';
+import { spritePaths, basePaths } from '../data/art.js';
 
 const TAU = Math.PI * 2;
 
@@ -23,6 +23,19 @@ function shade(hex, f) {
 // ── pose for photoreal sprites ───────────────────────────
 function poseFor(e) {
   const fam = e.sp.family;
+  if (fam === 'human') return 'run';
+  if (e.spId === 'spine') return 'fly';
+  if (e.spId.startsWith('vyrr_')) {
+    if (e.spId === 'vyrr_seeker') return e.aiming || e.firedT > 0 ? 'fire' : 'idle';
+    if (e.spId === 'vyrr_hound') return e.d < 12 ? 'pounce' : 'run';
+    if (e.firedT > 0) return 'fire';
+    if (e.aiming) return e.spId === 'vyrr_hunter' ? 'aim' : 'fire';
+    if (e.mode === 'leap') return 'leap';
+    if (e.mode === 'roar') return 'roar';
+    if (e.mode === 'move') return e.sp.cloaks ? 'cloak' : e.spId === 'vyrr_tracker' && e.sp.speed > 6 && e.T < 1.6 ? 'run' : 'walk';
+    if (e.alt > 1.5 && e.spId === 'vyrr_tracker') return 'crouch';
+    return 'walk';
+  }
   if (fam === 'mil') return 'idle';
   if (fam === 'alien') return { skitter: 'run', glider: 'fly', orb: 'idle', stalker: 'walk', brute: 'walk', pod: 'fall', colossus: 'walk' }[e.spId] || 'idle';
   if (e.sp.anchor === 'center') return 'fly';
@@ -34,10 +47,18 @@ function poseFor(e) {
 function spriteFrames(e) {
   const pose = poseFor(e);
   for (const p of [pose, 'walk', 'run', 'idle', 'fly']) {
+    // an entity's own art set first (city alpha, clan hunter, civilian), then the species art
+    const own = e.artBase ? getFrames(basePaths(e.artBase, e.artKind, p)) : null;
+    if (own) return { frames: own, pose: p };
     const f = getFrames(spritePaths(e.spId, e.sp.family, p));
     if (f) return { frames: f, pose: p };
   }
   return null;
+}
+
+function downFrames(e) {
+  const own = e.artBase ? getFrames(basePaths(e.artBase, e.artKind, 'down')) : null;
+  return own || getFrames(spritePaths(e.spId, e.sp.family, 'down'));
 }
 
 export function drawEntity(g, e, view, t, opts = {}) {
@@ -58,24 +79,32 @@ export function drawEntity(g, e, view, t, opts = {}) {
   if (e.state === 'dying') {
     const dt = e.deathT;
     const fam = e.sp.family;
-    if (!opts.drawnOnly && (fam === 'quad' || fam === 'bird')) {
-      const f = getFrames(spritePaths(e.spId, fam, flyer ? 'fall' : 'down'));
+    if (!opts.drawnOnly && (fam === 'quad' || fam === 'bird' || fam === 'alien')) {
+      const f = flyer ? getFrames(spritePaths(e.spId, fam, 'fall')) : downFrames(e);
       if (f && (flyer || dt > 0.12)) deathArt = f[0];
     }
     if (flyer) g.rotate(dt * (deathArt ? 2.5 : 7) * e.facing);
     else if ((fam === 'quad' || fam === 'bird') && !deathArt) { const c = Math.min(1, dt * 2.2); g.rotate(-e.facing * c * 0.18); g.scale(1, 1 - c * 0.55); }
-    else if (fam === 'alien') { const c = Math.min(1, dt * 1.5); g.scale(1 + c * 0.3, 1 - c * 0.7); }
+    else if (fam === 'alien' && !deathArt) { const c = Math.min(1, dt * 1.5); g.scale(1 + c * 0.3, 1 - c * 0.7); }
   }
   g.scale(e.facing * k, k);
 
   const art = deathArt || opts.drawnOnly ? null : spriteFrames(e);
   if (deathArt) {
-    const w = e.sp.len * (flyer ? 1 : 1.05), h = w * (deathArt.height / deathArt.width);
+    const w = e.sp.len * (flyer ? 1 : e.sp.family === 'alien' ? 1.6 : 1.05), h = w * (deathArt.height / deathArt.width);
     g.drawImage(deathArt, -w / 2, flyer ? -h / 2 : -h, w, h);
   } else if (art) drawSprite(g, e, art.frames);
   else (DRAW[e.sp.draw] || DRAW.popup)(g, e, t);
 
   if (e.sp.weakpoints && e.state === 'alive') drawWeakpoints(g, e, t);
+  if (e.aiming && e.state === 'alive') {
+    const by = e.sp.anchor === 'bottom' ? -e.sp.body.y * 1.25 : 0;
+    const r = Math.max(0.25, 14 / k);
+    const pulse = 0.6 + 0.4 * Math.sin(t * 25);
+    const gr = g.createRadialGradient(0.25 * e.sp.len, by, 0, 0.25 * e.sp.len, by, r);
+    gr.addColorStop(0, `rgba(255,240,200,${pulse})`); gr.addColorStop(0.35, `rgba(255,140,30,${0.8 * pulse})`); gr.addColorStop(1, 'rgba(255,100,20,0)');
+    g.globalAlpha = 1; g.fillStyle = gr; circ(g, 0.25 * e.sp.len, by, r);
+  }
   if (e.spId === 'sniper' && e.glint > 0 && e.state === 'alive') {
     g.globalAlpha = 1;
     const r = 9 / k;
@@ -402,6 +431,69 @@ const DRAW = {
     g.fillStyle = shade(c, 0.12); ell(g, 0.4, -12.4, 2.2, 1.4);
     g.fillStyle = shade(c, -0.3); for (let i = 0; i < 5; i++) ell(g, -4 + i * 2, -9, 0.6, 0.25);
     g.strokeStyle = '#111'; line(g, 2.5, -10, 5.5, -7.5, 0.35);
+  },
+
+  // ── City Hunt ──
+  vyrr(g, e) {
+    const s = e.sp.len / 1.1;
+    const [c, glow] = e.sp.colors;
+    const walk = e.mode === 'move' ? 0.45 : e.mode === 'leap' ? 0 : 0.08;
+    g.lineCap = 'round';
+    g.strokeStyle = shade(c, -0.1);
+    for (const off of [0, Math.PI]) {
+      const a = e.mode === 'leap' ? (off ? 0.6 : -0.4) : Math.sin(e.phase + off) * walk;
+      const kx = Math.sin(a) * 0.45 * s + 0.1 * s, ky = -0.7 * s;
+      line(g, 0, -1.15 * s, kx, ky, 0.13 * s); line(g, kx, ky, kx - 0.22 * s + Math.sin(a) * 0.15 * s, 0, 0.09 * s);
+    }
+    const grd = g.createLinearGradient(-0.4 * s, 0, 0.4 * s, 0); grd.addColorStop(0, '#07080a'); grd.addColorStop(0.55, shade(c, 0.25)); grd.addColorStop(1, '#0b0c0e');
+    g.fillStyle = grd; ell(g, 0.03 * s, -1.6 * s, 0.32 * s, 0.55 * s, 0.1);
+    g.fillStyle = shade(c, -0.25); for (let i = 0; i < 4; i++) ell(g, -0.12 * s, -1.25 * s - i * 0.2 * s, 0.22 * s, 0.07 * s, 0.2);
+    g.strokeStyle = shade(c, 0.1); const arm = e.aiming || e.firedT > 0 ? -0.5 : 0.35;
+    line(g, 0.15 * s, -1.95 * s, 0.5 * s, -1.45 * s + arm * 0.4 * s, 0.09 * s); line(g, 0.5 * s, -1.45 * s + arm * 0.4 * s, 0.85 * s, -1.4 * s + arm * 0.6 * s, 0.07 * s);
+    g.fillStyle = shade(c, 0.2); ell(g, 0.82 * s, -1.4 * s + arm * 0.6 * s, 0.12 * s, 0.05 * s, arm * 0.4);
+    g.fillStyle = shade(c, 0.15); ell(g, 0.12 * s, -2.28 * s, 0.17 * s, 0.14 * s, -0.4);
+    g.fillStyle = shade(c, -0.15); poly(g, [-0.05 * s, -2.38 * s, -0.42 * s, -2.62 * s, -0.12 * s, -2.28 * s]);
+    if (e.sp.isAlpha) { g.strokeStyle = shade(c, 0.3); for (let i = 0; i < 6; i++) line(g, -0.05 * s, -2.1 * s - i * 0.05 * s, -0.5 * s - i * 0.05 * s, -2.4 * s - i * 0.12 * s, 0.03 * s); }
+    g.fillStyle = glow; for (const dx of [0.2, 0.25, 0.3]) circ(g, dx * s, -2.3 * s, 0.025 * s);
+  },
+  vyrrhound(g, e) {
+    const s = e.sp.len / 1.4;
+    const [c, glow] = e.sp.colors;
+    g.lineCap = 'round'; g.strokeStyle = shade(c, -0.15);
+    for (let i = 0; i < 4; i++) { const a = Math.sin(e.phase + i * 1.6) * 0.6; const lx = -0.45 * s + i * 0.3 * s; line(g, lx, -0.45 * s, lx + Math.sin(a) * 0.25 * s, 0, 0.07 * s); }
+    const grd = g.createLinearGradient(0, -0.75 * s, 0, -0.25 * s); grd.addColorStop(0, shade(c, 0.25)); grd.addColorStop(1, '#090706');
+    g.fillStyle = grd; ell(g, 0, -0.5 * s, 0.6 * s, 0.2 * s, -0.08);
+    g.fillStyle = shade(c, 0.1); ell(g, 0.62 * s, -0.55 * s, 0.2 * s, 0.11 * s, 0.2);
+    g.strokeStyle = shade(c, -0.3); for (let i = 0; i < 6; i++) line(g, -0.45 * s + i * 0.15 * s, -0.66 * s, -0.5 * s + i * 0.15 * s, -0.86 * s, 0.03 * s);
+    g.fillStyle = glow; circ(g, 0.72 * s, -0.58 * s, 0.03 * s);
+  },
+  seeker(g, e) {
+    const [c, glow, core] = e.sp.colors;
+    const grd = g.createRadialGradient(-0.1, -0.1, 0.03, 0, 0, 0.38); grd.addColorStop(0, '#6a6f78'); grd.addColorStop(1, '#08090b');
+    g.fillStyle = grd; circ(g, 0, 0, 0.36);
+    g.strokeStyle = shade(c, 0.3); g.lineWidth = 0.03; for (let i = 0; i < 3; i++) { g.beginPath(); g.arc(0, 0, 0.28, i * 2.1 + e.phase, i * 2.1 + e.phase + 1.2); g.stroke(); }
+    const pulse = e.aiming ? 1 : 0.6 + 0.3 * Math.sin(e.phase * 3);
+    const cg = g.createRadialGradient(0.12, 0, 0, 0.12, 0, 0.16); cg.addColorStop(0, core); cg.addColorStop(0.5, `rgba(255,176,46,${pulse})`); cg.addColorStop(1, 'rgba(255,176,46,0)');
+    g.fillStyle = cg; circ(g, 0.12, 0, 0.16);
+  },
+  spine(g, e) {
+    const L = 0.5;
+    const gr = g.createLinearGradient(-L, 0, L * 0.5, 0); gr.addColorStop(0, 'rgba(255,140,30,0)'); gr.addColorStop(0.7, 'rgba(255,190,90,0.9)'); gr.addColorStop(1, '#fff3d0');
+    g.fillStyle = gr; ell(g, 0, 0, L * 0.5, 0.05);
+    g.fillStyle = '#2a1d10'; poly(g, [0.25, -0.03, 0.42, 0, 0.25, 0.03]);
+  },
+  human(g, e) {
+    const [coat, skin, dark] = e.sp.colors;
+    const tone = e.artTone || (e.artTone = ['#3a3f4a', '#6b2b2b', '#2d4a3a', '#5a4a3a', '#2a2f4f', '#7a6a55'][e.id % 6]);
+    const body = e.spId === 'officer' ? coat : tone;
+    const run = Math.sin(e.phase) * 0.6;
+    g.lineCap = 'round'; g.strokeStyle = dark;
+    line(g, 0, -0.9, Math.sin(run) * 0.35, -0.45, 0.11); line(g, Math.sin(run) * 0.35, -0.45, Math.sin(run) * 0.3 - 0.1, 0, 0.09);
+    line(g, 0, -0.9, -Math.sin(run) * 0.35, -0.45, 0.11); line(g, -Math.sin(run) * 0.35, -0.45, -Math.sin(run) * 0.3 - 0.1, 0, 0.09);
+    g.fillStyle = body; poly(g, [-0.17, -0.85, 0.17, -0.85, 0.2, -1.45, -0.2, -1.45]);
+    g.strokeStyle = body; line(g, 0.15, -1.38, 0.15 + Math.sin(-run) * 0.3, -1.0, 0.08); line(g, -0.15, -1.38, -0.15 + Math.sin(run) * 0.3, -1.0, 0.08);
+    g.fillStyle = skin; circ(g, 0.02, -1.6, 0.11);
+    if (e.spId === 'officer') { g.fillStyle = dark; ell(g, 0.02, -1.69, 0.13, 0.05); }
   },
 
   // ── military ──

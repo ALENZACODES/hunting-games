@@ -1,6 +1,7 @@
 // Menus and overlays (DOM): title with career dashboard, campaign (10
-// chapters × 10 levels), ops, briefing + loadout, arsenal, career, hall of
-// fame, options, how to play, pause and results.
+// chapters × 10 levels), ops, City Hunt (5 cities × 12 scenes, story
+// cards), briefing + loadout, arsenal, career, hall of fame, options,
+// how to play, pause and results.
 
 import { LEVELS, BIOMES, CHAPTERS, CONDITION_LABELS, LEVEL_COUNT } from '../data/levels.js';
 import { OPS } from '../data/ops.js';
@@ -9,7 +10,8 @@ import { SPECIES } from '../data/species.js';
 import * as store from '../engine/storage.js';
 import * as audio from '../engine/audio.js';
 import { thumbnail } from '../game/render-scene.js';
-import { weaponProfilePath } from '../data/art.js';
+import { weaponProfilePath, cityArt, storyArt, MAJOR as MAJOR_PIX, CITY_SELECT_ART } from '../data/art.js';
+import { CITIES, CITY_LEVELS, CITY_BY_ID, cityLevels, MAJOR } from '../data/cities.js';
 
 function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -33,6 +35,18 @@ const fmtTime = (s) => { s = Math.round(s); const hh = Math.floor(s / 3600), mm 
 const bar = (value, max, label) => h('div', { class: 'pbar' }, h('div', { class: 'pbar-fill', style: { width: `${Math.min(100, pct(value, max))}%` } }), label ? h('span', {}, label) : null);
 const chip = (text, kind = '') => h('span', { class: 'chip-tag ' + kind }, text);
 const kv = (k, v, cls = '') => h('div', { class: 'kv ' + cls }, h('span', {}, k), h('b', {}, v));
+
+// layered background: the photo if it exists, otherwise the drawn stand-in under it
+const art = (path, fallback) => [path && `url("assets/${path}")`, fallback && `url(${fallback})`].filter(Boolean).join(', ');
+const sid = (n) => String(n).padStart(2, '0');
+const cityProgress = (cityId) => {
+  const lv = cityLevels(cityId);
+  return { lv, done: lv.filter((l) => store.progressOf(l.id).passed).length, stars: lv.reduce((a, l) => a + store.progressOf(l.id).stars, 0) };
+};
+const sceneOpen = (L) => store.options().unlockAll || L.n === 1 || store.progressOf(cityLevels(L.city)[L.n - 2].id).passed;
+const STORY_BEFORE = { 1: 'start', 4: 'after3', 7: 'after6', 12: 'boss' };
+const TYPE_LABEL = { street: 'Street', square: 'Plaza', strip: 'The Strip', park: 'Park', interior: 'Interior', rooftop: 'Rooftop', bridge: 'Bridge', waterfront: 'Waterfront' };
+const TOD_LABEL = { citynight: 'Night', night: 'Night', dusk: 'Dusk', dawn: 'Dawn', day: 'Day' };
 
 const RANKS = [[0, 'Greenhorn'], [10, 'Apprentice'], [30, 'Hunter'], [60, 'Woodsman'], [100, 'Marksman'], [150, 'Guide'], [200, 'Sharpshooter'], [260, 'Master Hunter'], [320, 'Legend'], [370, 'Grand Slam Legend']];
 const MAX_STARS = LEVEL_COUNT * 3 + OPS.length * 3;
@@ -66,7 +80,8 @@ function levelTargets(def) {
 
 function objectiveOf(def) {
   if (def.goal) return goalText(def);
-  return `Hit ${def.need} of ${def.total}${def.timeLimit ? ` in ${def.timeLimit} s` : ''}${def.finale ? ', then destroy the Colossus' : ''}`;
+  const boss = def.finaleDef?.as?.name || 'the Colossus';
+  return `Hit ${def.need} of ${def.total}${def.timeLimit ? ` in ${def.timeLimit} s` : ''}${def.finale ? `, then ${def.finaleDef ? 'bring down' : 'destroy'} ${boss}` : ''}`;
 }
 
 function difficultyPips(diff = 1) {
@@ -85,7 +100,7 @@ export class UI {
     this.loadouts = {};
   }
 
-  clear() { this.root.innerHTML = ''; this.root.classList.remove('show', 'dim', 'title-art'); }
+  clear() { this.root.innerHTML = ''; this.root.classList.remove('show', 'dim', 'title-art'); this.root.style.backgroundImage = ''; }
 
   screen(title, body, { back = true, wide = false, dim = false, onBack = null, sub = null } = {}) {
     this.clear();
@@ -113,11 +128,14 @@ export class UI {
     const gunsOpen = WEAPONS.filter((w) => w.unlock <= reached).length;
     const next = nextLevel();
     const best = store.hall()[0];
+    const cityDone = CITY_LEVELS.filter((l) => store.progressOf(l.id).passed).length;
+    const cityStars = CITY_LEVELS.reduce((a, l) => a + store.progressOf(l.id).stars, 0);
 
     const menu = h('nav', { class: 'menu' },
       next ? h('button', { class: 'primary', onclick: () => { click(); this.briefing(next, 'hunt'); } }, 'Continue', h('small', {}, `Level ${next.n} · ${next.name}`)) : null,
       h('button', { class: next ? '' : 'primary', onclick: () => { click(); this.campaign(); } }, 'Hunt Campaign', h('small', {}, `${t.campaignPassed} / ${LEVEL_COUNT} cleared · ${t.campaignStars} ★`)),
       h('button', { onclick: () => { click(); this.ops(); } }, 'Military Ops', h('small', {}, `${opsOpen} / ${OPS.length} open · ${t.opStars} ★`)),
+      h('button', { class: 'city-btn', onclick: () => { click(); this.cityHub(); } }, 'City Hunt', h('small', {}, `Special series · ${cityDone} / ${CITY_LEVELS.length} scenes · ${cityStars} ★`)),
       h('button', { onclick: () => { click(); this.arsenal(); } }, 'Arsenal', h('small', {}, `${gunsOpen} / ${WEAPONS.length} guns`)),
       h('button', { onclick: () => { click(); this.career(); } }, 'Career & Stats', h('small', {}, rank.name)),
       h('button', { onclick: () => { click(); this.hall(); } }, 'Hall of Fame', h('small', {}, best ? `Top ${fmt(best.score)}` : 'No scores yet')),
@@ -138,6 +156,8 @@ export class UI {
       chapterStrip,
       h('h4', {}, 'Military Ops'),
       bar(t.opsPassed, OPS.length, `${t.opsPassed} / ${OPS.length} complete · ${t.opStars} / ${OPS.length * 3} ★`),
+      h('h4', {}, 'City Hunt'),
+      bar(cityDone, CITY_LEVELS.length, `${cityDone} / ${CITY_LEVELS.length} scenes · ${CITIES.filter((c) => cityProgress(c.id).done === 12).length} / 5 alphas down`),
       h('h4', {}, 'Career'),
       st.runs ? h('div', { class: 'kv-grid' },
         kv('Accuracy', `${pct(st.hits, st.shots)} %`), kv('Kills', fmt(st.kills)),
@@ -147,7 +167,7 @@ export class UI {
     this.root.append(h('div', { class: 'title-layout' },
       h('div', { class: 'title' },
         h('div', { class: 'logo' }, h('span', { class: 'logo-top' }, 'HUNTING'), h('span', { class: 'logo-bottom' }, 'GAMES')),
-        h('p', { class: 'tag' }, `Field to frontier. ${LEVEL_COUNT} levels in 10 chapters · 25 real firearms · 25 military ops.`),
+        h('p', { class: 'tag' }, `Field to frontier. ${LEVEL_COUNT} levels in 10 chapters · 25 real firearms · 25 military ops · City Hunt in 5 cities.`),
         menu,
         h('p', { class: 'hint' }, 'Best with a mouse. Click to aim with a locked pointer · Esc to pause')),
       card));
@@ -225,12 +245,102 @@ export class UI {
     this.screen('Military Ops', wrap, { wide: true, sub: `${t.opsPassed} / ${OPS.length} complete · ${t.opStars} ★` });
   }
 
+
+  // ── City Hunt: dossier + five cities ──
+  cityHub() {
+    const all = CITIES.map((c) => ({ c, ...cityProgress(c.id) }));
+    const done = all.reduce((a, x) => a + x.done, 0), st = all.reduce((a, x) => a + x.stars, 0);
+    const dossier = h('div', { class: 'dossier' },
+      h('div', { class: 'dossier-photo', style: { backgroundImage: art(MAJOR_PIX.portrait) } }, h('span', {}, 'JTF NIGHTFALL')),
+      h('div', { class: 'dossier-body' },
+        h('small', { class: 'eyebrow' }, 'Operator dossier'),
+        h('h3', {}, MAJOR.name), h('p', { class: 'meta' }, MAJOR.unit),
+        h('p', { class: 'lead' }, MAJOR.bio),
+        h('p', { class: 'meta' }, 'The Vyrr hunt for sport. They cloak, climb, leap between buildings and fire bone spines back at you. Each city ends with its alpha.'),
+        h('div', { class: 'kv-grid' }, kv('Scenes cleared', `${done} / ${CITY_LEVELS.length}`), kv('Stars', `${st} / ${CITY_LEVELS.length * 3}`), kv('Alphas down', `${all.filter((x) => x.done === 12).length} / 5`))));
+    const grid = h('div', { class: 'grid cities' });
+    for (const { c, lv, done: d, stars: s } of all) {
+      const first = lv[0];
+      grid.append(h('button', { class: 'card city-card', onclick: () => { click(); this.city(c.id); } },
+        h('div', { class: 'thumb', style: { backgroundImage: art(cityArt(c.id, 'key.jpg'), thumbnail(first.biome, first.tod)) } },
+          d === 12 ? h('img', { class: 'medal', src: `assets/${cityArt(c.id, 'medal.png')}`, alt: '', onerror: (e) => e.target.replaceWith(h('span', { class: 'done' }, '✓')) }) : null,
+          h('span', { class: 'city-name' }, c.name, h('small', {}, c.district))),
+        h('div', { class: 'card-body' },
+          h('small', {}, c.tagline),
+          h('div', { class: 'obj' }, `Alpha: ${c.alpha}`),
+          bar(d, 12, `${d} / 12 scenes`),
+          h('div', { class: 'card-foot' }, stars(Math.round(s / 12)), h('span', { class: 'meta' }, `${s} / 36 ★`)))));
+    }
+    this.screen('City Hunt', h('div', {}, dossier, h('h3', { class: 'cat' }, 'Choose a city'), grid), { wide: true, sub: 'Special series · 5 cities · 60 scenes' });
+    this.root.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url("assets/${CITY_SELECT_ART}")`; // falls back to the live scene behind
+  }
+
+  city(cityId) {
+    const c = CITY_BY_ID[cityId];
+    const { lv, done, stars: st } = cityProgress(cityId);
+    const next = lv.find((l) => !store.progressOf(l.id).passed && sceneOpen(l));
+    const seen = Object.keys(store.uiState()).some((k) => k.startsWith(`story:${cityId}:`));
+    const head = h('div', { class: 'city-head', style: { backgroundImage: [`linear-gradient(90deg, rgba(0,0,0,0.78), rgba(0,0,0,0.15))`, art(cityArt(cityId, 'panorama.jpg'), thumbnail(lv[0].biome, lv[0].tod))].join(', ') } },
+      h('div', {},
+        h('h3', {}, `${c.name} · ${c.district}`),
+        h('p', { class: 'lead' }, c.tagline),
+        h('p', { class: 'meta' }, `Alpha: ${c.alpha} · Issued: M4A1, SCAR 17S, AKM, SBE3, AXMC, M82A1 · Space: cover`),
+        h('div', { class: 'row' },
+          next ? h('button', { class: 'primary', onclick: () => { click(); this.briefing(next, 'city'); } }, done ? `Continue · Scene ${next.n}` : 'Start the city') : null,
+          seen ? h('button', { onclick: () => { click(); this.story(cityId, 'all', () => this.city(cityId)); } }, 'Story so far') : null)),
+      h('div', { class: 'city-side' },
+        h('img', { class: 'major-cut', src: `assets/${MAJOR_PIX.standing}`, alt: '', onerror: (e) => e.target.remove() }),
+        h('div', { class: 'chapter-progress' }, bar(done, 12, `${done} / 12 scenes`), bar(st, 36, `${st} / 36 ★`))));
+    const grid = h('div', { class: 'grid levels' });
+    for (const L of lv) {
+      const open = sceneOpen(L);
+      const p = store.progressOf(L.id);
+      grid.append(h('button', { class: 'card' + (open ? '' : ' locked') + (next && next.id === L.id ? ' next' : '') + (L.n === 12 ? ' alpha' : ''), disabled: !open, onclick: () => { click(); this.briefing(L, 'city'); } },
+        h('div', { class: 'thumb', style: { backgroundImage: art(cityArt(cityId, `scene_${sid(L.n)}.jpg`), thumbnail(L.biome, L.tod)) } },
+          h('span', { class: 'num' }, L.n), !open && h('span', { class: 'lock' }, '🔒'), p.passed && h('span', { class: 'done' }, '✓'),
+          L.n === 12 ? h('span', { class: 'next-tag alpha-tag' }, 'ALPHA') : next && next.id === L.id ? h('span', { class: 'next-tag' }, 'NEXT') : null),
+        h('div', { class: 'card-body' },
+          h('strong', {}, L.name),
+          h('small', {}, L.brief),
+          h('div', { class: 'obj' }, objectiveOf(L)),
+          h('div', { class: 'chips' }, chip(TYPE_LABEL[L.sceneType]), chip(TOD_LABEL[L.tod] || L.tod, L.tod === 'citynight' ? 'dark' : ''), L.n === 12 ? chip('Alpha', 'hot') : null),
+          h('div', { class: 'card-foot' }, stars(p.stars), difficultyPips(L.diff), p.best ? h('span', { class: 'best' }, fmt(p.best)) : h('span', { class: 'meta' }, open ? 'New' : '')))));
+    }
+    this.screen(c.name, h('div', {}, head, grid), { wide: true, sub: `City Hunt · ${c.district}`, onBack: () => this.cityHub() });
+  }
+
+  // story cards: one full-screen image per beat with a caption
+  story(cityId, at, then, firstTime = false) {
+    const c = CITY_BY_ID[cityId];
+    const beats = c.story.map(([when, text], i) => ({ when, text, i }))
+      .filter((b) => (at === 'all' ? store.uiState()[`story:${cityId}:${b.when}`] : b.when === at));
+    if (!beats.length) { then(); return; }
+    if (firstTime && at !== 'all') store.setUi(`story:${cityId}:${at}`, true);
+    const lv = cityLevels(cityId);
+    const fallbackScene = { start: 0, after3: 3, after6: 6, boss: 11, end: 11 };
+    let k = 0;
+    const show = () => {
+      const b = beats[k];
+      const L = lv[fallbackScene[b.when]];
+      this.clear();
+      this.root.classList.add('show', 'dim');
+      const nextBtn = h('button', { class: 'primary', onclick: () => { click(); k++; if (k < beats.length) show(); else then(); } }, k + 1 < beats.length ? 'Next' : 'Continue');
+      this.root.append(h('div', { class: 'story', style: { backgroundImage: art(storyArt(cityId, b.i), thumbnail(L.biome, L.tod)) } },
+        h('div', { class: 'story-cap' },
+          h('small', { class: 'eyebrow' }, `${c.name} · ${({ start: 'Arrival', after3: 'Pattern', after6: 'Trophy wall', boss: 'The alpha', end: 'Aftermath' })[b.when]} · ${k + 1} / ${beats.length}`),
+          h('p', {}, b.text),
+          h('div', { class: 'row' }, nextBtn, k + 1 < beats.length ? h('button', { onclick: () => { click(); then(); } }, 'Skip') : null))));
+      setTimeout(() => nextBtn.focus({ preventScroll: true }), 30);
+    };
+    show();
+  }
+
   // ── briefing + loadout ──
   briefing(def, kind) {
     const reached = store.campaignLevelReached();
     const gen = store.options().genericNames;
     let pool;
-    if (kind === 'ops') pool = def.issue.map((id) => WEAPON_BY_ID[id]);
+    if (kind === 'ops' || kind === 'city') pool = def.issue.map((id) => WEAPON_BY_ID[id]);
     else {
       const allowed = WEAPONS.filter((w) => !def.classes || def.classes.includes(w.cls));
       pool = allowed.filter((w) => w.unlock <= reached);
@@ -240,6 +350,7 @@ export class UI {
     const needs = Math.max(...levelTargets(def).filter((sp) => sp.counts !== false).map((sp) => sp.minPower || 1), 1);
     const scoped = (w) => (w.optic.type === 'scope' ? 1 : 0);
     let sel = this.loadouts[key] || pool.slice().sort((a, b) => (b.power >= needs) - (a.power >= needs) || b.power - a.power || scoped(b) - scoped(a) || b.unlock - a.unlock).slice(0, 3).map((w) => w.id);
+    if (kind === 'city' && !this.loadouts[key]) sel = ['scar', 'm4', 'm82']; // close-quarters carbine, a battle rifle for the alpha, the .50 for range
     sel = sel.filter((id) => pool.some((w) => w.id === id));
     if (!sel.length && pool.length) sel = [pool[0].id];
 
@@ -250,7 +361,11 @@ export class UI {
         bad ? ` — do not shoot, −${sp.penalty}` : ` — ${sp.points} pts · gun power ${sp.minPower}+${sp.hp > 1 ? ` · ${sp.hp} hits` : ''}${sp.chargeWhenWounded ? ' · charges if wounded' : ''}${sp.damage && sp.family === 'alien' ? ' · attacks' : ''}`));
     }
     if (def.statics || def.plates) targets.append(h('li', {}, h('b', {}, 'Steel plates'), def.plates ? ' — unknown distances' : ` — ${[...new Set(def.statics.map((s) => s.d))].join(', ')} m`));
-    if (def.boss || def.finale) targets.append(h('li', { class: 'boss' }, h('b', {}, 'Colossus'), ' — only the three glowing weak points take damage'));
+    if (def.finale === 'vyrr_alpha') {
+      const a = SPECIES.vyrr_alpha;
+      targets.append(h('li', { class: 'boss' }, h('b', {}, def.finaleDef.as.name), ` — the city's alpha. Walks in once the quota is met · ${a.hp} hit points · gun power ${a.minPower}+ · fires three-spine volleys and calls in hounds`));
+    } else if (def.boss || def.finale) targets.append(h('li', { class: 'boss' }, h('b', {}, 'Colossus'), ' — only the three glowing weak points take damage'));
+    if (kind === 'city') targets.append(h('li', { class: 'warn' }, h('b', {}, 'They fire back'), ' — a glowing chest and red brackets mean a spine is coming. Shoot it out of the air (+50) or hold Space to duck behind cover. You reload twice as fast in cover.'));
 
     const list = h('div', { class: 'loadout' });
     const render = () => {
@@ -272,7 +387,12 @@ export class UI {
       }
       startBtn.disabled = !sel.length;
     };
-    const startBtn = h('button', { class: 'primary big', onclick: () => { click(); this.loadouts[key] = sel; this.app.start(def, kind, sel); } }, 'Start');
+    const go = () => { this.loadouts[key] = sel; this.app.start(def, kind, sel); };
+    const startBtn = h('button', { class: 'primary big', onclick: () => {
+      click();
+      const beat = kind === 'city' && STORY_BEFORE[def.n];
+      if (beat && !store.uiState()[`story:${def.city}:${beat}`]) this.story(def.city, beat, go, true); else go();
+    } }, 'Start');
     const p = store.progressOf(def.id);
     const ch = kind === 'hunt' ? CHAPTERS[def.chapter - 1] : null;
     const conds = (def.cond || []).map((c) => h('li', {}, chip(CONDITION_LABELS[c], CHIP_KIND[c]), ' ', CHIP_HELP[c]));
@@ -281,11 +401,12 @@ export class UI {
       : '★ meet the quota · ★★ hit 85 % of all targets · ★★★ hit them all with 60 % accuracy';
     const body = h('div', { class: 'brief' },
       h('div', { class: 'brief-left' },
-        h('div', { class: 'thumb big', style: { backgroundImage: `url(${thumbnail(def.biome, def.tod)})` } }),
-        h('p', { class: 'lead' }, def.brief),
+        h('div', { class: 'thumb big', style: { backgroundImage: kind === 'city' ? art(cityArt(def.city, `scene_${sid(def.n)}.jpg`), thumbnail(def.biome, def.tod)) : `url(${thumbnail(def.biome, def.tod)})` } }),
+        kind === 'city' ? h('img', { class: 'brief-major', src: `assets/${MAJOR_PIX.briefing}`, alt: '', onerror: (e) => e.target.remove() }) : null,
+        h('p', { class: 'lead' }, kind === 'city' ? `“${def.brief}” — Major Navarro` : def.brief),
         h('p', { class: 'objective' }, objectiveOf(def)),
         h('div', { class: 'kv-grid' },
-          kv('Setting', `${BIOMES[def.biome].name}, ${def.filter === 'nv' ? 'night (NV)' : def.filter === 'thermal' ? 'night (thermal)' : def.tod}`),
+          kv('Setting', `${BIOMES[def.biome].name}, ${def.filter === 'nv' ? 'night (NV)' : def.filter === 'thermal' ? 'night (thermal)' : (TOD_LABEL[def.tod] || def.tod).toLowerCase()}`),
           kv('Wind', def.wind ? `${def.wind[0]}–${def.wind[1]} m/s` : 'light'),
           kv('Difficulty', difficultyPips(def.diff || (kind === 'ops' ? 1.3 : 1))),
           kv('Health', def.hp ? `${def.hp}` : 'not at risk'),
@@ -295,10 +416,12 @@ export class UI {
         h('h4', {}, 'Targets'), targets,
         h('p', { class: 'meta star-rule' }, starRule)),
       h('div', { class: 'brief-right' },
-        h('h4', {}, kind === 'ops' ? `Issued weapons${pool.length > 3 ? ' (pick 3)' : ''}` : `Loadout (pick up to 3)${def.classes ? ' · ' + def.classes.map((c) => CLASSES[c]).join(', ') : ' · any gun'}`),
+        h('h4', {}, kind === 'ops' || kind === 'city' ? `Issued weapons${pool.length > 3 ? ' (pick 3)' : ''}` : `Loadout (pick up to 3)${def.classes ? ' · ' + def.classes.map((c) => CLASSES[c]).join(', ') : ' · any gun'}`),
         list, startBtn));
-    const sub = kind === 'hunt' ? `Chapter ${ch.n} · ${ch.name} · Level ${def.n} of ${LEVEL_COUNT}` : `Military Op ${def.n} of ${OPS.length} · ${def.cat}`;
-    this.screen(def.name, body, { wide: true, sub, onBack: () => (kind === 'hunt' ? this.campaign(def.chapter) : this.ops()) });
+    const sub = kind === 'hunt' ? `Chapter ${ch.n} · ${ch.name} · Level ${def.n} of ${LEVEL_COUNT}`
+      : kind === 'city' ? `City Hunt · ${def.cityName} · Scene ${def.n} of 12${def.n === 12 ? ' · alpha' : ''}`
+      : `Military Op ${def.n} of ${OPS.length} · ${def.cat}`;
+    this.screen(def.name, body, { wide: true, sub, onBack: () => (kind === 'hunt' ? this.campaign(def.chapter) : kind === 'city' ? this.city(def.city) : this.ops()) });
     render();
   }
 
@@ -420,7 +543,9 @@ export class UI {
         h('p', {}, 'Each level sends targets in waves. Hit enough of them to fill the quota bar. Misses and escapes turn grey.'),
         h('p', {}, 'Rounds take time to arrive and drop with distance. Lead moving targets, range far ones with F and hold over (or let the scope dial it).'),
         h('p', {}, 'A gun that is too weak wounds instead of kills. Protected birds, does in buck-only season and no-shoot targets cost points.'),
-        h('p', {}, 'Vital-zone hits, long shots and combos score more.')));
+        h('p', {}, 'Vital-zone hits, long shots and combos score more.'),
+        h('h4', {}, 'City Hunt'),
+        h('p', {}, 'The Vyrr fire back. A glowing chest and red brackets mean a spine is coming: shoot it out of the air or hold Space to duck behind cover, where you reload twice as fast. Never shoot civilians or police.')));
     this.screen('How to Play', body);
   }
 
@@ -442,11 +567,11 @@ export class UI {
       info.push(kv('Shots', s.shots), kv('Accuracy', `${pct(s.shotHits, s.shots)} %`), kv('Combo', s.combo), kv('Wind', `${Math.abs(s.wind).toFixed(1)} m/s ${s.wind >= 0 ? '→' : '←'}`));
       if (s.gun) info.push(kv('Gun', `${weaponName(s.gun.def, store.options().genericNames)} · ${s.gun.ammo}/${s.gun.def.mag}`));
     }
-    const keys = [['Left click', 'Fire'], ['Right click', 'Aim / scope'], ['Wheel', 'Zoom · switch gun'], ['R', 'Reload'], ['1 2 3 Q', 'Guns'], ['Shift', 'Hold breath'], ['F', 'Range'], ['Arrows', 'Dial turrets']];
+    const keys = [['Left click', 'Fire'], ['Right click', 'Aim / scope'], ['Wheel', 'Zoom · switch gun'], ['R', 'Reload'], ['1 2 3 Q', 'Guns'], ['Shift', 'Hold breath'], ['F', 'Range'], ['Arrows', 'Dial turrets'], def.cover ? ['Space', 'Take cover'] : null].filter(Boolean);
     this.root.append(h('div', { class: 'pause-wrap' },
       h('div', { class: 'pause' },
         h('h2', {}, 'Paused'),
-        h('p', { class: 'meta' }, c.kind === 'hunt' ? `Level ${def.n} · ${def.name}` : def.name || ''),
+        h('p', { class: 'meta' }, c.kind === 'hunt' ? `Level ${def.n} · ${def.name}` : c.kind === 'city' ? `${def.cityName} · Scene ${def.n} · ${def.name}` : def.name || ''),
         h('p', { class: 'objective' }, def.n || def.goal ? objectiveOf(def) : ''),
         h('button', { class: 'primary', onclick: () => { click(); this.app.resume(); } }, 'Resume'),
         h('button', { onclick: () => { click(); this.app.restart(); } }, 'Restart'),
@@ -461,7 +586,7 @@ export class UI {
     this.clear();
     this.root.classList.add('show', 'dim');
     const gen = store.options().genericNames;
-    const next = r.pass && kind === 'hunt' ? LEVELS.find((l) => l.n === def.n + 1) : null;
+    const next = !r.pass ? null : kind === 'hunt' ? LEVELS.find((l) => l.n === def.n + 1) : kind === 'city' ? cityLevels(def.city)[def.n] || null : null;
     const before = r.before || { best: 0, plays: 0 };
     const newBest = r.score > before.best;
     const stat = (k, v) => h('div', { class: 'stat' }, h('span', {}, k), h('b', {}, v));
@@ -481,10 +606,14 @@ export class UI {
       const done = lv.filter((l) => store.progressOf(l.id).passed).length;
       const st = lv.reduce((a, l) => a + store.progressOf(l.id).stars, 0);
       chapterLine = h('div', { class: 'chapter-line' }, h('span', {}, `Chapter ${ch.n} · ${ch.name}`), bar(done, 10, `${done}/10 cleared · ${st}/30 ★`));
+    } else if (kind === 'city') {
+      const cp = cityProgress(def.city);
+      chapterLine = h('div', { class: 'chapter-line' }, h('span', {}, `${def.cityName} · City Hunt`), bar(cp.done, 12, `${cp.done}/12 scenes · ${cp.stars}/36 ★`));
     }
     const box = h('div', { class: 'results ' + (r.pass ? 'pass' : 'fail') },
-      h('h2', {}, r.pass ? (kind === 'hunt' ? 'Level cleared' : 'Op complete') : 'Failed'),
-      h('p', { class: 'reason' }, (kind === 'hunt' ? `Level ${def.n} · ` : '') + def.name + (r.reason ? ` — ${r.reason}` : '')),
+      kind === 'city' ? h('img', { class: 'res-portrait', src: `assets/${!r.pass ? MAJOR_PIX.battle : def.n === 12 ? MAJOR_PIX.salute : MAJOR_PIX.victory}`, alt: '', onerror: (e) => e.target.remove() }) : null,
+      h('h2', {}, r.pass ? (kind === 'hunt' ? 'Level cleared' : kind === 'city' ? (def.n === 12 ? 'Alpha down' : 'Scene cleared') : 'Op complete') : 'Failed'),
+      h('p', { class: 'reason' }, (kind === 'hunt' ? `Level ${def.n} · ` : kind === 'city' ? `${def.cityName} · Scene ${def.n} · ` : '') + def.name + (r.reason ? ` — ${r.reason}` : '')),
       h('div', { class: 'score' }, fmt(r.score)),
       h('div', { class: 'score-sub' }, stars(r.stars), newBest ? chip('New best', 'gold') : chip(`Best ${fmt(Math.max(before.best, r.score))}`)),
       h('div', { class: 'stats' },
@@ -512,9 +641,9 @@ export class UI {
       setTimeout(() => input.focus({ preventScroll: true }), 50);
     }
     box.append(h('div', { class: 'actions' },
-      next ? h('button', { class: 'primary', onclick: () => { click(); this.briefing(next, 'hunt'); } }, `Next: Level ${next.n}`) : null,
+      next ? h('button', { class: 'primary', onclick: () => { click(); this.briefing(next, kind); } }, kind === 'city' ? `Next: Scene ${next.n}` : `Next: Level ${next.n}`) : null,
       h('button', { onclick: () => { click(); this.app.restart(); } }, 'Retry'),
-      h('button', { onclick: () => { click(); this.app.toMenu(); kind === 'hunt' ? this.campaign(def.chapter) : this.ops(); } }, kind === 'hunt' ? 'Chapter' : 'Ops'),
+      h('button', { onclick: () => { click(); this.app.toMenu(); kind === 'hunt' ? this.campaign(def.chapter) : kind === 'city' ? this.city(def.city) : this.ops(); } }, kind === 'hunt' ? 'Chapter' : kind === 'city' ? 'City' : 'Ops'),
       h('button', { onclick: () => { click(); this.app.quit(); } }, 'Main menu')));
     this.root.append(box);
   }

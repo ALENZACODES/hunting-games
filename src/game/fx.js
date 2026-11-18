@@ -38,6 +38,12 @@ export class FX {
     this.add(q.sx + rand(-3, 3) * k, q.sy - 10 * k, { vx: rand(-5, 5), vy: rand(-10, 0), life: rand(0.4, 0.8), size: rand(5, 10) * k, color: 'rgba(255,170,80,0.6)', drag: 0.95, grow: 1.4, glow: true });
   }
 
+  spineTrail(e) {
+    const q = this.at(e);
+    const k = Math.max(0.5, q.ppm / 25);
+    this.add(q.sx, q.sy, { vx: 0, vy: 0, life: 0.25, size: 3 * k, color: 'rgba(255,190,90,0.8)', drag: 0.9, grow: 0.6, glow: true });
+  }
+
   update(dt) {
     const arr = this.p;
     for (let i = arr.length - 1; i >= 0; i--) {

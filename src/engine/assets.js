@@ -18,7 +18,7 @@ export function getImage(path, kind = 'sprite') {
     const img = new Image();
     img.onload = () => {
       try {
-        entry.img = kind === 'sprite' ? processSprite(img) : img;
+        entry.img = kind === 'sprite' ? processSprite(img) : kind === 'overlay' ? processOverlay(img) : img;
       } catch (e) {
         entry.img = img; // tainted canvas (file://) – use as is
       }
@@ -50,6 +50,42 @@ export function preload(paths, kind = 'sprite') {
   for (const p of paths) getImage(p, kind);
 }
 
+// Full-frame foreground overlays keep their size and position. If one comes
+// with a plain backdrop instead of transparency, the backdrop is keyed out
+// from the top edge down (never from the bottom, where the cover object sits).
+function processOverlay(img) {
+  const w = img.naturalWidth, h = img.naturalHeight;
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const g = c.getContext('2d', { willReadFrequently: true });
+  g.drawImage(img, 0, 0);
+  const data = g.getImageData(0, 0, w, h);
+  const px = data.data;
+  if (px[3] < 250 || px[(w - 1) * 4 + 3] < 250) return c; // already transparent
+  let r = 0, gg = 0, b = 0;
+  for (let x = 0; x < w; x++) { r += px[x * 4]; gg += px[x * 4 + 1]; b += px[x * 4 + 2]; }
+  r /= w; gg /= w; b /= w;
+  const near = (i) => Math.abs(px[i] - r) + Math.abs(px[i + 1] - gg) + Math.abs(px[i + 2] - b) < 90;
+  const seen = new Uint8Array(w * h);
+  const stack = [];
+  for (let x = 0; x < w; x++) stack.push(x);
+  for (let y = 0; y < h * 0.6; y++) { stack.push(y * w); stack.push(y * w + w - 1); }
+  let cleared = 0;
+  while (stack.length) {
+    const p = stack.pop();
+    if (seen[p]) continue;
+    seen[p] = 1;
+    if (!near(p * 4)) continue;
+    px[p * 4 + 3] = 0; cleared++;
+    const x = p % w, y = (p / w) | 0;
+    if (x > 0) stack.push(p - 1); if (x < w - 1) stack.push(p + 1);
+    if (y > 0) stack.push(p - w); if (y < h - 1) stack.push(p + w);
+  }
+  if (cleared > w * h * 0.97) return img; // it was not a backdrop
+  g.putImageData(data, 0, 0);
+  return c;
+}
+
 function processSprite(img) {
   const w = img.naturalWidth, h = img.naturalHeight;
   const c = document.createElement('canvas');
@@ -62,11 +98,7 @@ function processSprite(img) {
   // Is there a plain opaque background? Sample the four corners.
   const corners = [0, (w - 1) * 4, (h - 1) * w * 4, ((h - 1) * w + w - 1) * 4];
   const opaque = corners.every((i) => px[i + 3] > 250);
-  if (opaque) {
-    const ref = [px[0], px[1], px[2]];
-    const similar = corners.every((i) => Math.abs(px[i] - ref[0]) + Math.abs(px[i + 1] - ref[1]) + Math.abs(px[i + 2] - ref[2]) < 60);
-    if (similar) keyOutBackground(px, w, h, ref, 58);
-  }
+  if (opaque) keyOutBackground(px, w, h);
 
   // Trim to the visible bounding box
   let minX = w, minY = h, maxX = -1, maxY = -1;
@@ -87,22 +119,49 @@ function processSprite(img) {
   return out;
 }
 
-function keyOutBackground(px, w, h, ref, tol) {
-  const seen = new Uint8Array(w * h);
+function keyOutBackground(px, w, h) {
+  // Grow from the image border through low-saturation pixels whose colour
+  // changes smoothly from one pixel to the next. This removes plain
+  // backdrops, lighter panels and soft drop shadows, and stops at the
+  // subject's sharp outline.
+  const n = w * h;
+  const gone = new Uint8Array(n);
+  const sat = (i) => Math.max(px[i], px[i + 1], px[i + 2]) - Math.min(px[i], px[i + 1], px[i + 2]);
+  const lum = (i) => (px[i] + px[i + 1] + px[i + 2]) / 3;
+  // only pixels near the backdrop's brightness can be removed, so darker
+  // metal (thin barrels, scopes) is never eaten even where its edge is soft
+  const corners = [0, (w - 1) * 4, (h - 1) * w * 4, ((h - 1) * w + w - 1) * 4];
+  const floor = corners.reduce((a, i) => a + lum(i), 0) / 4 - 50;
+  const bg = (i) => sat(i) < 28 && lum(i) > floor;
   const stack = [];
-  const push = (x, y) => { const k = y * w + x; if (!seen[k]) { seen[k] = 1; stack.push(k); } };
-  for (let x = 0; x < w; x++) { push(x, 0); push(x, h - 1); }
-  for (let y = 0; y < h; y++) { push(0, y); push(w - 1, y); }
+  const seed = (x, y) => { const k = y * w + x; if (!gone[k] && bg(k * 4)) { gone[k] = 1; stack.push(k); } };
+  for (let x = 0; x < w; x++) { seed(x, 0); seed(x, h - 1); }
+  for (let y = 0; y < h; y++) { seed(0, y); seed(w - 1, y); }
   while (stack.length) {
     const k = stack.pop();
     const i = k * 4;
-    const diff = Math.abs(px[i] - ref[0]) + Math.abs(px[i + 1] - ref[1]) + Math.abs(px[i + 2] - ref[2]);
-    if (diff > tol) continue;
-    px[i + 3] = diff > tol * 0.6 ? Math.min(px[i + 3], Math.round(255 * (diff - tol * 0.6) / (tol * 0.4))) : 0;
     const x = k % w, y = (k / w) | 0;
-    if (x > 0) push(x - 1, y);
-    if (x < w - 1) push(x + 1, y);
-    if (y > 0) push(x, y - 1);
-    if (y < h - 1) push(x, y + 1);
+    const nb = [x > 0 ? k - 1 : -1, x < w - 1 ? k + 1 : -1, y > 0 ? k - w : -1, y < h - 1 ? k + w : -1];
+    for (const q of nb) {
+      if (q < 0 || gone[q]) continue;
+      const j = q * 4;
+      const d = Math.abs(px[j] - px[i]) + Math.abs(px[j + 1] - px[i + 1]) + Math.abs(px[j + 2] - px[i + 2]);
+      if (d < 18 && bg(j)) { gone[q] = 1; stack.push(q); }
+    }
+  }
+  let count = 0;
+  for (let k = 0; k < n; k++) count += gone[k];
+  if (count > n * 0.985) return; // would erase the subject: leave the image alone
+  for (let k = 0; k < n; k++) if (gone[k]) px[k * 4 + 3] = 0;
+  // soften the one-pixel fringe left around the subject
+  for (let y = 1; y < h - 1; y++) {
+    for (let x = 1; x < w - 1; x++) {
+      const k = y * w + x;
+      if (gone[k]) continue;
+      if (gone[k - 1] || gone[k + 1] || gone[k - w] || gone[k + w]) {
+        const i = k * 4;
+        if (bg(i)) px[i + 3] = Math.min(px[i + 3], 110);
+      }
+    }
   }
 }

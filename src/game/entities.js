@@ -5,7 +5,8 @@
 // access to the view, the player and spawn/damage helpers.
 
 import { SPECIES } from '../data/species.js';
-import { project, xForScreen, altForScreen, W, rand, clamp } from './view.js';
+import { project, xForScreen, altForScreen, W, rand, clamp, pick } from './view.js';
+import { OFFICER_BASES, CIVILIANS_PER_CITY } from '../data/art.js';
 
 let nextId = 1;
 
@@ -25,6 +26,11 @@ export function createEntity(S, spId, def = {}) {
     mode: '', timer: 0, x: 0, alt: 0, d: rand(lane.d[0], lane.d[1]), vx: 0, valt: 0, vd: 0,
     alt0: lane.alt ? rand(lane.alt[0], lane.alt[1]) : 0, popup: 1, deathT: 0, wounded: false,
   };
+  // City Hunt per-entity art sets
+  if (def.clan) { e.artBase = `city/${def.clan}/hunter`; e.artKind = 'hunter'; }
+  if (spId === 'civilian' && def.city) { e.artBase = `city/${def.city}/civilian_${1 + ((Math.random() * CIVILIANS_PER_CITY) | 0)}`; e.artKind = 'civilian'; }
+  if (spId === 'officer') { e.artBase = pick(OFFICER_BASES); e.artKind = 'officer'; }
+  if (spId === 'vyrr_alpha' && def.city) { e.artBase = `city/${def.city}/alpha`; e.artKind = 'alpha'; }
   if (def.d != null) e.d = def.d;
   if (def.alt != null) e.alt0 = def.alt;
   e.alt = e.alt0;
@@ -124,12 +130,34 @@ const INIT = {
     e.vx = e.facing * e.sp.speed * rand(0.8, 1.15);
     e.mode = 'drive';
   },
+  hunter(e, S) {
+    e.x = sxToX(S, e, rand(220, W - 220));
+    e.alt = perchAlt(e);
+    e.alpha = 0; e.mode = 'perch'; e.timer = rand(2.2, 3.8);
+    if (e.sp.isAlpha) { e.d = e.lane.d[1] - 15; e.x = sxToX(S, e, W / 2); e.alt = 0; e.nextRoar = 0.75; }
+  },
+  projectile(e, S, def) {
+    const from = def.from;
+    e.x = from.x + from.facing * 0.3; e.d = Math.max(3, from.d - 0.5);
+    e.alt = from.alt + (from.sp.anchor === 'bottom' ? from.sp.body.y * 1.5 : 0);
+    const T = Math.max(0.55, e.d / (def.speed || 40));
+    const tx = S.view.camX + rand(-0.5, 0.5) + (def.spread || 0), talt = 1.45 + rand(-0.15, 0.15), td = 1.2;
+    e.vx = (tx - e.x) / T; e.valt = (talt - e.alt) / T; e.vd = (td - e.d) / T;
+    e.dmg = def.dmg || 10; e.facing = e.vx >= 0 ? 1 : -1;
+    e.mode = 'fly';
+  },
   sniper(e, S) {
     e.x = sxToX(S, e, rand(200, W - 200));
     e.alpha = 0; e.mode = 'hide';
     e.fireT = rand(8, 12); e.glintT = rand(0.8, 2);
   },
 };
+
+function perchAlt(e) {
+  const a = e.lane.alt;
+  if (!a || a[1] < 1.5 || Math.random() < 0.55) return 0;
+  return rand(Math.max(2, a[0]), a[1]);
+}
 
 function placeHover(S, e) {
   e.x = sxToX(S, e, rand(220, W - 220));
@@ -338,6 +366,54 @@ const UPDATE = {
     const p = screen(S, e);
     if (e.age > 2 && !onScreenX(p.sx, 260)) escape(e, S);
   },
+  hunter(e, dt, S) {
+    const sp = e.sp;
+    e.timer -= dt;
+    if (e.firedT > 0) e.firedT -= dt;
+    switch (e.mode) {
+      case 'perch': {
+        fadeIn(e, dt, sp.cloaks ? 0.5 : 0.8);
+        if (sp.isAlpha) {
+          if (e.hp <= sp.hp * e.nextRoar && e.nextRoar > 0) { e.mode = 'roar'; e.timer = 1.3; e.nextRoar -= 0.25; S.sound('alien'); S.spawn('vyrr_hound', {}); S.spawn('vyrr_hound', {}); break; }
+          if (e.d < 14) { S.damage(25, e); e.timer = 0; }
+        }
+        if (e.timer <= 0 && !e.aiming) startMove(e, S);
+        if (!sp.isAlpha && e.age > sp.escape) { e.mode = 'vanish'; }
+        break;
+      }
+      case 'roar':
+        if (e.timer <= 0) { e.mode = 'perch'; e.timer = rand(1.5, 2.5); }
+        break;
+      case 'move': {
+        const p = Math.min(1, (e.age - e.t0) / e.T);
+        e.x = e.x0 + (e.x1 - e.x0) * p; e.d = e.d0 + (e.d1 - e.d0) * p; e.alt = e.a0 + (e.a1 - e.a0) * p;
+        e.facing = e.x1 >= e.x0 ? 1 : -1;
+        e.phase += dt * 4 * (sp.walk || 2);
+        if (sp.cloaks) e.alpha += (0.1 - e.alpha) * Math.min(1, dt * 6);
+        if (p >= 1) { e.mode = 'perch'; e.timer = rand(2.4, 4.2) / (S.diff || 1); }
+        break;
+      }
+      case 'leap': {
+        const p = Math.min(1, (e.age - e.t0) / e.T);
+        e.x = e.x0 + (e.x1 - e.x0) * p; e.d = e.d0 + (e.d1 - e.d0) * p;
+        e.alt = e.a0 + (e.a1 - e.a0) * p + e.arc * 4 * p * (1 - p);
+        e.facing = e.x1 >= e.x0 ? 1 : -1;
+        if (p >= 1) { e.mode = 'perch'; e.timer = rand(2.4, 4.2) / (S.diff || 1); S.fx.dust(e, 1); }
+        break;
+      }
+      case 'vanish':
+        e.alpha = Math.max(0, e.alpha - dt * 1.5);
+        if (e.alpha <= 0) escape(e, S);
+        break;
+      default: break;
+    }
+  },
+  projectile(e, dt, S) {
+    e.phase += dt * 20;
+    move(e, dt);
+    if (Math.random() < 0.7) S.fx.spineTrail(e);
+    if (e.d <= 1.5) { S.impact(e); e.state = 'gone'; e.result = 'impact'; S.onGone(e); }
+  },
   sniper(e, dt, S) {
     fadeIn(e, dt, 1);
     e.glintT -= dt;
@@ -354,6 +430,39 @@ const UPDATE = {
     }
   },
 };
+
+function startMove(e, S) {
+  const sp = e.sp;
+  e.x0 = e.x; e.d0 = e.d; e.a0 = e.alt; e.t0 = e.age;
+  e.d1 = rand(e.lane.d[0], e.lane.d[1]);
+  if (sp.isAlpha) { e.lane = { ...e.lane, d: [Math.max(12, e.lane.d[0] - 6), Math.max(18, e.lane.d[1] - 6)] }; e.d1 = rand(e.lane.d[0], e.lane.d[1]); }
+  e.x1 = xForScreen(S.view, rand(220, W - 220), e.d1);
+  e.a1 = perchAlt(e);
+  const dist = Math.hypot(e.x1 - e.x0, e.d1 - e.d0);
+  if (sp.leaps && (Math.abs(e.a1 - e.a0) > 1.5 || Math.random() < 0.35)) {
+    e.mode = 'leap'; e.T = rand(0.8, 1.2); e.arc = rand(2, 4) + Math.abs(e.a1 - e.a0) * 0.3;
+  } else {
+    e.a1 = e.a0 < 1.5 ? 0 : e.a0; // walking stays on the same surface
+    e.mode = 'move'; e.T = Math.max(0.8, dist / (sp.speed * 0.7));
+  }
+}
+
+// Vyrr (and anything with sp.fires) shoot back: a visible charge, then spines
+function fireTick(e, dt, S) {
+  const f = e.sp.fires;
+  if (e.fireT == null) e.fireT = rand(f.every[0], f.every[1]) * 0.7;
+  const ready = e.alpha > 0.6 && (e.mode === 'perch' || e.mode === 'hover' || e.mode === 'in');
+  if (!ready) { e.aiming = false; return; }
+  e.fireT -= dt;
+  e.aiming = e.fireT <= f.windup && e.fireT > 0;
+  if (e.fireT <= 0) {
+    const n = f.volley || 1;
+    for (let i = 0; i < n; i++) S.spawnProjectile(e, { speed: f.speed, dmg: f.dmg, spread: (i - (n - 1) / 2) * 0.6 });
+    S.sound('alien');
+    e.firedT = 0.35;
+    e.fireT = rand(f.every[0], f.every[1]) / (S.diff || 1);
+  }
+}
 
 function move(e, dt) {
   e.x += e.vx * dt; e.alt += e.valt * dt; e.d += e.vd * dt;
@@ -387,13 +496,14 @@ export function updateEntity(e, dt, S) {
     } else if (e.sp.behavior === 'popup' || e.sp.behavior === 'mover') {
       e.popup = Math.max(0, e.popup - dt / 0.15);
     }
-    const life = fam === 'alien' ? 0.9 : fam === 'mil' ? 1.2 : 3.2;
+    const life = e.sp.intercept ? 0.15 : fam === 'human' ? 0.6 : fam === 'alien' ? (e.sp.boss ? 1.6 : 1.4) : fam === 'mil' ? 1.2 : 3.2;
     if (e.deathT > life - 0.6) e.alpha = Math.max(0, e.alpha - dt / 0.6);
     if (e.deathT > life) { e.state = 'gone'; S.onGone(e); }
     return;
   }
   if (e.state !== 'alive') return;
   (UPDATE[e.sp.behavior] || UPDATE.static)(e, dt, S);
+  if (e.state === 'alive' && e.sp.fires) fireTick(e, dt, S);
 }
 
 // Spook: a gunshot startles animals that can hear it

@@ -12,6 +12,7 @@ import { WEAPONS } from './data/weapons.js';
 import { UI } from './ui/menus.js';
 import { preload } from './engine/assets.js';
 import { TITLE_ART } from './data/art.js';
+import { cityLevels } from './data/cities.js';
 
 const canvas = document.getElementById('game');
 const g = canvas.getContext('2d');
@@ -79,9 +80,17 @@ const app = {
       WEAPONS.filter((w) => w.unlock > this.reachedBefore && w.unlock <= after).forEach((w) => unlocks.push(`Gun: ${w.name}`));
       OPS.filter((o) => o.unlock === def.n).forEach((o) => unlocks.push(`Op: ${o.name}`));
     }
+    if (kind === 'city' && r.pass && !before.passed) {
+      const nl = cityLevels(def.city)[def.n];
+      if (nl) unlocks.push(`Scene ${nl.n}: ${nl.name}`);
+      else unlocks.push(`${def.cityName} cleared · city medal`);
+    }
     this.mode = 'results';
     releaseLock();
-    ui.results(def, kind, r, unlocks);
+    const show = () => ui.results(def, kind, r, unlocks);
+    // the city's closing story plays once, after its alpha falls
+    if (kind === 'city' && r.pass && def.n === 12 && !store.uiState()[`story:${def.city}:end`]) ui.story(def.city, 'end', show, true);
+    else show();
   },
   applyOptions() {
     const o = store.options();

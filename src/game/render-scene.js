@@ -14,6 +14,7 @@ export const SKIES = {
   dusk: { top: '#1b2142', mid: '#6d4a76', bottom: '#ea8a58', haze: '#c98a72', sun: { x: 0.24, up: 10, r: 50, c: '#ffae6a' }, tint: 'rgba(90,40,90,0.22)' },
   night: { top: '#01030a', mid: '#071226', bottom: '#13223a', haze: '#1b2a42', moon: { x: 0.78, up: 300, r: 24 }, stars: true, tint: 'rgba(4,10,28,0.55)' },
   alien: { top: '#0d0517', mid: '#3a1452', bottom: '#b4467e', haze: '#7b3a6c', moons: true, stars: true, aurora: true, tint: 'rgba(70,10,80,0.18)' },
+  citynight: { top: '#04060d', mid: '#0e1730', bottom: '#3a2c48', haze: '#2a3048', tint: null },
 };
 
 const cache = new Map();
@@ -240,8 +241,157 @@ function drawFeatures(g, b, biomeId, hy, R, sky) {
 
 function backdropCanvas(biomeId, tod) {
   const key = biomeId + '|' + tod;
-  if (!cache.has(key)) cache.set(key, buildBackdrop(biomeId, tod));
+  if (!cache.has(key)) cache.set(key, BIOMES[biomeId].city ? buildCityBackdrop(biomeId, tod) : buildBackdrop(biomeId, tod));
   return cache.get(key);
+}
+
+
+// ── City Hunt stand-in scenes (replaced by assets/city/<city>/scene_NN.jpg) ──
+function buildCityBackdrop(biomeId, tod) {
+  const b = BIOMES[biomeId];
+  const sky = SKIES[tod] || SKIES.day;
+  const night = tod === 'citynight';
+  const hy = b.horizon * H;
+  const type = b.sceneType;
+  const neon = b.neon || ['#ff2d55', '#00c2ff', '#ffd60a'];
+  const R = rng(biomeId + tod);
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  const vx = W / 2;
+  const win = (x, y, w, h) => {
+    if (!night && R() < 0.6) { g.fillStyle = `rgba(150,180,210,${0.25 + R() * 0.3})`; g.fillRect(x, y, w, h); return; }
+    if (night && R() < 0.55) { g.fillStyle = R() < 0.15 ? neon[(R() * neon.length) | 0] : `rgba(255,${200 + R() * 40 | 0},${120 + R() * 60 | 0},${0.5 + R() * 0.5})`; g.fillRect(x, y, w, h); }
+  };
+  const tower = (x, top, w, base, col) => {
+    g.fillStyle = col; g.fillRect(x, top, w, base - top);
+    for (let yy = top + 6; yy < base - 6; yy += 9) for (let xx = x + 4; xx < x + w - 5; xx += 8) win(xx, yy, 4, 5);
+  };
+  if (type !== 'interior') {
+    const sg = g.createLinearGradient(0, 0, 0, hy);
+    sg.addColorStop(0, sky.top); sg.addColorStop(0.6, sky.mid); sg.addColorStop(1, sky.bottom);
+    g.fillStyle = sg; g.fillRect(0, 0, W, hy + 2);
+    if (night) { const gl = g.createRadialGradient(W / 2, hy, 10, W / 2, hy, W * 0.7); gl.addColorStop(0, 'rgba(255,150,80,0.35)'); gl.addColorStop(1, 'rgba(255,150,80,0)'); g.fillStyle = gl; g.fillRect(0, 0, W, hy); }
+    // far skyline
+    const farCol = night ? '#0b1020' : mix(sky.haze, '#3d4656', 0.45);
+    for (let x = -20; x < W; x += 28 + R() * 50) {
+      const w = 26 + R() * 60, h = 40 + Math.pow(R(), 1.6) * (type === 'rooftop' ? 260 : 340);
+      tower(x, hy - h, w, hy + 2, farCol);
+      if (R() < 0.12) { g.fillStyle = farCol; g.fillRect(x + w / 2 - 2, hy - h - 40, 4, 40); }
+    }
+  }
+  const ground = (top, colA, colB) => { const gg = g.createLinearGradient(0, top, 0, H); gg.addColorStop(0, colA); gg.addColorStop(1, colB); g.fillStyle = gg; g.fillRect(0, top, W, H - top); };
+  const lanes = (col) => { g.strokeStyle = col; g.lineWidth = 3; for (const f of [-0.6, -0.2, 0.2, 0.6]) { g.beginPath(); g.moveTo(vx + f * 40, hy + 4); g.lineTo(vx + f * W * 1.4, H); g.stroke(); } };
+  const facades = (sign) => {
+    // a wall of buildings receding toward the vanishing point on one side
+    const near = sign < 0 ? 0 : W, far = vx + sign * 120;
+    for (let k = 0; k < 7; k++) {
+      const f0 = k / 7, f1 = (k + 1) / 7;
+      const x0 = near + (far - near) * f0, x1 = near + (far - near) * f1;
+      const t0 = hy - (H * 0.95) * (1 - f0) - 60 * R(), t1 = hy - (H * 0.95) * (1 - f1) - 40;
+      const col = night ? mix('#151a26', '#2a3044', R() * 0.6) : mix('#8d8f94', '#b9a98f', R());
+      g.fillStyle = col;
+      g.beginPath(); g.moveTo(x0, t0); g.lineTo(x1, Math.min(t1, hy - 20)); g.lineTo(x1, hy + 8 + (1 - f1) * 40); g.lineTo(x0, H * (0.98 - f0 * 0.2)); g.closePath(); g.fill();
+      for (let r = 0; r < 14; r++) {
+        const fy = r / 14;
+        const ya = t0 + (H * (0.98 - f0 * 0.2) - t0) * fy, yb = Math.min(t1, hy - 20) + (hy + 8 + (1 - f1) * 40 - Math.min(t1, hy - 20)) * fy;
+        const wx = x0 + (x1 - x0) * 0.25, wy = ya + (yb - ya) * 0.25;
+        win(Math.min(wx, wx + (x1 - x0) * 0.5), wy, Math.abs(x1 - x0) * 0.4, Math.max(2, (H - t0) / 40));
+      }
+      if ((type === 'strip' || type === 'square') && R() < 0.7) {
+        const nc = neon[(R() * neon.length) | 0];
+        const sx0 = x0 + (x1 - x0) * 0.2, sy = t0 + (hy - t0) * (0.35 + R() * 0.3);
+        g.save(); g.shadowColor = nc; g.shadowBlur = 25; g.fillStyle = nc;
+        g.globalAlpha = night ? 0.9 : 0.5;
+        g.fillRect(Math.min(sx0, sx0 + (x1 - x0) * 0.6), sy, Math.abs(x1 - x0) * 0.6, (H - t0) / 9);
+        g.restore();
+      }
+    }
+  };
+  switch (type) {
+    case 'street': case 'strip': case 'square': {
+      ground(hy, night ? '#1a1c22' : '#5a5c60', night ? '#0c0d10' : '#2e2f33');
+      lanes(night ? 'rgba(255,220,120,0.35)' : 'rgba(255,255,255,0.5)');
+      facades(-1); facades(1);
+      if (night) { for (let k = 0; k < 8; k++) { const x = R() * W, y = hy + 20 + R() * (H - hy) * 0.6; const gl = g.createRadialGradient(x, y, 0, x, y, 120); gl.addColorStop(0, `${neon[k % neon.length]}55`); gl.addColorStop(1, `${neon[k % neon.length]}00`); g.fillStyle = gl; g.fillRect(x - 120, y - 120, 240, 240); } }
+      if (type === 'strip') for (let k = 0; k < 6; k++) { const x = vx + (k % 2 ? 1 : -1) * (80 + k * 70), base = hy + 30 + k * 30, h = 120 + k * 40; g.strokeStyle = '#2a2014'; g.lineWidth = 6 + k; g.beginPath(); g.moveTo(x, base); g.quadraticCurveTo(x + 10, base - h * 0.6, x + 4, base - h); g.stroke(); g.fillStyle = night ? '#16301c' : '#3d6b34'; for (let f = 0; f < 7; f++) { g.beginPath(); g.ellipse(x + Math.cos(f) * 30, base - h + Math.sin(f) * 8, 40, 9, f, 0, 7); g.fill(); } }
+      break;
+    }
+    case 'park': {
+      ground(hy, night ? '#14261a' : '#5f7a3a', night ? '#0a120c' : '#33461f');
+      g.strokeStyle = night ? 'rgba(200,190,160,0.25)' : 'rgba(210,200,170,0.7)'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(vx - 30, hy + 4); g.lineTo(vx - W * 0.35, H); g.moveTo(vx + 30, hy + 4); g.lineTo(vx + W * 0.35, H); g.stroke();
+      for (const sign of [-1, 1]) for (let k = 0; k < 9; k++) {
+        const f = k / 9, x = vx + sign * (60 + (W * 0.5) * Math.pow(f, 1.4)), base = hy + 10 + (H - hy) * Math.pow(f, 2) * 0.7, h = 40 + f * 420;
+        g.fillStyle = night ? '#0b140d' : mix('#2f4d24', '#567a34', R()); g.beginPath(); g.ellipse(x, base - h * 0.75, h * 0.35, h * 0.4, 0, 0, 7); g.fill();
+        g.fillStyle = '#2a2116'; g.fillRect(x - 2 - f * 6, base - h * 0.4, 4 + f * 12, h * 0.4);
+      }
+      break;
+    }
+    case 'interior': {
+      const bg = g.createLinearGradient(0, 0, 0, hy); bg.addColorStop(0, night ? '#14161c' : '#cfc6b4'); bg.addColorStop(1, night ? '#2a2620' : '#a99d86');
+      g.fillStyle = bg; g.fillRect(0, 0, W, hy + 2);
+      for (let k = 0; k < 7; k++) { const x = 160 + k * 260; g.fillStyle = night ? '#221f1a' : '#b8ab92'; g.fillRect(x, 60, 70, hy - 60); g.fillStyle = night ? 'rgba(255,220,150,0.8)' : 'rgba(255,255,240,0.9)'; g.beginPath(); g.ellipse(x + 35, 50, 60, 10, 0, 0, 7); g.fill(); }
+      for (let k = 0; k < 3; k++) { g.strokeStyle = night ? '#3a3328' : '#8e826c'; g.lineWidth = 6; g.beginPath(); g.moveTo(0, hy * (0.35 + k * 0.2)); g.lineTo(W, hy * (0.35 + k * 0.2)); g.stroke(); }
+      ground(hy, night ? '#2b2721' : '#d9d0bf', night ? '#14120f' : '#8f8573');
+      g.strokeStyle = 'rgba(0,0,0,0.12)'; g.lineWidth = 2; for (let f = -8; f <= 8; f++) { g.beginPath(); g.moveTo(vx + f * 30, hy); g.lineTo(vx + f * 260, H); g.stroke(); }
+      break;
+    }
+    case 'rooftop': {
+      const roofTop = hy + 60;
+      ground(roofTop, night ? '#24252a' : '#77736a', night ? '#111216' : '#47443e');
+      g.fillStyle = night ? '#1b1c20' : '#8a857b'; g.fillRect(0, roofTop - 14, W, 18);
+      for (let k = 0; k < 3; k++) { const x = 200 + k * 650 + R() * 100, base = roofTop - 10, w = 90 + R() * 40, h = 110 + R() * 60; g.fillStyle = night ? '#2a211a' : '#6b4a2e'; g.fillRect(x, base - h, w, h * 0.75); g.beginPath(); g.moveTo(x - 6, base - h); g.lineTo(x + w / 2, base - h - 40); g.lineTo(x + w + 6, base - h); g.fill(); g.fillStyle = '#222'; for (let l = 0; l < 4; l++) g.fillRect(x + 8 + l * (w - 16) / 3, base - h * 0.25, 5, h * 0.25); }
+      break;
+    }
+    case 'bridge': {
+      ground(hy, night ? '#1d1f24' : '#6d6a63', night ? '#0d0e11' : '#3d3a35');
+      g.strokeStyle = night ? 'rgba(200,210,230,0.5)' : 'rgba(80,80,80,0.8)'; g.lineWidth = 3;
+      for (const sign of [-1, 1]) for (let k = 0; k < 14; k++) { g.beginPath(); g.moveTo(vx + sign * 40, hy - 330); g.lineTo(vx + sign * (60 + k * 70), hy + 10 + k * 40); g.stroke(); }
+      g.fillStyle = night ? '#1b1a1f' : '#8b7d6a'; g.fillRect(vx - 70, hy - 360, 140, 370);
+      g.fillStyle = night ? '#0d0e11' : '#5a5246'; g.fillRect(vx - 30, hy - 250, 24, 120); g.fillRect(vx + 6, hy - 250, 24, 120);
+      break;
+    }
+    case 'waterfront': {
+      const shore = H * 0.66;
+      const wg = g.createLinearGradient(0, hy, 0, shore); wg.addColorStop(0, night ? '#151c30' : mix(sky.bottom, '#2c4a66', 0.5)); wg.addColorStop(1, night ? '#07090f' : '#1c3346');
+      g.fillStyle = wg; g.fillRect(0, hy, W, shore - hy);
+      for (let k = 0; k < 160; k++) { const x = R() * W, y = hy + 4 + R() * (shore - hy); g.fillStyle = night ? `${neon[k % neon.length]}66` : 'rgba(255,255,255,0.2)'; g.fillRect(x, y, 10 + R() * 40, 2); }
+      ground(shore, night ? '#2a2a2e' : '#9c958a', night ? '#121215' : '#5e5a52');
+      g.fillStyle = night ? '#3a3a40' : '#c2bcb0'; g.fillRect(0, shore - 6, W, 8);
+      for (let k = 0; k < 9; k++) { const x = k * 230 + 60; g.strokeStyle = '#222'; g.lineWidth = 5; g.beginPath(); g.moveTo(x, shore); g.lineTo(x, shore - 160); g.stroke(); if (night) { const gl = g.createRadialGradient(x, shore - 165, 0, x, shore - 165, 60); gl.addColorStop(0, 'rgba(255,230,170,0.9)'); gl.addColorStop(1, 'rgba(255,230,170,0)'); g.fillStyle = gl; g.fillRect(x - 60, shore - 225, 120, 120); } }
+      break;
+    }
+    default: ground(hy, '#444', '#222');
+  }
+  return c;
+}
+
+// Ducked behind cover: the scene's cover object fills the lower screen.
+export function drawCoverView(g, biomeId, coverT, t) {
+  const k = Math.min(1, coverT);
+  g.save();
+  g.fillStyle = `rgba(0,0,0,${0.25 * k})`; g.fillRect(0, 0, W, H);
+  const img = getImage(foregroundPath(biomeId), 'overlay');
+  const lift = k * H * 0.3;
+  if (img) {
+    // zoom into the overlay so its cover object rises to just below eye level
+    const iw = img.width, ih = img.height;
+    const fgTop = BIOMES[biomeId].fgTop || 0.74;
+    const top = (fgTop - 0.26 * k) * H;
+    const vs = (H - top) / ((1 - fgTop) * ih);
+    const sy = ih * Math.max(0, fgTop - 0.2);
+    const dy = top - (fgTop * ih - sy) * vs;
+    g.drawImage(img, 0, sy, iw, ih - sy, (W - iw * vs) / 2, dy, iw * vs, (ih - sy) * vs);
+  } else {
+    const top = H - lift - 120 * k;
+    const gr = g.createLinearGradient(0, top, 0, H);
+    gr.addColorStop(0, '#b9b4aa'); gr.addColorStop(0.15, '#8f8a80'); gr.addColorStop(1, '#4a4741');
+    g.fillStyle = gr;
+    g.beginPath(); g.moveTo(-20, H); g.lineTo(-20, top + 60); g.lineTo(W * 0.08, top); g.lineTo(W * 0.92, top); g.lineTo(W + 20, top + 60); g.lineTo(W + 20, H); g.closePath(); g.fill();
+    g.fillStyle = 'rgba(0,0,0,0.25)'; for (let x = 120; x < W; x += 360) g.fillRect(x, top + 20, 6, H - top);
+    g.fillStyle = '#d6c25a'; g.fillRect(W * 0.08, top + 4, W * 0.84, 6);
+  }
+  g.restore();
 }
 
 export function drawBackdrop(g, biomeId, tod, view, wide = false) {
@@ -291,10 +441,11 @@ function fgStalks(biomeId) {
 
 export function drawForeground(g, biomeId, t, windStrength = 2, wide = false) {
   if (wide) { for (const k of [-1, 0, 1]) { g.save(); g.translate(k * W, 0); drawForeground(g, biomeId, t, windStrength, false); g.restore(); } return; }
-  const img = getImage(foregroundPath(biomeId), 'raw');
+  const img = getImage(foregroundPath(biomeId), 'overlay');
   if (img) { g.drawImage(img, 0, 0, W, H); return; }
   const b = BIOMES[biomeId];
   if (!b.fg || b.fg === 'none') return;
+  if (b.fg === 'cover') return; // city scenes: the cover object only fills the view when ducking (drawCoverView)
   const stalks = fgStalks(biomeId);
   const sway = 0.012 + windStrength * 0.004;
   if (b.fg === 'reeds' || b.fg === 'corn' || b.fg === 'grass') {
