@@ -8,6 +8,7 @@ import { WEAPON_BY_ID, weaponName } from '../data/weapons.js';
 import { createEntity, updateEntity, hitTest, canBeHit, spook, makeCharge } from './entities.js';
 import { drawEntity } from './render-targets.js';
 import { drawBackdrop, drawForeground, horizonFor, worldTint, drawCoverView } from './render-scene.js';
+import { createAmbience } from './ambience.js';
 import { Gun, drawViewmodel, drawCrosshair, drawSightPicture, drawScopeOverlay, scopeRadius } from './weapon.js';
 import { FX } from './fx.js';
 import * as audio from '../engine/audio.js';
@@ -56,6 +57,7 @@ export class Session {
     this.paused = false;
     this.chirpT = 3;
     this.fx.reduce = !!options.reduceFlashes;
+    this.ambience = createAmbience(def.biome, this.biome, this.tod, { reduceFlashes: !!options.reduceFlashes });
     this.setupStatics();
     if (def.boss) this.spawnBoss(def.boss);
   }
@@ -548,6 +550,7 @@ export class Session {
     if (!this.demo && this.state !== 'done') this.handleInput(input, dt);
     const gun = this.gun;
     if (gun) gun.update(dt);
+    if (this.ambience) this.ambience.update(dt, this.wind);
     // cover: duck behind the scene's cover object; reloads twice as fast there
     this.coverT = clamp((this.coverT || 0) + (this.cover ? dt : -dt) / 0.18, 0, 1);
     if (gun && this.coverT > 0.5 && gun.reloading) gun.reloadT -= dt;
@@ -656,6 +659,7 @@ export class Session {
       drawCrosshair(g, gp.x, gp.y, gun, filter ? '#7dff9a' : '#ffffff');
     }
     if (this.def.cover && this.coverT > 0) drawCoverView(g, this.def.biome, this.coverT, this.time);
+    if (this.ambience) this.ambience.drawFront(g, ads);
     this.drawTexts(g, ads, gp, z);
     this.drawWarnings(g, ads, gp, z);
     this.drawHud(g, ads);
@@ -709,6 +713,7 @@ export class Session {
   renderWorld(g, { thermal = false } = {}) {
     const wide = this.adsT > 0.5;
     drawBackdrop(g, this.def.biome, this.tod, this.view, wide);
+    if (this.ambience && !thermal) this.ambience.drawBack(g);
     if (!thermal) this.renderEntities(g);
     drawForeground(g, this.def.biome, this.time, Math.abs(this.wind), wide);
     this.fx.draw(g);

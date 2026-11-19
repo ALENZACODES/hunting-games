@@ -70,6 +70,8 @@ export const BASE_POSES = {
 export function basePaths(artBase, kind, pose) {
   const n = BASE_POSES[kind]?.[pose];
   if (!artBase || !n) return [];
+  // people: the first running photo plus an optional opposite-stride frame
+  if ((kind === 'civilian' || kind === 'officer') && pose === 'run') return [`${artBase}_run.png`, `${artBase}_run_2.png`];
   if (n === 1) return [`${artBase}_${pose}.png`];
   return Array.from({ length: n }, (_, i) => `${artBase}_${pose}_${i + 1}.png`);
 }
@@ -101,7 +103,7 @@ export function cityArtManifest() {
     for (let i = 1; i <= 12; i++) files.push(`city/${c}/scene_${pad(i)}.jpg`, `city/${c}/scene_${pad(i)}_cover.png`);
     files.push(`city/${c}/key.jpg`, `city/${c}/panorama.jpg`, `city/${c}/medal.png`);
     for (let i = 0; i < STORY_PER_CITY; i++) files.push(storyArt(c, i));
-    for (let i = 1; i <= CIVILIANS_PER_CITY; i++) files.push(...basePaths(`city/${c}/civilian_${i}`, 'civilian', 'run'));
+    for (let i = 1; i <= CIVILIANS_PER_CITY; i++) files.push(`city/${c}/civilian_${i}_run.png`);
     for (const pose of Object.keys(BASE_POSES.alpha)) files.push(...basePaths(`city/${c}/alpha`, 'alpha', pose));
     for (const pose of Object.keys(BASE_POSES.hunter)) files.push(...basePaths(`city/${c}/hunter`, 'hunter', pose));
     groups[`City: ${c}`] = files;
@@ -111,10 +113,16 @@ export function cityArtManifest() {
     for (const pose of Object.keys(POSES[id])) vyrr.push(...spritePaths(id, 'alien', pose));
   }
   groups['City: Vyrr (shared)'] = vyrr;
-  groups['City: officers'] = OFFICER_BASES.flatMap((b) => basePaths(b, 'officer', 'run'));
+  groups['City: officers'] = OFFICER_BASES.map((b) => `${b}_run.png`);
   groups['City: Major Navarro'] = MAJOR_ART;
   groups['City: select screen'] = [CITY_SELECT_ART];
   return groups;
+}
+
+// Optional second running frame (opposite stride) for every civilian and officer.
+export function strideManifest() {
+  return [...CITY_IDS.flatMap((c) => Array.from({ length: CIVILIANS_PER_CITY }, (_, i) => `city/${c}/civilian_${i + 1}_run_2.png`)),
+    ...OFFICER_BASES.map((b) => `${b}_run_2.png`)];
 }
 
 // Free-licensed photos used for some gun profiles (full credits in

@@ -26,6 +26,9 @@ export function createEntity(S, spId, def = {}) {
     mode: '', timer: 0, x: 0, alt: 0, d: rand(lane.d[0], lane.d[1]), vx: 0, valt: 0, vd: 0,
     alt0: lane.alt ? rand(lane.alt[0], lane.alt[1]) : 0, popup: 1, deathT: 0, wounded: false,
   };
+  // Animals walk on the ground in the scene photo. Lanes written for the old
+  // drawn hillsides lifted deer and elk up to 28 m, which floats them in the sky.
+  if (sp.family === 'quad' && sp.anchor === 'bottom') e.alt0 = Math.min(e.alt0, 1.2);
   // City Hunt per-entity art sets
   if (def.clan) { e.artBase = `city/${def.clan}/hunter`; e.artKind = 'hunter'; }
   if (spId === 'civilian' && def.city) { e.artBase = `city/${def.city}/civilian_${1 + ((Math.random() * CIVILIANS_PER_CITY) | 0)}`; e.artKind = 'civilian'; }

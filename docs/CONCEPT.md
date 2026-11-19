@@ -194,6 +194,8 @@ Room for five more (to reach 30): Vehicle Ambush, Rooftop Overwatch, Sniper Duel
 
 **No-shoots.** Civilians (−1000) and police (−1500) run through the scenes.
 
+**Living scenes.** Each scene photo carries moving weather and light chosen for that place and time: rain, sleet or snow, drifting mist and steam, neon and screens that pulse, police light bars just out of frame, searchlights, a passing helicopter, birds, blowing leaves and glints on water. Runners bounce through their stride with a contact shadow and slight motion blur.
+
 **Armory.** M4A1, SCAR 17S, AKM, SBE3, AXMC and M82A1 are issued; pick three. Alphas need gun power 5 or more.
 
 **Story.** Twelve story cards per city: three before scene 1, two after scene 3, two after scene 6, two before the alpha and three after it. Each plays once and can be replayed from the city page.

@@ -24,6 +24,7 @@ assets/
 - **Frames:** wing-flap birds use two files, `<id>_fly_1.png` and `<id>_fly_2.png`. Everything else is one image per pose; the engine adds bob, gallop and fall motion.
 - **Guns:** the in-hand view uses `<id>.png` (first-person) when present; otherwise it uses the side-profile photo `<id>_profile.png`, mirrored and angled into the scene; with neither, a drawn stand-in.
 - **City Hunt cover overlays** (`scene_NN_cover.png`) keep their full frame. A transparent PNG is best; a plain chroma-green backdrop above the object is keyed out from the top edge down.
+- **City Hunt running frames:** a civilian or officer may have a second photo, `<name>_run_2.png`, with the legs in the opposite stride; the game then alternates the two frames.
 - **City Hunt art sets:** a city's alpha, hunter clan and civilians use their own files first and fall back to the shared Vyrr art, then to drawn stand-ins.
 - **Backgrounds** are drawn full-screen. If the horizon in an image does not line up with where animals stand, change that biome's `horizon` in `src/data/levels.js`.
 - **Local testing:** open the game through a local web server (`npm start`), not by double-clicking `index.html`. Browsers block the image clean-up step on `file://` pages.

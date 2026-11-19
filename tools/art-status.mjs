@@ -5,7 +5,7 @@
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { POSES, EXTRA_POSES, spritePaths, backgroundPath, foregroundPath, weaponPath, weaponProfilePath, TITLE_ART, cityArtManifest } from '../src/data/art.js';
+import { POSES, EXTRA_POSES, spritePaths, backgroundPath, foregroundPath, weaponPath, weaponProfilePath, TITLE_ART, cityArtManifest, strideManifest } from '../src/data/art.js';
 import { SPECIES } from '../src/data/species.js';
 import { BIOMES } from '../src/data/levels.js';
 import { WEAPONS } from '../src/data/weapons.js';
@@ -20,6 +20,7 @@ const groups = {
   'Guns, profile (Arsenal)': WEAPONS.map((w) => weaponProfilePath(w.id)),
   'Title art': [TITLE_ART],
   ...cityArtManifest(),
+  'City: second running frames (optional)': strideManifest(),
 };
 
 let have = 0, total = 0;

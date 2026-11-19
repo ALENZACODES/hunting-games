@@ -392,8 +392,13 @@ export function drawCoverView(g, biomeId, coverT, t) {
   g.restore();
 }
 
+// A scene can hand in a live version of its photo (the ambience bakes the
+// pulsing neon into it a few times a second); it is drawn in place of the photo.
+const liveBackdrops = new Map();
+export function setLiveBackdrop(biomeId, canvas) { if (canvas) liveBackdrops.set(biomeId, canvas); else liveBackdrops.delete(biomeId); }
+
 export function drawBackdrop(g, biomeId, tod, view, wide = false) {
-  const img = getImage(backgroundPath(biomeId), 'raw');
+  const img = liveBackdrops.get(biomeId) || getImage(backgroundPath(biomeId), 'raw');
   const src = img || backdropCanvas(biomeId, tod);
   const b = BIOMES[biomeId];
   if (b.scroll) {

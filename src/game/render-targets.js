@@ -65,6 +65,9 @@ export function drawEntity(g, e, view, t, opts = {}) {
   if (e.state === 'gone') return;
   const p = project(view, e.x, e.alt, e.d);
   const k = p.ppm;
+  // sideways speed on screen, for motion blur on fast movers
+  if (e._lt !== undefined && t > e._lt) { const v = (p.sx - e._lsx) / (t - e._lt); e.svx = (e.svx || 0) * 0.7 + v * 0.3; }
+  e._lt = t; e._lsx = p.sx;
   const span = e.sp.len * k * 1.5 + 40;
   if (p.sx < -span || p.sx > 1920 + span || p.sy < -span * 2 || p.sy > 1080 + span) return;
 
@@ -93,7 +96,7 @@ export function drawEntity(g, e, view, t, opts = {}) {
   if (deathArt) {
     const w = e.sp.height ? e.sp.height * 0.95 : e.sp.len * (flyer ? 1 : e.sp.family === 'alien' ? 1.6 : 1.05), h = w * (deathArt.height / deathArt.width);
     g.drawImage(deathArt, -w / 2, flyer ? -h / 2 : -h, w, h);
-  } else if (art) drawSprite(g, e, art.frames, art.pose);
+  } else if (art) drawSprite(g, e, art.frames, art.pose, k);
   else (DRAW[e.sp.draw] || DRAW.popup)(g, e, t);
 
   if (e.sp.weakpoints && e.state === 'alive') drawWeakpoints(g, e, t);
@@ -121,7 +124,14 @@ export function drawEntity(g, e, view, t, opts = {}) {
 const POSE_HEIGHT = { crouch: 0.62, roar: 1.02, run: 0.97 };
 const POSE_SPAN = { leap: 0.95, down: 0.95, pounce: null };
 
-function drawSprite(g, e, frames, pose) {
+// soft contact shadow under a figure standing on the ground (metres)
+function groundShadow(g, rx, alpha) {
+  const grd = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+  grd.addColorStop(0, `rgba(0,0,0,${alpha})`); grd.addColorStop(0.6, `rgba(0,0,0,${alpha * 0.45})`); grd.addColorStop(1, 'rgba(0,0,0,0)');
+  g.save(); g.scale(1, 0.16); g.fillStyle = grd; g.beginPath(); g.arc(0, 0, rx, 0, TAU); g.fill(); g.restore();
+}
+
+function drawSprite(g, e, frames, pose, k = 1) {
   const fi = frames.length > 1 ? Math.floor((e.phase / Math.PI) % frames.length + frames.length) % frames.length : 0;
   const img = frames[fi];
   let w = e.sp.len, h = w * (img.height / img.width);
@@ -129,13 +139,29 @@ function drawSprite(g, e, frames, pose) {
     if (POSE_SPAN[pose]) { w = e.sp.height * POSE_SPAN[pose]; h = w * (img.height / img.width); }
     else { h = e.sp.height * (POSE_HEIGHT[pose] || 1); w = h * (img.width / img.height); }
   }
+  const moving = e.mode === 'walk' || e.mode === 'flee' || e.mode === 'run' || e.mode === 'charge' || e.mode === 'move';
   let bob = 0;
-  if (frames.length === 1) {
+  if (e.sp.family === 'human' && moving) bob = -Math.abs(Math.sin(e.phase)) * 0.045 * h; // runners rise mid-stride
+  else if (e.sp.height && moving && pose !== 'leap') bob = -Math.abs(Math.sin(e.phase)) * 0.018 * h;
+  else if (frames.length === 1) {
     if (e.sp.anchor === 'center' && e.sp.family !== 'mil') bob = Math.sin(e.phase) * 0.04 * w;
-    else if (e.mode === 'walk' || e.mode === 'flee' || e.mode === 'run' || e.mode === 'charge') bob = -Math.abs(Math.sin(e.phase)) * 0.025 * w;
+    else if (moving) bob = -Math.abs(Math.sin(e.phase)) * 0.025 * w;
   }
   const pop = e.popup ?? 1;
   if (e.sp.anchor === 'bottom') {
+    if (e.alt < 0.4 && e.state === 'alive' && pose !== 'leap') {
+      // the shadow tightens a little while the runner is in the air
+      const air = bob ? 1 + bob / h * 3 : 1;
+      groundShadow(g, Math.max(0.3, Math.min(w, e.sp.height ? e.sp.height * 0.55 : w) * 0.5) * air, 0.5);
+    }
+    // motion blur: two faint copies trailing behind a fast mover
+    const mps = Math.abs(e.svx || 0) / Math.max(1e-6, k);
+    if (mps > 2.5 && e.state === 'alive') {
+      const back = -Math.sign(e.svx) * Math.min(mps * 0.03, 0.4) * e.facing; // local x is mirrored by facing
+      const a0 = g.globalAlpha;
+      for (const [f, a] of [[1, 0.2], [2, 0.09]]) { g.globalAlpha = a0 * a; g.drawImage(img, -w / 2 + back * f, -h + bob, w, h); }
+      g.globalAlpha = a0;
+    }
     g.save(); g.scale(1, pop);
     g.drawImage(img, -w / 2, -h + bob, w, h);
     g.restore();

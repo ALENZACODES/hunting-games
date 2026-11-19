@@ -22,6 +22,33 @@ export const CITY_ARMORY = ['m4', 'scar', 'akm', 'sbe3', 'axmc', 'm82'];
 const ALT = { street: 16, square: 12, strip: 14, park: 5, interior: 5, rooftop: 3, bridge: 9, waterfront: 6 };
 // horizon (fraction of screen height) the scene photos are prompted with
 const HORIZON = { street: 0.5, square: 0.5, strip: 0.5, park: 0.5, interior: 0.5, rooftop: 0.46, bridge: 0.5, waterfront: 0.48 };
+// Moving light and weather over each scene photo (src/game/ambience.js).
+// Defaults come from the time of day and scene type; EXTRA adds what each
+// photo shows (wet streets, snow, steam, a waterfall, an old subway).
+const OUTDOOR = (type) => type !== 'interior';
+function ambienceFor(biomeId, type, tod) {
+  const fx = new Set();
+  const night = tod === 'night', dusk = tod === 'dusk';
+  if (night && type !== 'park') fx.add('neon');
+  if ((night || dusk) && ['street', 'strip', 'square', 'bridge'].includes(type)) fx.add('police');
+  if (night && ['rooftop', 'waterfront', 'bridge'].includes(type)) fx.add('searchlights');
+  if ((night || dusk) && OUTDOOR(type)) fx.add('heli');
+  if (type === 'waterfront') fx.add('glints');
+  if ((tod === 'day' || tod === 'dawn') && OUTDOOR(type)) fx.add('birds');
+  if (tod === 'day' && type === 'interior') fx.add('motes');
+  if (tod === 'dawn') fx.add('mist');
+  if (type === 'park' && !night) fx.add('leaves');
+  for (const e of EXTRA[biomeId] || []) e.startsWith('-') ? fx.delete(e.slice(1)) : fx.add(e);
+  return [...fx];
+}
+const EXTRA = {
+  'nyc-01': ['steam'], 'nyc-02': ['steam'], 'nyc-05': ['flicker', '-heli'], 'nyc-06': ['rain', 'steam'], 'nyc-09': ['leaves'], 'nyc-11': ['motes'], 'nyc-12': ['drizzle'],
+  'toronto-02': ['drizzle'], 'toronto-06': ['sleet'], 'toronto-08': ['leaves'], 'toronto-09': ['flicker'], 'toronto-12': ['snow'],
+  'singapore-02': ['drizzle'], 'singapore-03': ['mist'], 'singapore-09': ['mist', 'motes'], 'singapore-12': ['glints'],
+  'hongkong-02': ['drizzle'], 'hongkong-03': ['rain'], 'hongkong-04': ['mist'], 'hongkong-08': ['cloud', 'drizzle'], 'hongkong-11': ['mist'],
+  'vegas-03': ['neonflicker'], 'vegas-04': ['neonflicker'], 'vegas-06': ['dust'], 'vegas-09': ['neonflicker'], 'vegas-10': ['dust', '-birds'],
+};
+
 // cover photos that show scenery behind the object instead of being cut out;
 // the game uses its drawn cover for these until the file is replaced
 const SKIP_COVER = new Set(['singapore-11']);
@@ -217,7 +244,7 @@ function buildScene(city, i, row) {
   BIOMES[biomeId] = {
     name: `${name}, ${city.name}`, horizon: MEASURED[biomeId] ?? HORIZON[type], city: city.id, sceneType: type, neon: city.neon,
     water: type === 'waterfront' || (type === 'bridge' && city.water), fg: 'cover', fgTop: 0.74, noCoverArt: SKIP_COVER.has(biomeId),
-    art: `city/${city.id}/scene_${sid}`,
+    art: `city/${city.id}/scene_${sid}`, ambience: ambienceFor(biomeId, type, tod),
   };
   const altMax = ALT[type];
   const boss = n === 12;
