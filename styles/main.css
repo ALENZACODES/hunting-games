@@ -289,6 +289,10 @@ table.keys { width: 100%; border-collapse: collapse; font-size: 14px; }
 .res-portrait { float: right; width: 120px; height: 120px; object-fit: cover; border-radius: 10px; margin: -6px -10px 6px 12px; border: 1px solid var(--line); }
 @media (max-width: 1100px) { .grid.cities { grid-template-columns: repeat(3, 1fr); } .dossier, .city-head { grid-template-columns: 1fr; } }
 .city-side { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-self: stretch; }
-.major-cut { position: absolute; right: 0; bottom: 70px; height: 260px; object-fit: contain; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7)); pointer-events: none; }
+.city-head { position: relative; overflow: hidden; }
+.city-head.with-major { padding-right: 190px; }
+.major-cut { position: absolute; right: 18px; bottom: 0; height: 94%; max-height: 300px; object-fit: contain; object-position: bottom; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7)); pointer-events: none; }
 .brief-major { width: 100%; aspect-ratio: 16 / 6; object-fit: cover; border-radius: 10px; margin: 10px 0 0; border: 1px solid var(--line); }
 #ui { background-size: cover; background-position: center; }
+.gun-card .credit { display: block; margin-top: 6px; font-size: 11px; color: var(--muted, #9aa3ad); text-decoration: none; }
+.gun-card .credit:hover { text-decoration: underline; }

@@ -396,7 +396,7 @@ const UPDATE = {
         e.x = e.x0 + (e.x1 - e.x0) * p; e.d = e.d0 + (e.d1 - e.d0) * p; e.alt = e.a0 + (e.a1 - e.a0) * p;
         e.facing = e.x1 >= e.x0 ? 1 : -1;
         e.phase += dt * 4 * (sp.walk || 2);
-        if (sp.cloaks) e.alpha += (0.1 - e.alpha) * Math.min(1, dt * 6);
+        if (sp.cloaks) e.alpha += (0.4 - e.alpha) * Math.min(1, dt * 6); // the cloak photo is already see-through
         if (p >= 1) { e.mode = 'perch'; e.timer = rand(2.4, 4.2) / (S.diff || 1); }
         break;
       }

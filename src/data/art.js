@@ -116,3 +116,10 @@ export function cityArtManifest() {
   groups['City: select screen'] = [CITY_SELECT_ART];
   return groups;
 }
+
+// Free-licensed photos used for some gun profiles (full credits in
+// assets/weapons/CREDITS.txt); shown under the gun in the Arsenal.
+export const PHOTO_CREDITS = {
+  win70: { by: 'Michael E. Cumpston, touch-up by Francis Flinch', license: 'CC BY-SA 3.0', url: 'https://commons.wikimedia.org/wiki/File:Super2012b.jpg' },
+  m82: { by: 'Zachi Evenor and MathKnight', license: 'CC BY-SA 4.0', url: 'https://commons.wikimedia.org/wiki/File:Barrett-M82A1-Independence-Day-2017-IZE-048-white.jpg' },
+};

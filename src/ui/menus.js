@@ -10,7 +10,7 @@ import { SPECIES } from '../data/species.js';
 import * as store from '../engine/storage.js';
 import * as audio from '../engine/audio.js';
 import { thumbnail } from '../game/render-scene.js';
-import { weaponProfilePath, cityArt, storyArt, MAJOR as MAJOR_PIX, CITY_SELECT_ART } from '../data/art.js';
+import { weaponProfilePath, cityArt, storyArt, MAJOR as MAJOR_PIX, CITY_SELECT_ART, PHOTO_CREDITS } from '../data/art.js';
 import { CITIES, CITY_LEVELS, CITY_BY_ID, cityLevels, MAJOR } from '../data/cities.js';
 
 function h(tag, attrs = {}, ...kids) {
@@ -280,7 +280,7 @@ export class UI {
     const { lv, done, stars: st } = cityProgress(cityId);
     const next = lv.find((l) => !store.progressOf(l.id).passed && sceneOpen(l));
     const seen = Object.keys(store.uiState()).some((k) => k.startsWith(`story:${cityId}:`));
-    const head = h('div', { class: 'city-head', style: { backgroundImage: [`linear-gradient(90deg, rgba(0,0,0,0.78), rgba(0,0,0,0.15))`, art(cityArt(cityId, 'panorama.jpg'), thumbnail(lv[0].biome, lv[0].tod))].join(', ') } },
+    const head = h('div', { class: 'city-head with-major', style: { backgroundImage: [`linear-gradient(90deg, rgba(0,0,0,0.78), rgba(0,0,0,0.15))`, art(cityArt(cityId, 'panorama.jpg'), thumbnail(lv[0].biome, lv[0].tod))].join(', ') } },
       h('div', {},
         h('h3', {}, `${c.name} · ${c.district}`),
         h('p', { class: 'lead' }, c.tagline),
@@ -289,8 +289,8 @@ export class UI {
           next ? h('button', { class: 'primary', onclick: () => { click(); this.briefing(next, 'city'); } }, done ? `Continue · Scene ${next.n}` : 'Start the city') : null,
           seen ? h('button', { onclick: () => { click(); this.story(cityId, 'all', () => this.city(cityId)); } }, 'Story so far') : null)),
       h('div', { class: 'city-side' },
-        h('img', { class: 'major-cut', src: `assets/${MAJOR_PIX.standing}`, alt: '', onerror: (e) => e.target.remove() }),
-        h('div', { class: 'chapter-progress' }, bar(done, 12, `${done} / 12 scenes`), bar(st, 36, `${st} / 36 ★`))));
+        h('div', { class: 'chapter-progress' }, bar(done, 12, `${done} / 12 scenes`), bar(st, 36, `${st} / 36 ★`))),
+      h('img', { class: 'major-cut', src: `assets/${MAJOR_PIX.standing}`, alt: '', onerror: (e) => { e.target.parentNode.classList.remove('with-major'); e.target.remove(); } }));
     const grid = h('div', { class: 'grid levels' });
     for (const L of lv) {
       const open = sceneOpen(L);
@@ -475,7 +475,8 @@ export class UI {
           h('small', {}, `${w.caliber} · ${w.action} · ${w.mag} rounds`),
           h('small', {}, `${opticLabel(w)} · ${w.vel} m/s${w.pellets ? ` · ${w.pellets} pellets · ${w.range} m` : ''}`),
           bars(w),
-          h('em', {}, open ? (w.cls === 'military' ? 'Unlocked · also issued in Military Ops' : 'Unlocked') : `Unlocks at level ${w.unlock} · Chapter ${Math.ceil(w.unlock / 10)}`)));
+          h('em', {}, open ? (w.cls === 'military' ? 'Unlocked · also issued in Military Ops' : 'Unlocked') : `Unlocks at level ${w.unlock} · Chapter ${Math.ceil(w.unlock / 10)}`),
+          PHOTO_CREDITS[w.id] ? h('a', { class: 'credit', href: PHOTO_CREDITS[w.id].url, target: '_blank', rel: 'noopener' }, `Photo: ${PHOTO_CREDITS[w.id].by} · ${PHOTO_CREDITS[w.id].license}`) : null));
       }
       wrap.append(h('h3', { class: 'cat' }, label), grid);
     }

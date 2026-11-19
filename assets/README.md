@@ -1,6 +1,6 @@
 # assets/
 
-Art for the game. Everything here is optional: any file that is missing is replaced by a drawn stand-in, so the game always runs. Prompts for every file are in [`docs/ART-PROMPTS.md`](../docs/ART-PROMPTS.md) and, for City Hunt, [`docs/CITY-ART-PROMPTS.md`](../docs/CITY-ART-PROMPTS.md).
+Art for the game. Everything here is optional: any file that is missing is replaced by a drawn stand-in, so the game always runs. Some gun profiles are free-licensed photos; their credits are in [`weapons/CREDITS.txt`](weapons/CREDITS.txt) and in the Arsenal. Prompts for every file are in [`docs/ART-PROMPTS.md`](../docs/ART-PROMPTS.md) and, for City Hunt, [`docs/CITY-ART-PROMPTS.md`](../docs/CITY-ART-PROMPTS.md).
 
 ```
 assets/
