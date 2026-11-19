@@ -1,5 +1,7 @@
 # HUNTING GAMES
 
+**Play in the browser:** https://alenzacodes.github.io/hunting-games/ (desktop, mouse recommended)
+
 A first-person hunting shooter for the browser. It keeps the classic light-gun loop (targets flush, you have a few shells, hit enough to clear the round) and adds real firearms, scopes, ballistics and an alien turn.
 
 - **100-level hunt campaign in 10 chapters:** ducks, geese, pheasant, doves, turkey, rabbits, whitetail, mule deer, pronghorn, elk, moose, wild boar and black bear, with fog, wind, night vision, thermal, trophy animals and timed levels, then the aliens arrive and the last chapters end at the Colossus.
