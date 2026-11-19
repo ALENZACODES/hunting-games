@@ -10,7 +10,8 @@ import { SPECIES } from '../data/species.js';
 import * as store from '../engine/storage.js';
 import * as audio from '../engine/audio.js';
 import { thumbnail } from '../game/render-scene.js';
-import { weaponProfilePath, cityArt, storyArt, MAJOR as MAJOR_PIX, CITY_SELECT_ART, PHOTO_CREDITS } from '../data/art.js';
+import { weaponProfilePath, cityArt, storyArt, MAJOR as MAJOR_PIX, CITY_SELECT_ART, PHOTO_CREDITS, levelArt } from '../data/art.js';
+import { getImage } from '../engine/assets.js';
 import { CITIES, CITY_LEVELS, CITY_BY_ID, cityLevels, MAJOR } from '../data/cities.js';
 
 function h(tag, attrs = {}, ...kids) {
@@ -337,6 +338,8 @@ export class UI {
 
   // ── briefing + loadout ──
   briefing(def, kind) {
+    // start downloading this level's photos while the briefing is read
+    try { for (const [path, k] of levelArt(def, SPECIES, (kind === 'ops' || kind === 'city') ? def.issue : [])) getImage(path, k); } catch (e) { /* preloading is best effort */ }
     const reached = store.campaignLevelReached();
     const gen = store.options().genericNames;
     let pool;

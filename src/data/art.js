@@ -131,3 +131,28 @@ export const PHOTO_CREDITS = {
   win70: { by: 'Michael E. Cumpston, touch-up by Francis Flinch', license: 'CC BY-SA 3.0', url: 'https://commons.wikimedia.org/wiki/File:Super2012b.jpg' },
   m82: { by: 'Zachi Evenor and MathKnight', license: 'CC BY-SA 4.0', url: 'https://commons.wikimedia.org/wiki/File:Barrett-M82A1-Independence-Day-2017-IZE-048-white.jpg' },
 };
+
+// Every image a level can use, so the menus can start downloading them while
+// the briefing is on screen (the photos are large on a first visit).
+// Returns [path, kind] pairs; kind is how the loader must process the file.
+export function levelArt(def, species, loadout = []) {
+  const out = new Set();
+  const ids = new Set((def.spawns || []).map((s) => s.sp));
+  if (def.finale) ids.add(def.finale);
+  if (def.kind === 'city') ids.add('spine');
+  for (const id of ids) {
+    const sp = species[id];
+    if (!sp) continue;
+    for (const pose of Object.keys({ ...(POSES[ALIAS[id] || id] || {}), ...(EXTRA_POSES[ALIAS[id] || id] || {}) })) spritePaths(id, sp.family, pose).forEach((p) => out.add(p));
+  }
+  if (def.kind === 'city') {
+    const c = def.city;
+    for (const [kind, poses] of [['hunter', BASE_POSES.hunter], ['alpha', BASE_POSES.alpha]]) {
+      for (const pose of Object.keys(poses)) basePaths(`city/${c}/${kind}`, kind, pose).forEach((p) => out.add(p));
+    }
+    for (let i = 1; i <= CIVILIANS_PER_CITY; i++) out.add(`city/${c}/civilian_${i}_run.png`);
+    OFFICER_BASES.forEach((b) => out.add(`${b}_run.png`));
+  }
+  for (const id of loadout) { out.add(weaponPath(id)); out.add(weaponProfilePath(id)); }
+  return [[backgroundPath(def.biome), 'raw'], [foregroundPath(def.biome), 'overlay'], ...[...out].map((p) => [p, 'sprite'])];
+}
